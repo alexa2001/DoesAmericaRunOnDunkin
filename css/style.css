@@ -1,5 +1,4 @@
 body {
-    /*background-image: url("/images/homepageimg.jpg");*/
     background-color: #cccccc;
 }
 
@@ -9,71 +8,13 @@ body {
     /*padding-left: 2em;*/
 }
 
-.jumbotron {
-    background-color: #0e6380;
-    /*background-image: url("/images/donuts.jpg");*/
-    color: #fff;
-    padding: 100px 25px;
-    font-family: Montserrat, sans-serif;
-}
+.first{
+    background-image: url("/images/DD.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 
+}
 .title{
-    color:black;
-}
-
-/*.y.mandatory-scroll-snapping {*/
-/*    scroll-snap-type: y mandatory;*/
-/*}*/
-
-/*.container > div {*/
-/*    text-align: center;*/
-/*    scroll-snap-align: center;*/
-/*    flex: none;*/
-/*}*/
-
-/*.y.container > div {*/
-/*    line-height: 256px;*/
-/*    font-size: 100px;*/
-/*    !*width: 256px;*!*/
-/*    height: 100%;*/
-/*}*/
-/*.container > div:nth-child(even) {*/
-/*    background-color: #87ea87;*/
-
-/*}*/
-
-#fp-nav.fp-right {
-    right: 17px;
-}
-
-#fp-nav {
-    position: fixed;
-    z-index: 100;
-    top: 50%;
-    opacity: 1;
-    transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translate3d(0,-50%,0);
-}
-
-#fp-nav ul li, .fp-slidesNav ul li {
-    display: block;
-    width: 14px;
-    height: 13px;
-    margin: 7px;
-    position: relative;
-}
-
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    margin-top: 7em;
 }
