@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="fullpage.css" />
+    <link rel="stylesheet" type="text/css" href="./css/fullpage.css" />
 
     <!-- This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "easeInOutCubic". -->
     <script src="vendors/easings.min.js"></script>
 
-    <script type="text/javascript" src="fullpage.js"></script>
+    <script type="text/javascript" src="./js/fullpage.js"></script>
 </head>
 <!--<body>-->
 <body>
@@ -43,16 +43,21 @@
 <!--</div>-->
 
 <div id="fullpage">
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
-    <div class="section">Some section</div>
+    <div class="section">Title</div>
+    <div class="section">Visualization1</div>
+    <div class="section">Visualization2</div>
+    <div class="section">Visualization3</div>
+    <div class="section">Visualization4</div>
+    <div class="section">Visualization5</div>
+    <div class="section">Extra</div>
+    <div class="section">Extra</div>
+
 </div>
 
 <script type="text/javascript" src="../dist/fullpage.js"></script>
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff']
+        sectionsColor: ['lightgrey', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff', '#4BBFC3', '#7BAABE', '#ccddff']
     });
 </script>
 </body>
