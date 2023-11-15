@@ -19,31 +19,11 @@
 </head>
 <!--<body>-->
 <body>
-<!-- Your content goes here -->
-<!--<div class="jumbotron">-->
-<!--    <h1 class="display-4">Does America Run on Dunkin?</h1>-->
-<!--    <p class="lead">A look into America's fast food industry</p>-->
-<!--    <hr class="my-4">-->
-<!--</div>-->
-
-<!--<div class="jumbotron jumbotron-fluid">-->
-<!--    <div class="container">-->
-<!--        <h1 class="display-4 title">Does America Run on Dunkin'?</h1>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<div class="holster">-->
-<!--<div class="container y proximity-scroll-snapping" dir="ltr">-->
-<!--    <div>Visualization 1</div>-->
-<!--    <div>Visualization 2</div>-->
-<!--    <div>Visualization 3</div>-->
-<!--    <div>Visualization 4</div>-->
-<!--    <div>Visualization 5</div>-->
-<!--</div>-->
-<!--</div>-->
 
 <div id="fullpage">
-    <div class="section">Title</div>
+    <div class="section first">
+        <h1 class="display-4 title">Does America Run on Dunkin'?</h1>
+    </div>
     <div class="section">Visualization1</div>
     <div class="section">Visualization2</div>
     <div class="section">Visualization3</div>
@@ -53,13 +33,6 @@
     <div class="section">Extra</div>
 
 </div>
-  
-<script type="text/javascript" src="../dist/fullpage.js"></script>
-<script type="text/javascript">
-    var myFullpage = new fullpage('#fullpage', {
-        sectionsColor: ['lightgrey', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff', '#4BBFC3', '#7BAABE', '#ccddff']
-    });
-</script>
 
 <!-- - - - - - - - - - - - >
 <    Load JS libraries     >
@@ -81,5 +54,11 @@
 
 <!-- Your JavaScript code can go here -->
 <script src="js/fastFoodMap.js"></script>
+<script type="text/javascript" src="../dist/fullpage.js"></script>
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['lightgrey', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff', '#4BBFC3', '#7BAABE', '#ccddff']
+    });
+</script>
 </body>
 </html>
