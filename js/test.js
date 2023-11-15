@@ -1,0 +1,1 @@
+// test creating a javascript file
