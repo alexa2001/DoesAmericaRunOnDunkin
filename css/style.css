@@ -18,3 +18,26 @@ body {
 .title{
     margin-top: 7em;
 }
+
+h1{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.label{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    font: 12px sans-serif;
+    /*  pointer-events: none;	This line needs to be removed */
+}
+.tooltip h3,h4 {
+    text-align: left;
+}
+.tooltip h4 {
+    font: 14px sans-serif;
+}
