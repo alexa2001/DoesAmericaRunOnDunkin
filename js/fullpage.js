@@ -1119,7 +1119,7 @@
         slidesNavPosition: 'bottom',
         scrollBar: false,
         hybrid: false,
-        licenseKey: '',
+        licenseKey: 'gplv3-license',
         credits: {
             "enabled": true,
             "label": 'Made with fullPage.js',
