@@ -23,9 +23,33 @@
         <h1>Risk Factor Prevalence Over Time</h1>
         <div id="riskfactorvis"></div>
     </div>
-    <div class="section">Visualization1</div>
-        <div class="section" id="vis1-fastfoodmap">
+    <div class="section">
+        <!-- Visualizations -->
+        <div class="row"
+             style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
+            <div class="col">
+                <div class="row"
+                     style="border: thin solid rgba(211,211,211,0.73); border-radius: 5px; background: rgba(214,226,233,0.42)">
+                    <div class="col">
+                        <div class="row">
+                            <div id="mapDiv" style="height: 71vh; width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <select>
+                                <option value="McDonalds">McDonalds</option>
+                                <option value="Burger King">Burger King</option>
+                                <option value="Subway">Subway</option>
+                                <option value="Dunkin' Donuts">Dunkin' Donuts</option>
+                            </select>
+                            <div id="stateMapDiv" style="height: 71vh; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     <div class="section">Visualization2</div>
     <div class="section">Visualization3</div>
     <div class="section">Visualization4</div>
@@ -55,6 +79,8 @@
 
 <!-- Your JavaScript code can go here -->
 <script src="js/fastFoodMap.js"></script>
+<script src="js/stateMap.js"></script>
+<script src="js/helpers.js"></script>
 <script src="js/main.js"></script>
 <script src="js/riskFactorPrevalence.js"></script>
 <script src="js/fullpage.js"></script>
