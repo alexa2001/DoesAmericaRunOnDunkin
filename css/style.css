@@ -15,6 +15,45 @@ body {
     background-size: cover;
 
 }
-.title{
+#rank-title {
     margin-top: 7em;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.rank-tooltip {
+    position: absolute;
+    text-align: center;
+    font: 12px sans-serif;
+    font-family: Avenir, "serif";
+    /*  pointer-events: none;	This line needs to be removed */
+}
+.rank-tooltip h3,h4 {
+    text-align: left;
+}
+.rank-tooltip h4 {
+    font: 14px sans-serif;
+    font-family: Avenir, "serif";
+}
+
+.rank-tooltip h3 {
+    font: 16px sans-serif;
+    font-family: Avenir, "serif";
+    font-weight: bold;
+}
+
+.rank-x-axis, .rank-y-axis {
+    font-size: .35em;
+}
+
+.rank-axis text {
+    font: 10px sans-serif;
+    fill: #000000;
+    stroke: #000000;
+}
+
+.rank-axis path,
+.rank-axis line {
+    fill: none;
+    stroke: #000000;
 }
