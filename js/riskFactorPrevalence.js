@@ -26,7 +26,7 @@ class RiskFactorPrevalence{
         vis.obesityLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',25) // Y-coordinate of the text
+            .attr('y',40) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -36,7 +36,7 @@ class RiskFactorPrevalence{
         vis.hypertensionLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',210) // Y-coordinate of the text
+            .attr('y',240) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -46,7 +46,7 @@ class RiskFactorPrevalence{
         vis.highcholesterolLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',420) // Y-coordinate of the text
+            .attr('y',485) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -63,7 +63,7 @@ class RiskFactorPrevalence{
         let selectBox = vis.svg.append("foreignObject")
             .attr("x", 0)
             .attr("y", 20)
-            .attr("width", 110)
+            .attr("width", 107)
             .attr("height", 200)
             .attr("class", "select-box")
             .append("xhtml:body")
@@ -71,7 +71,7 @@ class RiskFactorPrevalence{
 
         let options = d3.select("#mySelect")
             .selectAll("option")
-            .data(["20 and Over", "20-39", "40-59", "60 and Over"])
+            .data(["20 and over", "20-39", "40-59", "60 and over"])
             .enter()
             .append("option")
             .text(d => d);
@@ -110,42 +110,34 @@ class RiskFactorPrevalence{
 
 
 
-        vis.updateVis();
+        vis.updateVis("20 and over");
 
     }
-
-    updateVis(){
+    updateVis(selectedOption){
         let vis = this;
-
-        vis.firstTenObesity = [] ;
-        vis.firstTenHypertension = [] ;
-        vis.firstTenCholesterol = [] ;
-
-        for (let i = 0; i < 10; i++){
-            vis.firstTenObesity.push(vis.obesity[i]);
-            vis.firstTenHypertension.push(vis.hypertension[i]);
-            vis.firstTenCholesterol.push(vis.highcholesterol[i]);
-        }
-
-        console.log(vis.firstTenObesity);
-        // console.log(vis.obesity[0]);
 
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
             .attr('id', 'tooltip')
 
+        //OBESITY
+        vis.filteredObesityCircles = vis.obesity.filter(function(d){
+            return (d.AgeGroup === selectedOption) && (d.Sex === "All");
+        });
 
-        let obesityCircles = vis.svg.selectAll("obesityVis")
-            .data(vis.firstTenObesity);
+        vis.xScale = d3.scaleLinear()
+            .domain([0, vis.filteredObesityCircles.length - 1]) // Mapping domain to the number of circles
+            .range([50, vis.width - 50]);
 
-        console.log(vis.obesity);
+        let obesityCircles = vis.svg.selectAll(".obesityCircles")
+            .data(vis.filteredObesityCircles);
 
         obesityCircles.exit().remove();
 
         obesityCircles
             .enter()
             .append("circle")
-            .attr("class", "obesityVis")
+            .attr("class", "obesityCircles")
             .merge(obesityCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
@@ -172,7 +164,9 @@ class RiskFactorPrevalence{
                     .html(``);
             })
             .transition()
-            .attr("cx", (d, i) => i * ((d.Percent) * 2 + 25) + (d.Percent))
+            .attr("cx", function(d, i){
+                return vis.xScale(i);
+            })
             .attr("cy", 110)
             .attr("r", function(d){
                 return d.Percent;
@@ -180,31 +174,43 @@ class RiskFactorPrevalence{
             })
             .attr('fill', '#e36830');
 
-        let obesityCirclesLabels = vis.svg.selectAll("labels")
-            .data(vis.firstTenObesity);
+        let obesityLabels = vis.svg.selectAll(".obesityLabels")
+            .data(vis.filteredObesityCircles);
 
-        obesityCirclesLabels
+        obesityLabels.exit().remove();
+
+        obesityLabels
             .enter()
             .append("text")
-            .attr("class", "labels")
-            .attr("x", (d, i) => i * ((d.Percent) * 2 + 25) + (d.Percent))
+            .attr("class", "obesityLabels")
+            .attr("x", function(d, i){
+                return vis.xScale(i);
+            })
             .attr("y", 175)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .text(d => d.SurveyYears)
 
+        //HYPERTENSION
 
+        vis.filteredHypertensionCircles = vis.hypertension.filter(function(d){
+            return (d.AgeGroup === selectedOption) && (d.Sex === "All");
+        });
 
-        let hypertensionCircles = vis.svg.selectAll("hypertensionVis")
-            .data(vis.firstTenHypertension);
+        vis.xScaleHypertension = d3.scaleLinear()
+            .domain([0, vis.filteredHypertensionCircles.length - 1]) // Mapping domain to the number of circles
+            .range([50, vis.width - 50 ]);
+
+        let hypertensionCircles = vis.svg.selectAll(".hypertensionCircles")
+            .data(vis.filteredHypertensionCircles);
 
         hypertensionCircles.exit().remove();
 
         hypertensionCircles
             .enter()
             .append("circle")
-            .attr("class", "hypertensionVis")
+            .attr("class", "hypertensionCircles")
             .merge(hypertensionCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
@@ -231,39 +237,54 @@ class RiskFactorPrevalence{
                     .html(``);
             })
             .transition()
-            .attr("cx", (d, i) => i * ((d.Percent) * 2 + 25) + (d.Percent))
-            .attr("cy", 300)
+            .attr("cx", function(d, i){
+                // console.log(`label x: ${i}, label xScale: ${vis.xScale(i)}`)
+                return vis.xScaleHypertension(i);
+            })
+            .attr("cy", 340)
             .attr("r", function(d){
-                return d.Percent;
+                return d.Percent*0.80;
 
-            }) // radius of the circle
-            // .attr("height",d => vis.height - vis.x(d.ct))
+            })
             .attr('fill', '#e36830');
 
-        let hypertensionCirclesLabels = vis.svg.selectAll("labels")
-            .data(vis.firstTenHypertension);
+        let hypertensionLabels = vis.svg.selectAll(".hypertensionLabels")
+            .data(vis.filteredHypertensionCircles);
 
-        hypertensionCirclesLabels
+        hypertensionLabels.exit().remove();
+
+        hypertensionLabels
             .enter()
             .append("text")
-            .attr("class", "labels")
-            .attr("x", (d, i) => i * ((d.Percent) * 2 + 25) + (d.Percent))
-            .attr("y", 375)
+            .attr("class", "hypertensionLabels")
+            .attr("x", function(d, i){
+                return vis.xScaleHypertension(i);
+            })
+            .attr("y", 415)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .text(d => d.SurveyYears)
 
-        let cholesterolCircles = vis.svg.selectAll("cholesterolVis")
-            .data(vis.firstTenCholesterol);
+        //HIGH CHOLESTEROL
+
+        vis.filteredCholesterolCircles = vis.highcholesterol.filter(function(d){
+            return (d.AgeGroup === selectedOption) && (d.Sex === "All");
+        });
+
+        vis.xScaleCholesterol = d3.scaleLinear()
+            .domain([0, vis.filteredCholesterolCircles.length - 1]) // Mapping domain to the number of circles
+            .range([50, vis.width - 50]);
+
+        let cholesterolCircles = vis.svg.selectAll(".cholesterolCircles")
+            .data(vis.filteredCholesterolCircles);
 
         cholesterolCircles.exit().remove();
 
-        vis.d = 0
         cholesterolCircles
             .enter()
             .append("circle")
-            .attr("class", "cholesterolVis")
+            .attr("class", "cholesterolCircles")
             .merge(cholesterolCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
@@ -290,28 +311,35 @@ class RiskFactorPrevalence{
                     .html(``);
             })
             .transition()
-            .attr("cx", (d, i) => i * ((d.Percent) * 3 + 90) + (d.Percent))
-            .attr("cy", 500)
+            .attr("cx", function(d, i){
+                // console.log(`label x: ${i}, label xScale: ${vis.xScale(i)}`)
+                return vis.xScaleCholesterol(i);
+            })
+            .attr("cy", 540)
             .attr("r", function(d){
                 return d.Percent;
 
-            }) // radius of the circle
-            // .attr("height",d => vis.height - vis.x(d.ct))
+            })
             .attr('fill', '#e36830');
 
-        let cholesterolCirclesLabels = vis.svg.selectAll("labels")
-            .data(vis.firstTenCholesterol);
+        let cholesterolLabels = vis.svg.selectAll(".cholesterolLabels")
+            .data(vis.filteredCholesterolCircles);
 
-        cholesterolCirclesLabels
+        cholesterolLabels.exit().remove();
+
+        cholesterolLabels
             .enter()
             .append("text")
-            .attr("class", "labels")
-            .attr("x", (d, i) => i * ((d.Percent) * 3 + 90) + (d.Percent))
-            .attr("y", 540)
+            .attr("class", "cholesterolLabels")
+            .attr("x", function(d, i){
+                return vis.xScaleCholesterol(i);
+            })
+            .attr("y", 615)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .text(d => d.SurveyYears)
+
     }
 
 
