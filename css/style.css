@@ -89,3 +89,14 @@ h3{
 .tooltip h4 {
     font: 14px sans-serif;
 }
+
+#mapToolTip {
+    pointer-events: none; /* Let mouse events pass through */
+    position: absolute;
+    opacity: 0;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 5px;
+}

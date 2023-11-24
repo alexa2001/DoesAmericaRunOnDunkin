@@ -145,15 +145,36 @@ class FoodMapVis {
             .range(["white", "#F05E16"]);
         // console.log("color scale", vis.colorScale.domain())
 
-        // Apply color to states
-        vis.states.attr("fill", d => {
-            let stateName = d.properties.name; // Replace 'code' with the correct property key
-            // Use the state code to get the restaurant count
-            vis.storeCount = vis.chainDataByState[stateName];
-            // Apply color scale based on store count
-            return vis.colorScale(vis.storeCount);
 
-        });
+        // Update state vis with color and tooltip
+        vis.states
+            // update color
+            .attr("fill", d => {
+                let stateName = d.properties.name;
+                vis.storeCount = vis.chainDataByState[stateName];
+                //console.log("STORE COUNT", vis.storeCount)
+                return vis.colorScale(vis.storeCount);
+            })
+            // add tooltip
+            .on("mouseover", function(event, d) {
+                let stateName = d.properties.name;
+                vis.tooltip
+                    .transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                vis.tooltip.html(`<strong>State:</strong> ${d.properties.name}<br><strong>Restaurants:</strong> ${vis.chainDataByState[stateName]}`)
+                    .style("left", (event.pageX) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mousemove", function(event) {
+                vis.tooltip.style("left", (event.pageX) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                vis.tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
 
         vis.states.on("click", (event, d) => {
             let stateName = d.properties.name; // Gets the name of the clicked state
