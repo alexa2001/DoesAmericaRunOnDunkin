@@ -2,6 +2,10 @@ body {
     background-color: #cccccc;
 }
 
+.title{
+    margin-top: 7em;
+}
+
 .header{
     background-color: white;
     /*padding-top: 2em;*/
