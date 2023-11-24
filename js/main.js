@@ -40,23 +40,11 @@ function createVis() {
 
 function initMainPage(allDataArray){
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
-    stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0])
+    stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
     myRankChart = new rankChart('rankChart', allDataArray[4]);
 }
 
-function renderStateMap(stateIdentifier) {
-    let vis = this;
-
-    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json").then(function(us) {
-        let usStates = topojson.feature(us, us.objects.states).features;
-        let selectedState = usStates.find(d => d.properties.name === stateIdentifier);
-
-        //let restaurantLocations = vis.restaurantLocationData.filter(d => d.province === stateIdentifier);
-
-        console.log(selectedState);
-
-        new StateMapVis("stateMapDiv", us, selectedState);
-
-
-    });
-}
+document.getElementById('restaurantSelect').addEventListener('change', function() {
+    let selectedRestaurant = this.value;
+    stateMapVis.updateSelectedRestaurant(selectedRestaurant);
+});

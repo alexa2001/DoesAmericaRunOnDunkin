@@ -19,7 +19,7 @@ class FoodMapVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 20, right: 40, bottom: 20, left: 40};
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -66,6 +66,54 @@ class FoodMapVis {
             .attr('class', "tooltip")
             .attr('id', 'mapTooltip')
 
+        /////////////// LEGEND ///////////////
+        // legend scale
+        vis.legendScale = d3.scaleOrdinal()
+            .range([0, (vis.width/3)]);
+
+        //creating a legend group
+        vis.legend = vis.svg.append("g")
+            .attr('class', 'legend')
+            .attr('transform', `translate(${vis.width/ 2}, ${vis.height - 20})`)
+
+        vis.legendAxisGroup = vis.legend.append("g")
+            .attr("class", "legend-axis")
+
+        //add d3 linear gradient
+
+        //Create linear color gradient
+        vis.defs = vis.svg.append("defs");
+
+        vis.gradient = vis.defs.append("linearGradient")
+            .attr("id", "svgGradient")
+            .attr("x1", "0%")
+            .attr("x2", "100%")
+            .attr("y1", "100%")
+            .attr("y2", "100%");
+
+        vis.gradient.append("stop")
+            .attr("class", "start")
+            .attr("offset", "0%")
+            .attr("stop-color", "white")
+            .attr("stop-opacity", 1);
+
+        vis.gradient.append("stop")
+            .attr("class", "end")
+            .attr("offset", "100%")
+            .attr("stop-color", "#F05E16")
+            .attr("stop-opacity", 1);
+
+        vis.legendAxis = d3.axisBottom(vis.legendScale);
+
+        vis.legend
+            .append("rect")
+            .attr("class", "legend-color")
+            .attr("x", 0)
+            .attr("y", -20)
+            .attr("width", (vis.width/3))
+            .attr("height", 20)
+            .attr("fill", "url(#svgGradient)"); // pull gradient color scale
+
         vis.wrangleData()
     }
 
@@ -101,32 +149,21 @@ class FoodMapVis {
         vis.states.attr("fill", d => {
             let stateName = d.properties.name; // Replace 'code' with the correct property key
             // Use the state code to get the restaurant count
-            let storeCount = vis.chainDataByState[stateName];
+            vis.storeCount = vis.chainDataByState[stateName];
             // Apply color scale based on store count
-            return vis.colorScale(storeCount);
+            return vis.colorScale(vis.storeCount);
 
         });
 
         vis.states.on("click", (event, d) => {
-            let stateName = d.properties.name; // Or any identifier
-            renderStateMap(stateName);
+            let stateName = d.properties.name; // Gets the name of the clicked state
+            updateStateMap(stateName); // Calls the global function to update the state map
         });
 
 
-    }
+        vis.legendScale.domain([0, d3.max(Object.values(vis.chainDataByState))])
+        vis.legendAxisGroup.call(vis.legendAxis);
 
-    // renderStateMap(stateIdentifier, ) {
-    //     let vis = this;
-    //
-    //     d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json").then(function(us) {
-    //         let usStates = topojson.feature(us, us.objects.states).features;
-    //         let selectedState = usStates.find(d => d.properties.name === stateIdentifier);
-    //
-    //         let restaurantLocations = vis.restaurantLocationData.filter(d => d.province === stateIdentifier);
-    //
-    //         console.log(selectedState);
-    //
-    //         new StateMapVis("stateMapDiv", us, selectedState, restaurantLocations);
-    //     });
-    // }
+
+    }
 }
