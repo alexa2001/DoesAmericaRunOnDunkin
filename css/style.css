@@ -90,6 +90,10 @@ h3{
     font: 14px sans-serif;
 }
 
+.line {
+    fill: none;
+    stroke: #a534eb;
+
 #mapToolTip {
     pointer-events: none; /* Let mouse events pass through */
     position: absolute;

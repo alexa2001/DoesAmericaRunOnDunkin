@@ -7,6 +7,7 @@ let riskFactorVis;
 let foodMapVis;
 let stateMapVis;
 let myRankChart;
+let medianIncomeVis;
 
 // load data using promises
 let promises = [
@@ -16,6 +17,7 @@ let promises = [
     d3.json("data/chainLocations.geojson"),
     d3.csv("data/cause_of_death.csv"),
     d3.csv("data/top-50-fast-food-chains.csv"),
+    d3.csv("data/stateIncome.csv"),
 
 ];
 
@@ -42,6 +44,7 @@ function initMainPage(allDataArray){
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
     myRankChart = new rankChart('rankChart', allDataArray[4]);
+    medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
 }
 
 document.getElementById('restaurantSelect').addEventListener('change', function() {

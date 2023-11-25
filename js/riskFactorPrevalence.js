@@ -8,7 +8,7 @@ class RiskFactorPrevalence{
 
     initVis(){
         let vis = this;
-        console.log(vis.data);
+        // console.log(vis.data);
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
         // vis.width = 700;
@@ -78,7 +78,7 @@ class RiskFactorPrevalence{
 
         d3.select("#mySelect").on("change", function() {
             const selectedOption = d3.select(this).property("value");
-            console.log("Selected option:", selectedOption);
+            // console.log("Selected option:", selectedOption);
 
             // Call updateVis() when the selection changes
             vis.updateVis(selectedOption);
