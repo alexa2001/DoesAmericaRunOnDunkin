@@ -81,7 +81,7 @@ h3{
     position: absolute;
     text-align: center;
     font: 12px sans-serif;
-    /*  pointer-events: none;	This line needs to be removed */
+    pointer-events: none;	/* This line needs to be removed */
 }
 .tooltip h3,h4 {
     text-align: left;
@@ -89,7 +89,18 @@ h3{
 .tooltip h4 {
     font: 14px sans-serif;
 }
+
 .line {
     fill: none;
     stroke: #a534eb;
+
+#mapToolTip {
+    pointer-events: none; /* Let mouse events pass through */
+    position: absolute;
+    opacity: 0;
+    background-color: white;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 5px;
 }
