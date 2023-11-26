@@ -121,6 +121,7 @@ class StateMapVis {
             .append("path")
             .attr("class", "state")
             .merge(vis.statePath)
+            .transition()
             .attr("d", vis.path)
             .attr("fill", "#FFA985")
             .attr("stroke", "black")
@@ -157,6 +158,7 @@ class StateMapVis {
             .enter()
             .append('circle')
             .attr('class', 'store')
+            .transition()
             .attr('cx', d => {
                 //console.log("Longitude:", d.longitude, "Latitude:", d.latitude); // Debugging
                 let projected = vis.projection([d.longitude, d.latitude]);
