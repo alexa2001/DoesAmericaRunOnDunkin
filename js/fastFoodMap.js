@@ -64,7 +64,7 @@ class FoodMapVis {
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
-            .attr('id', 'mapTooltip')
+            //.attr('id', 'mapTooltip')
 
         /////////////// LEGEND ///////////////
         // legend scale
@@ -162,16 +162,19 @@ class FoodMapVis {
                     .transition()
                     .duration(200)
                     .style("opacity", .9);
-                vis.tooltip.html(`<strong>State:</strong> ${d.properties.name}<br><strong>Restaurants:</strong> ${vis.chainDataByState[stateName]}`)
+                vis.tooltip
+                    .html(`<strong>State:</strong> ${d.properties.name}<br><strong>Restaurants:</strong> ${vis.chainDataByState[stateName]}`)
                     .style("left", (event.pageX) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mousemove", function(event) {
-                vis.tooltip.style("left", (event.pageX) + "px")
+                vis.tooltip
+                    .style("left", (event.pageX) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseout", function() {
-                vis.tooltip.transition()
+                vis.tooltip
+                    .transition()
                     .duration(500)
                     .style("opacity", 0);
             });

@@ -177,7 +177,8 @@ class StateMapVis {
             .attr('opacity', 0.5)
             .attr('stroke', 'black')
             .on("mouseover", function(event, d) {
-                vis.tooltip.transition()
+                vis.tooltip
+                    .transition()
                     .duration(200)
                     .style("opacity", .9);
                 vis.tooltip.html(`Name: ${d.name}<br>Location: ${d.city}, ${d.province}`)
@@ -185,11 +186,13 @@ class StateMapVis {
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mousemove", function(event, d) {
-                vis.tooltip.style("left", (event.pageX) + "px")
+                vis.tooltip
+                    .style("left", (event.pageX) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseout", function(event, d) {
-                vis.tooltip.transition()
+                vis.tooltip
+                    .transition()
                     .duration(500)
                     .style("opacity", 0);
             });
@@ -217,7 +220,7 @@ class StateMapVis {
             vis.path.projection(vis.projection);
 
             // Re-draw the state path with the updated projection
-            vis.statePath.attr("d", vis.path);
+            //vis.statePath.attr("d", vis.path);
 
         } else {
             console.error("Selected state is not defined.");

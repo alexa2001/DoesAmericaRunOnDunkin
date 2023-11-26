@@ -93,6 +93,7 @@ h3{
 .line {
     fill: none;
     stroke: #a534eb;
+}
 
 #mapToolTip {
     pointer-events: none; /* Let mouse events pass through */
