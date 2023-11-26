@@ -158,24 +158,6 @@ class StateMapVis {
             .enter()
             .append('circle')
             .attr('class', 'store')
-            .transition()
-            .attr('cx', d => {
-                //console.log("Longitude:", d.longitude, "Latitude:", d.latitude); // Debugging
-                let projected = vis.projection([d.longitude, d.latitude]);
-                return projected ? projected[0] : null; // Fallback to null if projection is not valid
-            })
-            .attr('cy', d => {
-                let projected = vis.projection([d.longitude, d.latitude]);
-                return projected ? projected[1] : null; // Fallback to null if projection is not valid
-            })
-            .attr('r', 2)
-            .attr('display', d => {
-                let projected = vis.projection([d.longitude, d.latitude]);
-                return projected ? 'inline' : 'none'; // Hide circles if projection is not valid
-            })
-            .attr('fill', 'transparent')
-            .attr('opacity', 0.5)
-            .attr('stroke', 'black')
             .on("mouseover", function(event, d) {
                 vis.tooltip
                     .transition()
@@ -195,7 +177,25 @@ class StateMapVis {
                     .transition()
                     .duration(500)
                     .style("opacity", 0);
-            });
+            })
+            .transition()
+            .attr('cx', d => {
+                //console.log("Longitude:", d.longitude, "Latitude:", d.latitude); // Debugging
+                let projected = vis.projection([d.longitude, d.latitude]);
+                return projected ? projected[0] : null; // Fallback to null if projection is not valid
+            })
+            .attr('cy', d => {
+                let projected = vis.projection([d.longitude, d.latitude]);
+                return projected ? projected[1] : null; // Fallback to null if projection is not valid
+            })
+            .attr('r', 2)
+            .attr('display', d => {
+                let projected = vis.projection([d.longitude, d.latitude]);
+                return projected ? 'inline' : 'none'; // Hide circles if projection is not valid
+            })
+            .attr('fill', 'transparent')
+            .attr('opacity', 0.5)
+            .attr('stroke', 'black');
 
 
         ///////////////////// Dynamic Projection////////////////////////////
