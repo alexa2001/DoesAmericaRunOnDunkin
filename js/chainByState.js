@@ -80,7 +80,9 @@ class ChainByStateVis {
     updateVis(state){
         let vis = this;
 
-        // vis.map.panTo(new L.LatLng(vis.stateCoord[vis.selectedState]));
+        console.log("COORD: ", vis.stateCoord[vis.selectedState]);
+
+        vis.map.panTo((vis.stateCoord[vis.selectedState]));
 
         vis.displayData.forEach(function(d) {
             if (d.province === state){
