@@ -23,31 +23,45 @@ class ChainByStateVis {
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        let selectBox = vis.svg.append("foreignObject")
-            .attr("x", 0)
-            .attr("y", 20)
-            .attr("width", 107)
-            .attr("height", 200)
-            .attr("class", "select-box")
-            .append("xhtml:body")
-            .html('<select id="mySelect"></select>');
+        // let selectBox = vis.svg.append("foreignObject")
+        //     .attr("x", 0)
+        //     .attr("y", 20)
+        //     .attr("width", 107)
+        //     .attr("height", 200)
+        //     .attr("class", "select-box")
+        //     .append("xhtml:body")
+        //     .html('<select id="mySelect"></select>');
+        //
+        // let options = d3.select("#mySelect")
+        //     .selectAll("option")
+        //     .data(["MA", "NY", "CA", "IL"])
+        //     .enter()
+        //     .append("option")
+        //     .text(d => d);
+        //
+        // d3.select("#mySelect").on("change", function() {
+        //     const selectedOption = d3.select(this).property("value");
+        //     // console.log("Selected option:", selectedOption);
+        //
+        //     // Call updateVis() when the selection changes
+        //     vis.wrangleData(selectedOption);
+        // });
 
-        let options = d3.select("#mySelect")
-            .selectAll("option")
-            .data(["MA", "NY", "CA", "IL"])
-            .enter()
-            .append("option")
-            .text(d => d);
+        vis.selectedState = "MA";
+        vis.stateCoord = {
+            "MA" :[42.4072, -71.3824],
+            "NY": [40.7128, -74.0060],
+            "IL": [40.6331, -89.3985],
+            "CA": [36.7783, -119.4179]
+        }
 
-        d3.select("#mySelect").on("change", function() {
-            const selectedOption = d3.select(this).property("value");
-            // console.log("Selected option:", selectedOption);
+        document.getElementById('stateSelect').addEventListener('change', function() {
+            vis.selectedState = this.value;
+            // vis.wrangleData(vis.selectedState);
 
-            // Call updateVis() when the selection changes
-            vis.wrangleData(selectedOption);
         });
 
-        vis.map = L.map('chainVis').setView(vis.zoom, 7);
+        vis.map = L.map('chainVis').setView(vis.stateCoord[vis.selectedState], 7);
 
         L.Icon.Default.imagePath = 'images/leafletImages/';
 
@@ -56,15 +70,15 @@ class ChainByStateVis {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(vis.map);
 
-        console.log("HERE")
+        vis.wrangleData(vis.selectedState);
 
-        // L.geoJson(d3.json("data/MBTA-Lines.json")).addTo(vis.map);
 
-        vis.wrangleData("MA");
     }
 
     wrangleData(selectedOption){
         let vis = this;
+
+        console.log("STATE: ", selectedOption);
 
         vis.displayData = []
 

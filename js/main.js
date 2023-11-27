@@ -41,6 +41,8 @@ function createVis() {
 
 }
 
+
+
 function initMainPage(allDataArray){
     chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
@@ -50,7 +52,8 @@ function initMainPage(allDataArray){
 
 }
 
-// document.getElementById('restaurantSelect').addEventListener('change', function() {
-//     let selectedRestaurant = this.value;
-//     stateMapVis.updateSelectedRestaurant(selectedRestaurant);
+// document.getElementById('stateSelect').addEventListener('change', function() {
+//     let selectedState = this.value;
+//     console.log("SELECTEDSTATE: ", selectedState)
+//     chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], stateCoord[selectedState]);
 // });
