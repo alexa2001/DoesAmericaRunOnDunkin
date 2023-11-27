@@ -11,8 +11,8 @@ class ChainByStateVis {
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
         // vis.width = 700;
-        vis.height = 700;
-        vis.width = 700;
+        vis.height = 500;
+        vis.width = 500;
         // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -73,8 +73,8 @@ class ChainByStateVis {
         vis.chainData.forEach(function(s){
             vis.displayData.push({
                 "name": s.name,
-                "lat": s.latitude,
-                "lon": s.longitude,
+                "lat": +s.latitude,
+                "lon": +s.longitude,
                 "province": s.province
             })
         })
@@ -82,10 +82,16 @@ class ChainByStateVis {
         console.log("DISPLAYDATA:");
         console.log(vis.displayData);
 
-        vis.updateVis();
+        vis.updateVis(selectedOption);
     }
 
-    updateVis(){
+    updateVis(state){
         let vis = this;
+
+        vis.displayData.forEach(function(d) {
+            if (d.province === state){
+                vis.marker = L.marker([d["lat"], d["lon"]]).addTo(vis.map);
+            }
+        })
     }
 }
