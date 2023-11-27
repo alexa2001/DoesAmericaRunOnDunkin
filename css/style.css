@@ -92,7 +92,7 @@ h3{
 
 .line {
     fill: none;
-    stroke: #a534eb;
+    stroke: #FF671F;
 }
 
 #mapToolTip {
@@ -106,7 +106,7 @@ h3{
     padding: 5px;
 }
 
-.riskFactorSubtitle{
+.subtitle{
     font-style: italic;
     text-align: center;
     padding: 30px;
