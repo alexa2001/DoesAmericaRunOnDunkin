@@ -33,6 +33,38 @@ class RiskFactorPrevalence{
             .attr('font-weight', 'bold')
             .text("Obesity");
 
+        vis.obesityInfo = vis.svg.append('circle')
+            .attr("class", "obesityInfo")
+            .attr('cx', vis.width/2 + 50)
+            .attr("cy", 35)
+            .attr("r", 10)
+            .attr("fill", "blue")
+            .attr("cursor", "pointer")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>Obesity: Body mass index 
+                             (BMI, weight in kilograms divided by 
+                             height in meters squared) greater than 
+                             or equal to 30.</h4>
+                        </div>`
+                    );
+            })
+
+        vis.obesityInfoSym = vis.svg.append('text')
+            .attr("class", "obesityInfo")
+            .attr('x', vis.width/2 + 50)
+            .attr("y", 40)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr('font-weight', 'bold')
+            .text("?")
+
+
         vis.hypertensionLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
@@ -43,6 +75,37 @@ class RiskFactorPrevalence{
             .attr('font-weight', 'bold')
             .text("Hypertension");
 
+        vis.hypertensionInfo = vis.svg.append('circle')
+            .attr("class", "hypertensionInfo")
+            .attr('cx', vis.width/2 + 80)
+            .attr("cy", 235)
+            .attr("r", 10)
+            .attr("fill", "blue")
+            .attr("cursor", "pointer")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>Hypertension: Systolic blood pressure
+                              greater than or equal to 130 mmHg or 
+                              diastolic blood pressure greater than or 
+                              equal to 80 mmHg, or currently taking 
+                              medication to lower high blood pressure</h4>
+                        </div>`
+                    );
+            })
+
+        vis.hypertensionInfoSym = vis.svg.append('text')
+            .attr('x', vis.width/2 + 80)
+            .attr("y", 240)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr('font-weight', 'bold')
+            .text("?")
+
         vis.highcholesterolLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
@@ -52,6 +115,35 @@ class RiskFactorPrevalence{
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
             .text("High Cholesterol");
+
+        vis.cholesterolInfo = vis.svg.append('circle')
+            .attr("class", "hypertensionInfo")
+            .attr('cx', vis.width/2 + 95)
+            .attr("cy", 480)
+            .attr("r", 10)
+            .attr("fill", "blue")
+            .attr("cursor", "pointer")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>High total cholesterol: 
+                             Serum total cholesterol greater
+                              than or equal to 240 mg/dL.</h4>
+                        </div>`
+                    );
+            })
+
+        vis.cholesterolInfoSym = vis.svg.append('text')
+            .attr('x', vis.width/2 + 95)
+            .attr("y", 485)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr('font-weight', 'bold')
+            .text("?")
 
         vis.ages = vis.svg.append("text")
             .attr("x", 0)
@@ -142,21 +234,21 @@ class RiskFactorPrevalence{
             .on('mouseover', function (event, d){
                 d3.select(this)
                     .attr('stroke', 'black')
-                    .attr('fill', "yellow");
+                    .attr('fill', "#DA1884");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(
-                        `<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                             <h5>Percent: ${d.Percent}</h5>
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h5>${d.Percent}%</h5>
                         </div>`
                     );
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#e36830')
+                    .attr('fill', '#FF671F')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -172,7 +264,7 @@ class RiskFactorPrevalence{
                 return d.Percent;
 
             })
-            .attr('fill', '#e36830');
+            .attr('fill', '#FF671F');
 
         let obesityLabels = vis.svg.selectAll(".obesityLabels")
             .data(vis.filteredObesityCircles);
@@ -215,21 +307,21 @@ class RiskFactorPrevalence{
             .on('mouseover', function (event, d){
                 d3.select(this)
                     .attr('stroke', 'black')
-                    .attr('fill', "yellow");
+                    .attr('fill', "#DA1884");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(
-                        `<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                             <h5>Percent: ${d.Percent}</h5>
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h5>${d.Percent}%</h5>
                         </div>`
                     );
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#e36830')
+                    .attr('fill', '#FF671F')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -246,7 +338,7 @@ class RiskFactorPrevalence{
                 return d.Percent*0.80;
 
             })
-            .attr('fill', '#e36830');
+            .attr('fill', '#FF671F');
 
         let hypertensionLabels = vis.svg.selectAll(".hypertensionLabels")
             .data(vis.filteredHypertensionCircles);
@@ -289,21 +381,21 @@ class RiskFactorPrevalence{
             .on('mouseover', function (event, d){
                 d3.select(this)
                     .attr('stroke', 'black')
-                    .attr('fill', "yellow");
+                    .attr('fill', "#DA1884");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(
-                        `<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                             <h5>Percent: ${d.Percent}</h5>
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h5>${d.Percent}%</h5>
                         </div>`
                     );
             })
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#e36830')
+                    .attr('fill', '#FF671F')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -320,7 +412,7 @@ class RiskFactorPrevalence{
                 return d.Percent;
 
             })
-            .attr('fill', '#e36830');
+            .attr('fill', '#FF671F');
 
         let cholesterolLabels = vis.svg.selectAll(".cholesterolLabels")
             .data(vis.filteredCholesterolCircles);
