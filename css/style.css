@@ -105,3 +105,9 @@ h3{
     border-radius: 5px;
     padding: 5px;
 }
+
+.riskFactorSubtitle{
+    font-style: italic;
+    text-align: center;
+    padding: 30px;
+}
