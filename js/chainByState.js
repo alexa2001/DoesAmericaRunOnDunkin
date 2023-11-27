@@ -23,30 +23,6 @@ class ChainByStateVis {
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        // let selectBox = vis.svg.append("foreignObject")
-        //     .attr("x", 0)
-        //     .attr("y", 20)
-        //     .attr("width", 107)
-        //     .attr("height", 200)
-        //     .attr("class", "select-box")
-        //     .append("xhtml:body")
-        //     .html('<select id="mySelect"></select>');
-        //
-        // let options = d3.select("#mySelect")
-        //     .selectAll("option")
-        //     .data(["MA", "NY", "CA", "IL"])
-        //     .enter()
-        //     .append("option")
-        //     .text(d => d);
-        //
-        // d3.select("#mySelect").on("change", function() {
-        //     const selectedOption = d3.select(this).property("value");
-        //     // console.log("Selected option:", selectedOption);
-        //
-        //     // Call updateVis() when the selection changes
-        //     vis.wrangleData(selectedOption);
-        // });
-
         vis.selectedState = "MA";
         vis.stateCoord = {
             "MA" :[42.4072, -71.3824],
@@ -57,6 +33,8 @@ class ChainByStateVis {
 
         document.getElementById('stateSelect').addEventListener('change', function() {
             vis.selectedState = this.value;
+            console.log(vis.selectedState);
+            vis.wrangleData(vis.selectedState);
             // vis.wrangleData(vis.selectedState);
 
         });
@@ -101,6 +79,8 @@ class ChainByStateVis {
 
     updateVis(state){
         let vis = this;
+
+        // vis.map.panTo(new L.LatLng(vis.stateCoord[vis.selectedState]));
 
         vis.displayData.forEach(function(d) {
             if (d.province === state){
