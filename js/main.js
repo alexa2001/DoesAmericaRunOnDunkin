@@ -8,6 +8,7 @@ let foodMapVis;
 let stateMapVis;
 let myRankChart;
 let medianIncomeVis;
+let chainByStateVis;
 
 // load data using promises
 let promises = [
@@ -41,13 +42,15 @@ function createVis() {
 }
 
 function initMainPage(allDataArray){
+    chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
     myRankChart = new rankChart('rankChart', allDataArray[4]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
+
 }
 
-document.getElementById('restaurantSelect').addEventListener('change', function() {
-    let selectedRestaurant = this.value;
-    stateMapVis.updateSelectedRestaurant(selectedRestaurant);
-});
+// document.getElementById('restaurantSelect').addEventListener('change', function() {
+//     let selectedRestaurant = this.value;
+//     stateMapVis.updateSelectedRestaurant(selectedRestaurant);
+// });

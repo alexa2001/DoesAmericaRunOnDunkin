@@ -36,8 +36,10 @@ class StateMapVis {
 
         // set margins, width, and height
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+        vis.width = 700;
+        vis.height = 900;
+        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         // Zoom
         vis.viewpoint = {'width': 850, 'height': 610};
@@ -200,32 +202,32 @@ class StateMapVis {
 
         ///////////////////// Dynamic Projection////////////////////////////
         // Calculate the bounding box of the selected state
-        if (vis.selectedState) {
-            let bounds = vis.path.bounds(vis.selectedState);
-            //console.log("bounds", bounds)
-            let dx = bounds[1][0] - bounds[0][0];
-            let dy = bounds[1][1] - bounds[0][1];
-            let x = (bounds[0][0] + bounds[1][0]) / 2;
-            let y = (bounds[0][1] + bounds[1][1]) / 2;
-            //console.log("x", x, "y", y)
-
-            // Adjust scale and translation
-            let scale = 0.9 / Math.max(dx / vis.width, dy / vis.height);
-            let translate = [vis.width / 2 - scale * x, vis.height / 2 - scale * y];
-
-            vis.projection.scale(scale).translate(translate);
-
-            // Update the projection based on the selected state
-            vis.projection.scale(scale).translate(translate);
-            vis.path.projection(vis.projection);
-
-            // Re-draw the state path with the updated projection
-            //vis.statePath.attr("d", vis.path);
-
-        } else {
-            console.error("Selected state is not defined.");
-            return;
-        }
+        // if (vis.selectedState) {
+        //     let bounds = vis.path.bounds(vis.selectedState);
+        //     //console.log("bounds", bounds)
+        //     let dx = bounds[1][0] - bounds[0][0];
+        //     let dy = bounds[1][1] - bounds[0][1];
+        //     let x = (bounds[0][0] + bounds[1][0]) / 2;
+        //     let y = (bounds[0][1] + bounds[1][1]) / 2;
+        //     //console.log("x", x, "y", y)
+        //
+        //     // Adjust scale and translation
+        //     let scale = 0.9 / Math.max(dx / vis.width, dy / vis.height);
+        //     let translate = [vis.width / 2 - scale * x, vis.height / 2 - scale * y];
+        //
+        //     vis.projection.scale(scale).translate(translate);
+        //
+        //     // Update the projection based on the selected state
+        //     vis.projection.scale(scale).translate(translate);
+        //     vis.path.projection(vis.projection);
+        //
+        //     // Re-draw the state path with the updated projection
+        //     //vis.statePath.attr("d", vis.path);
+        //
+        // } else {
+        //     console.error("Selected state is not defined.");
+        //     return;
+        // }
     }
 
 }
