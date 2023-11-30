@@ -16,6 +16,10 @@ class RiskFactorPrevalence{
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
+        vis.tooltip = d3.select("body").append('div')
+            .attr('class', "tooltip")
+
+
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -54,6 +58,13 @@ class RiskFactorPrevalence{
                         </div>`
                     );
             })
+            .on("mouseout", function(event, d){
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
 
         vis.obesityInfoSym = vis.svg.append('text')
             .attr("class", "obesityInfo")
@@ -62,7 +73,22 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr("fill", "white")
             .attr('font-weight', 'bold')
+            .attr("cursor", "pointer")
             .text("?")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>Obesity: Body mass index 
+                             (BMI, weight in kilograms divided by 
+                             height in meters squared) greater than 
+                             or equal to 30.</h4>
+                        </div>`
+                    );
+            })
 
 
         vis.hypertensionLabel = vis.svg.append('text')
@@ -97,6 +123,13 @@ class RiskFactorPrevalence{
                         </div>`
                     );
             })
+            .on("mouseout", function(event, d){
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
 
         vis.hypertensionInfoSym = vis.svg.append('text')
             .attr('x', vis.width/2 + 80)
@@ -105,6 +138,22 @@ class RiskFactorPrevalence{
             .attr("fill", "white")
             .attr('font-weight', 'bold')
             .text("?")
+            .attr("cursor", "pointer")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>Hypertension: Systolic blood pressure
+                              greater than or equal to 130 mmHg or 
+                              diastolic blood pressure greater than or 
+                              equal to 80 mmHg, or currently taking 
+                              medication to lower high blood pressure</h4>
+                        </div>`
+                    );
+            })
 
         vis.highcholesterolLabel = vis.svg.append('text')
             .attr("class", "label")
@@ -136,6 +185,13 @@ class RiskFactorPrevalence{
                         </div>`
                     );
             })
+            .on("mouseout", function(event, d){
+                vis.tooltip
+                    .style("opacity", 0)
+                    .style("left", 0)
+                    .style("top", 0)
+                    .html(``);
+            })
 
         vis.cholesterolInfoSym = vis.svg.append('text')
             .attr('x', vis.width/2 + 95)
@@ -144,6 +200,20 @@ class RiskFactorPrevalence{
             .attr("fill", "white")
             .attr('font-weight', 'bold')
             .text("?")
+            .attr("cursor", "pointer")
+            .on('click', function (event){
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .html(
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
+                             <h4>High total cholesterol: 
+                             Serum total cholesterol greater
+                              than or equal to 240 mg/dL.</h4>
+                        </div>`
+                    );
+            })
 
         vis.ages = vis.svg.append("text")
             .attr("x", 0)
