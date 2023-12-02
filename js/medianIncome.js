@@ -31,9 +31,8 @@ class medianIncome {
         vis.radiusScale = d3.scaleLinear()
             .range([0,20])
 
-        vis.x = d3.scaleBand()
-            .rangeRound([0, vis.width*0.80])
-            .paddingInner(0.5);
+        vis.x = d3.scaleLinear()
+            .range([0,vis.width*0.80]);
 
         vis.y = d3.scaleLinear()
             .range([vis.height*0.50, 0]);
@@ -55,7 +54,7 @@ class medianIncome {
             .attr("font-size", "20px")
             .attr("transform", `translate(${vis.width * 0.5}, ${vis.height * 0.70})`)
             .style("text-anchor", "middle")
-            .text("State");
+            .text("Median Income");
 
         vis.svg.append("text")
             .attr("y", 60)
@@ -146,9 +145,9 @@ class medianIncome {
             .attr('class', "tooltip")
             .attr('id', 'tooltip')
 
-        vis.x.domain(vis.displayData.map(d => d["name"]));
+        vis.x.domain([0, d3.max(vis.displayData, d=> d["median_income"])])
         vis.y.domain([0, d3.max(vis.displayData, d=> d["restaurant_count"])]);
-        vis.radiusScale.domain([0, d3.max(vis.displayData, d=> d["median_income"])])
+        // vis.radiusScale.domain([0, d3.max(vis.displayData, d=> d["median_income"])])
 
         vis.svg.select(".y-axis")
             .attr("transform", "translate(130," + 65 + ")")
@@ -165,28 +164,28 @@ class medianIncome {
             .attr("dx", "-10px") // Adjust the position of the rotated labels if needed
             .attr("dy", "10px");
 
-        let path = vis.svg.selectAll(".line")
-            .data([vis.displayData]);
-
+        // let path = vis.svg.selectAll(".line")
+        //     .data([vis.displayData]);
+        //
         let circle = vis.svg.selectAll("circle")
             .data(vis.displayData);
-
-        const lineGenerator = d3.line()
-            .x(d => vis.x(d["name"]))
-            .y(d => vis.y(d["restaurant_count"]))
-            .curve(d3.curveLinear);
-
-        path
-            .enter()
-            .append("path")
-            .attr("class", "line")
-            .merge(path)
-            .attr("transform", "translate(130," + (65) + ")")
-            .attr("d", lineGenerator)
-            .attr("stroke-width", 2);
-
-        path.exit().remove();
-
+        //
+        // const lineGenerator = d3.line()
+        //     .x(d => vis.x(d["name"]))
+        //     .y(d => vis.y(d["restaurant_count"]))
+        //     .curve(d3.curveLinear);
+        //
+        // path
+        //     .enter()
+        //     .append("path")
+        //     .attr("class", "line")
+        //     .merge(path)
+        //     .attr("transform", "translate(130," + (65) + ")")
+        //     .attr("d", lineGenerator)
+        //     .attr("stroke-width", 2);
+        //
+        // path.exit().remove();
+        //
         circle
             .enter()
             .append("circle")
@@ -195,17 +194,16 @@ class medianIncome {
             .on('mouseover', function (event, d){
                 d3.select(this)
                     .attr('stroke', 'black')
-                    .attr('fill', "#DA1884")
-                    .attr("r", vis.radiusScale(d["median_income"]));
+                    .attr('fill', "#DA1884");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
                     .style("top", event.pageY + "px")
                     .html(
-                        `<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                        `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 20px">
                              <h5>${d["name"]}</h5>
                              <h4>Median Income: $${d["median_income"]}</h4>
-                             <h4>Restaurant Count: ${d["restaurant_count"]}</h4>
+                             <h4>Fast Food Restaurants: ${d["restaurant_count"]}</h4>
                         </div>`
                     );
             })
@@ -213,7 +211,6 @@ class medianIncome {
                 d3.select(this)
                     .attr('stroke', 'none')
                     .attr('fill', '#FF671F')
-                    .attr("r", 5)
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -226,7 +223,7 @@ class medianIncome {
                 return vis.y(d["restaurant_count"]);
             })
             .attr("cx", function(d){
-                return vis.x(d["name"]);
+                return vis.x(d["median_income"]);
             })
             .attr("fill", '#FF671F')
             .attr("class", "labels")
