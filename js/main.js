@@ -11,6 +11,7 @@ let medianIncomeVis;
 let chainByStateVis;
 let cardioMapVis;
 let brushVis;
+let titlePage;
 
 // load data using promises
 let promises = [
@@ -48,6 +49,7 @@ function createVis() {
 
 
 function initMainPage(allDataArray){
+    titlePage = new TitlePage('titlePage');
     chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
