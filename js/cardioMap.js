@@ -33,11 +33,11 @@ class cardioMap {
 
         vis.colorScale = d3.scaleLinear()
             // .range(['blue', 'white', 'red']);
-            .range(['white', 'red']);
+            .range(['white', 'blue']);
 
 
         vis.radiusScale = d3.scaleLinear()
-            .range([1, 20])
+            .range([1, 10])
 
 
         // Zoom
@@ -94,7 +94,7 @@ class cardioMap {
         vis.defs = vis.svg.append("defs");
 
         vis.gradient = vis.defs.append("linearGradient")
-            .attr("id", "svgGradient")
+            .attr("id", "cardioGradient")
             .attr("x1", "0%")
             .attr("x2", "100%")
             .attr("y1", "100%")
@@ -109,7 +109,7 @@ class cardioMap {
         vis.gradient.append("stop")
             .attr("class", "end")
             .attr("offset", "100%")
-            .attr("stop-color", "red")
+            .attr("stop-color", "blue")
             .attr("stop-opacity", 1);
 
         vis.legendAxis = d3.axisBottom(vis.legendScaleColor)
@@ -122,7 +122,7 @@ class cardioMap {
             .attr("y", -200)
             .attr("width", (4*vis.width/5))
             .attr("height", 30)
-            .attr("fill", "url(#svgGradient)"); // pull gradient color scale
+            .attr("fill", "url(#cardioGradient)"); // pull gradient color scale
 
         let cardioSelectBox = vis.svg.append("foreignObject")
             .attr("x", 0)
@@ -302,7 +302,7 @@ class cardioMap {
                         weight: 0.5,
                         opacity: 1,
                         color: 'white',
-                        dashArray: '3',
+                        // dashArray: '3',
                         fillOpacity: 0.7
                     };
                 });
@@ -311,7 +311,7 @@ class cardioMap {
             });
 
         function getColor(county){
-            let color = 'white'
+            let color = 'transparent'
             // console.log("colorful county",county)
             vis.filteredData.forEach(function(data) {
                 if (county['name'] === data['county'] && county['STATE'] === data['state']){
@@ -361,7 +361,7 @@ class cardioMap {
                 radius: radius,
                 color: color,
                 fillColor: 'black',
-                fillOpacity: 0.8,
+                fillOpacity: 1,
                 weight: 1
             })
                 .bindPopup(popupContent)
