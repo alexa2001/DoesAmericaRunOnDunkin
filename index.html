@@ -54,15 +54,20 @@
                     <div class="col">
                         <div class="row">
                             <div style="padding-right:10vh;padding-bottom:5vh">
-                                <h5>Select State</h5>
-                                <select id = "stateSelect" class="form-select" aria-label="Default select example">
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="CA">California</option>
-                                    <option value="NY">New York</option>
+                                <h5>Select Fast Food Chain</h5>
+                                <select id = "restaurantSelect">
+                                    <option value="">All Restaurant Chains</option>
+                                    <option value="McDonald's">McDonald's</option>
+                                    <option value="Burger King">Burger King</option>
+                                    <option value="Domino's">Domino's Pizza</option>
+                                    <option value="Taco Bell">Taco Bell</option>
+                                    <option value="Wendy's">Wendy's</option>
+                                    <option value="Arby's">Arby's</option>
+                                    <option value="Subway">Subway</option>
+                                    <option value="Dunkin' Donuts">Dunkin' Donuts</option>
                                 </select>
                             </div>
-                            <div id="chainVis" style="height: 400px; width: 400px; padding-bottom:10vh"></div>
+                            <div id="stateMapDiv" style="height: 400px; width: 400px; padding-bottom:10vh"></div>
                         </div>
                     </div>
                 </div>
@@ -157,6 +162,7 @@
 <script src="js/fullpage.js"></script>
 <script src="js/chainByState.js"></script>
 <script src="js/leaflet.js"></script>
+
 <!--<script type="text/javascript" src="../dist/fullpage.js"></script>-->
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
