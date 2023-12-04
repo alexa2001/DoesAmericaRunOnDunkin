@@ -24,8 +24,11 @@ class TitlePage{
         vis.title = vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/2)
+            .attr("fill", "white")
             .attr("text-anchor", "middle")
-            .attr('font-size', '24px') // Font size
+            .attr('font-size', 40) // Font size
+            .attr('font-family', 'monospace')
+            .attr("width", 100)
             .text("Does America Run on Dunkin'?")
 
         vis.logos = [
@@ -49,22 +52,22 @@ class TitlePage{
         let index = 0;
         let colorPalette = d3.scaleOrdinal(d3.schemePastel1);
         while(i < 360){
-            vis.circs2 = vis.svg.append("circle")
+            vis.circs = vis.svg.append("circle")
                 .attr("class", "logoCircle")
-                .attr('cx', 300*Math.cos(i)+640)
-                .attr("cy", 300*Math.sin(i)+360)
+                .attr('cx', 350*Math.cos(i)+640)
+                .attr("cy", 350*Math.sin(i)+360)
                 .attr("r", 50)
                 .transition()
                 .attr("fill", colorPalette(index))
 
             vis.logo = vis.svg.append("image")
                 .attr("xlink:href", vis.logos[index]) // Set the image URL
-                .attr("x", 300*Math.cos(i)+640 - 25) // X position of the image
-                .attr("y", 300*Math.sin(i)+360 -25) // Y position of the image
+                .attr("x", 350*Math.cos(i)+640 - 25) // X position of the image
+                .attr("y", 350*Math.sin(i)+360 -25) // Y position of the image
                 .attr("width", 50) // Set the width of the image
                 .attr("height", 50);
 
-            console.log(`Circle ${index}: (${300*Math.cos(i)+640}, ${300*Math.sin(i)+360})`)
+            // console.log(`Circle ${index}: (${300*Math.cos(i)+640}, ${300*Math.sin(i)+360})`)
             index += 1;
             i += 51.42;
         }
