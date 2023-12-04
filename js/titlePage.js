@@ -5,6 +5,16 @@ class TitlePage{
         this.initVis();
     }
 
+    circleXY(r, theta) {
+        // Convert angle to radians
+        theta = (theta-90) * Math.PI/180;
+
+        return {x: r*Math.cos(theta),
+            y: -r*Math.sin(theta)}
+    }
+
+
+
     initVis(){
         let vis = this;
 
@@ -20,6 +30,8 @@ class TitlePage{
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
+
+
 
         vis.title = vis.svg.append("text")
             .attr("x", vis.width/2)
@@ -41,52 +53,45 @@ class TitlePage{
             "./images/wendysLogo.png"
         ];
 
-        // vis.test = vis.svg.append("image")
-        //     .attr("xlink:href", "images/BKLogo.png") // Set the image URL
-        //     .attr("x", 50) // X position of the image
-        //     .attr("y", 50) // Y position of the image
-        //     .attr("width", 100) // Set the width of the image
-        //     .attr("height", 100);
-
-        let i =  51.42;
         let index = 0;
         let colorPalette = d3.scaleOrdinal(d3.schemePastel1);
-        while(i < 360){
-            vis.circs = vis.svg.append("circle")
+
+        // function moveCircle() {
+        //     circle.transition()
+        //         .duration(2000) // Animation duration in milliseconds
+        //         .attr("cx", 350) // Move the circle to x-coordinate 350
+        //         .attr("cy", 350) // Move the circle to y-coordinate 350
+        //         .transition()
+        //         .duration(2000) // Animation duration in milliseconds
+        //         .attr("cx", 50) // Move the circle back to x-coordinate 50
+        //         .attr("cy", 50) // Move the circle back to y-coordinate 50
+        //         .on("end", moveCircle); // Restart the animation when it ends
+        // }
+
+        for (let theta=0; theta<=360; theta += (360/7)) {
+            let answer = vis.circleXY(300, theta);
+            vis.circ = vis.svg.append("circle")
                 .attr("class", "logoCircle")
-                .attr('cx', 300*Math.cos(i)+640)
-                .attr("cy", 300*Math.sin(i)+360)
+                .attr('cx', answer.x + 640)
+                .attr("cy", answer.y + 360)
                 .attr("r", 50)
+                .attr("stroke", "white")
+                .attr("stroke-width", 3)
                 .transition()
-                .attr("fill", colorPalette(index))
+                .attr("fill", colorPalette(theta))
+
+            // moveCircle();
 
             vis.logo = vis.svg.append("image")
                 .attr("xlink:href", vis.logos[index]) // Set the image URL
-                .attr("x", 300*Math.cos(i)+640 - 25) // X position of the image
-                .attr("y", 300*Math.sin(i)+360 -25) // Y position of the image
-                .attr("width", 50) // Set the width of the image
-                .attr("height", 50);
+                .attr('x', answer.x + 640 - 35) // X position of the image
+                .attr("y", answer.y + 360 - 35) // Y position of the image
+                .attr("width", 70) // Set the width of the image
+                .attr("height", 70);
 
-            // console.log(`Circle ${index}: (${300*Math.cos(i)+640}, ${300*Math.sin(i)+360})`)
             index += 1;
-            i += 51.42;
         }
 
-        // vis.circs2 = vis.svg.append("circle")
-        //     .attr("class", "logoCircle")
-        //     .attr('cx', 300*Math.cos(51.42)+640)
-        //     .attr("cy", 300*Math.sin(51.42)+360)
-        //     .attr("r", 50)
-        //     .attr("fill", "blue")
-        //
-        // vis.circs3 = vis.svg.append("circle")
-        //     .attr("class", "logoCircle")
-        //     .attr('cx', 300*Math.cos(102.84)+640)
-        //     .attr("cy", 300*Math.sin(102.84)+360)
-        //     .attr("r", 50)
-        //     .attr("fill", "blue")
 
     }
-
-
 }
