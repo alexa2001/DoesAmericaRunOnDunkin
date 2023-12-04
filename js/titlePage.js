@@ -26,7 +26,7 @@ class TitlePage{
             .attr("y", vis.height/2)
             .attr("fill", "white")
             .attr("text-anchor", "middle")
-            .attr('font-size', 40) // Font size
+            .attr('font-size', 30) // Font size
             .attr('font-family', 'monospace')
             .attr("width", 100)
             .text("Does America Run on Dunkin'?")
@@ -54,16 +54,16 @@ class TitlePage{
         while(i < 360){
             vis.circs = vis.svg.append("circle")
                 .attr("class", "logoCircle")
-                .attr('cx', 350*Math.cos(i)+640)
-                .attr("cy", 350*Math.sin(i)+360)
+                .attr('cx', 300*Math.cos(i)+640)
+                .attr("cy", 300*Math.sin(i)+360)
                 .attr("r", 50)
                 .transition()
                 .attr("fill", colorPalette(index))
 
             vis.logo = vis.svg.append("image")
                 .attr("xlink:href", vis.logos[index]) // Set the image URL
-                .attr("x", 350*Math.cos(i)+640 - 25) // X position of the image
-                .attr("y", 350*Math.sin(i)+360 -25) // Y position of the image
+                .attr("x", 300*Math.cos(i)+640 - 25) // X position of the image
+                .attr("y", 300*Math.sin(i)+360 -25) // Y position of the image
                 .attr("width", 50) // Set the width of the image
                 .attr("height", 50);
 
