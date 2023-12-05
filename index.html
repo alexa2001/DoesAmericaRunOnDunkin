@@ -27,9 +27,12 @@
 <body>
 
 <div id="fullpage">
-    <div class="section first">
-        <h1 class="display-4 title">Does America Run on Dunkin'?</h1>
+    <div class="section">
+        <div id="titlePage"></div>
+<!--        <h1 class="display-4 title">Does America Run on Dunkin'?</h1>-->
     </div>
+
+
     <div class="section">
         <h3>The fast food industry has a major influence in the economy and diet of the U.S. There are fast food restaurants everywhere...</h3>
     </div>
@@ -145,6 +148,7 @@
 <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
 <!-- Your JavaScript code can go here -->
+<script src="js/titlePage.js"></script>
 <script src="js/medianIncome.js"></script>
 <script src="js/rankChart.js"></script>
 <script src="js/main.js"></script>
@@ -161,7 +165,7 @@
 <!--<script type="text/javascript" src="../dist/fullpage.js"></script>-->
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        sectionsColor: ['lightgrey', '#faf3dc', '#7BAABE', 'whitesmoke', '#ccddff', '#4BBFC3', '#7BAABE', '#f2ffc2', '#f2ffc2']
+        sectionsColor: ['#5f6269', '#faf3dc', '#7BAABE', 'whitesmoke', '#ccddff', '#4BBFC3', '#7BAABE', '#f2ffc2', '#f2ffc2']
     });
 </script>
 <script src="js/leaflet/leaflet.js"></script>

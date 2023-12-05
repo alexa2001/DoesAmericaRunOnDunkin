@@ -11,6 +11,7 @@ let medianIncomeVis;
 let chainByStateVis;
 let cardioMapVis;
 let brushVis;
+let titlePage;
 let chainSalesVis;
 
 // load data using promises
