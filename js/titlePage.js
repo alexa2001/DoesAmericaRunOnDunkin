@@ -15,8 +15,6 @@ class TitlePage{
             y: -r*Math.sin(theta)}
     }
 
-
-
     initVis(){
         let vis = this;
 
