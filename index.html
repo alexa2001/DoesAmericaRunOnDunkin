@@ -35,19 +35,20 @@
     </div>
     <div class="section">
         <!-- HEADING -->
-        <div class="row d-flex align-items-center" style="height: 10vh; padding: 0">
+        <div class="row d-flex align-items-center" style="height: 15vh; padding: 0">
             <h1 style="text-align: center">Explore Fast Food Chains in the US</h1>
         </div>
 
         <!-- Visualizations -->
-        <div class="row" style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
+        <div class="row" style="height: 85vh">
             <div class="col-7"> <!-- 75% width -->
                 <div id="mapDiv" style="height: 70vh; width: 100%;"></div>
             </div>
             <div class="col-5"> <!-- 25% width -->
                 <!-- Right column content -->
                 <row>
-                    <select id="restaurantSelect">
+                    <h5>Select a fast food chain to explore store statistics</h5>
+                    <select id="restaurantSelect" class="form-select" aria-label="Default select example" style="width: 30vh;">
                         <!-- options -->
                         <option value="">All Restaurant Chains</option>
                         <option value="McDonald’s">McDonald's</option>
@@ -59,10 +60,10 @@
                         <option value="Subway">Subway</option>
                         <option value="Dunkin' Donuts">Dunkin' Donuts</option>
                     </select>
+                    <br>
                     <div id="stateMapDiv" style="height: 35vh; width: 100%;"></div>
                 </row>
                 <row>
-                    <h5>See fast food chain sales and growth</h5>
                     <div id="salesDiv" style="height: 35vh; width: 100%;"></div>
                 </row>
             </div>
