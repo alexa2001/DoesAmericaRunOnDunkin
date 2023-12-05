@@ -15,7 +15,7 @@ class ChainSalesVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 40, right: 40, bottom: 40, left: 20};
+        vis.margin = {top: 40, right: 20, bottom: 40, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -29,7 +29,6 @@ class ChainSalesVis {
         vis.title = vis.svg.append('g')
             .attr('class', 'title')
             .attr('id', 'chart-title');
-
         vis.title.append('text')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle');
@@ -53,6 +52,19 @@ class ChainSalesVis {
             .attr("x", vis.width / 2)
             .attr("y", vis.height + vis.margin.bottom - 5)
             .text("Category");  // Replace with your actual axis label
+
+        /////////////// TOOLTIP ///////////////
+        // Initialize tooltip
+        vis.tooltip = d3.select("body").append('div')
+            .attr('class', "tooltip")
+            .attr('id', 'salesToolTip')
+
+        // Hover style
+        vis.hoverColor = "#D22B2B"; // Change as desired
+        vis.hoverStrokeColor = "#7B1818"; // Change as desired
+        vis.hoverStrokeWidth = 3; // Change as desired
+        vis.defaultStrokeColor = "black";
+        vis.defaultStrokeWidth = 0.5;
 
         // // Y-axis label
         // vis.svg.append("text")
@@ -78,11 +90,11 @@ class ChainSalesVis {
         vis.restaurantSalesData.forEach(function(d){
             vis.displayData.push({
                 "name": d.FastFoodChain,
-                "sales": +d.SystemwideSales,
-                "unitSales": +d.AvgSalesPerUnit,
-                "franchises": +d.FranchisedStores,
-                "companyStores": +d.CompanyStores,
-                "totalUnits": +d.TotalUnits,
+                "Systemwide Sales (millions of dollars)": +d.SystemwideSales,
+                "Sales per Unit (thousands of dollars)": +d.AvgSalesPerUnit,
+                "Franchise Stores": +d.FranchisedStores,
+                "Company Stores": +d.CompanyStores,
+                "Total Units Sold": +d.TotalUnits,
             })
         })
         console.log("CLEAN DISPLAYDATA:", vis.displayData);
@@ -141,7 +153,34 @@ class ChainSalesVis {
             .attr("y", d => vis.yScale(d.value))
             .attr("height", d => vis.height - vis.yScale(d.value))
             .attr("fill", "#F05E16")
-            .attr("stroke", "black");
+            .on("mouseover", function(event, d) {
+                //highlight when hovering
+                d3.select(this)
+                    .attr("fill", vis.hoverColor)
+                    .attr("stroke", vis.hoverStrokeColor)
+                    .attr("stroke-width", vis.hoverStrokeWidth);
+                // Show tooltip
+                // Update tooltip
+                vis.tooltip
+                    .transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                vis.tooltip.style("display", "block")
+                    .html(`<strong>Category:</strong> ${d.category}<br><strong>Value:</strong> ${d.value}`);
+            })
+            .on("mousemove", function(event) {
+                vis.tooltip.style("left", (event.pageX) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                // Revert fill and stroke when not hovered
+                d3.select(this)
+                    .attr("fill", "#F05E16")
+                    .attr("stroke", vis.defaultStrokeColor)
+                    .attr("stroke-width", vis.defaultStrokeWidth);
+                // Hide tooltip
+                vis.tooltip.style("display", "none");
+            });
 
         // Exit and remove old bars
         bars.exit().remove();

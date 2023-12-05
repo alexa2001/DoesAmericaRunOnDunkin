@@ -95,7 +95,7 @@ h3{
     stroke: #FF671F;
 }
 
-#mapToolTip {
+#mapToolTip, #salesToolTip {
     pointer-events: none; /* Let mouse events pass through */
     position: absolute;
     opacity: 0.8;
