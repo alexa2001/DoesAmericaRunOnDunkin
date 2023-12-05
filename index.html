@@ -34,42 +34,39 @@
         <h3>The fast food industry has a major influence in the economy and diet of the U.S. There are fast food restaurants everywhere...</h3>
     </div>
     <div class="section">
-        <h1>Fast Food Restaurants Across the US</h1>
-        <h3>See the density by state or click on a state for a view of each chain!</h3>
-        <br><br>
-        <!-- Visualizations -->
-        <div class="row"
-             style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
-            <div class="col">
-                <div class="row" id="mapVisualizations">
-                    <div class="col">
-                        <div class="row">
-                            <div id="mapDiv" style="height: 71vh; width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div style="padding-right:10vh;padding-bottom:5vh">
-                                <h5>Select Fast Food Chain</h5>
-                                <select id = "restaurantSelect" class="form-select" aria-label="Default select example">
-                                    <option value="">All Restaurant Chains</option>
-                                    <option value="McDonald's">McDonald's</option>
-                                    <option value="Burger King">Burger King</option>
-                                    <option value="Domino's">Domino's Pizza</option>
-                                    <option value="Taco Bell">Taco Bell</option>
-                                    <option value="Wendy's">Wendy's</option>
-                                    <option value="Arby's">Arby's</option>
-                                    <option value="Subway">Subway</option>
-                                    <option value="Dunkin' Donuts">Dunkin' Donuts</option>
-                                </select>
-                            </div>
-                            <div id="stateMapDiv" style="height: 400px; width: 400px; padding-bottom:10vh"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- HEADING -->
+        <div class="row d-flex align-items-center" style="height: 10vh; padding: 0">
+            <h1 style="text-align: center">Explore Fast Food Chains in the US</h1>
         </div>
 
+        <!-- Visualizations -->
+        <div class="row" style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
+            <div class="col-7"> <!-- 75% width -->
+                <div id="mapDiv" style="height: 70vh; width: 100%;"></div>
+            </div>
+            <div class="col-5"> <!-- 25% width -->
+                <!-- Right column content -->
+                <row>
+                    <select id="restaurantSelect">
+                        <!-- options -->
+                        <option value="">All Restaurant Chains</option>
+                        <option value="McDonald’s">McDonald's</option>
+                        <option value="Burger King">Burger King</option>
+                        <option value="Domino's">Domino's Pizza</option>
+                        <option value="Taco Bell">Taco Bell</option>
+                        <option value="Wendy's">Wendy's</option>
+                        <option value="Arby’s">Arby's</option>
+                        <option value="Subway">Subway</option>
+                        <option value="Dunkin' Donuts">Dunkin' Donuts</option>
+                    </select>
+                    <div id="stateMapDiv" style="height: 35vh; width: 100%;"></div>
+                </row>
+                <row>
+                    <h5>See fast food chain sales and growth</h5>
+                    <div id="salesDiv" style="height: 35vh; width: 100%;"></div>
+                </row>
+            </div>
+        </div>
     </div>
     <div class="section">
         <h3>The U.S. also sees a significant number of cardiovascular health issues...</h3>
@@ -157,6 +154,7 @@
 <script src="js/riskFactorPrevalence.js"></script>
 <script src="js/fullpage.js"></script>
 <script src="js/chainByState.js"></script>
+<script src="js/chainSales.js"></script>
 <script src="js/leaflet.js"></script>
 
 <!--<script type="text/javascript" src="../dist/fullpage.js"></script>-->
