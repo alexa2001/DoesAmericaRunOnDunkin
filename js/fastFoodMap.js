@@ -64,7 +64,7 @@ class FoodMapVis {
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
-            .attr('id', 'mapTooltip')
+            .attr('id', 'mapToolTip')
 
         /////////////// LEGEND ///////////////
         // legend scale

@@ -11,17 +11,29 @@ class ChainByStateVis {
     initVis(){
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
-        // vis.width = 700;
-        vis.height = 500;
-        vis.width = 500;
-        //vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        //vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+
+        // Dynamically set the size of the map container
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+
+
+        vis.mapContainer = document.getElementById('stateMapDiv');
+        vis.mapContainer.style.width = vis.width + 'px';
+        vis.mapContainer.style.height = vis.height + 'px';
+
+        console.log("width", vis.width)
+        console.log("width new", vis.mapContainer.style.width)
+
+        window.addEventListener('resize', function() {
+            vis.map.invalidateSize();
+        });
+
 
         // init drawing area
-        vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width + vis.margin.left + vis.margin.right)
-            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        vis.svg = d3.select(vis.parentElement).append("svg")
+            .attr("width", vis.mapContainer.style.width)
+            .attr("height", vis.mapContainer.style.height)
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
@@ -82,6 +94,8 @@ class ChainByStateVis {
         }
 
 
+        console.log("CHAINS", this.chainData)
+
         // set view
         vis.map = L.map('stateMapDiv').setView(vis.stateCoord[vis.selectedState], 7);
 
@@ -94,7 +108,6 @@ class ChainByStateVis {
 
         vis.wrangleData(vis.selectedState);
     }
-
 
     wrangleData(selectedOption){
         let vis = this;
@@ -110,7 +123,8 @@ class ChainByStateVis {
                 "name": s.name,
                 "lat": +s.latitude,
                 "lon": +s.longitude,
-                "province": s.province
+                "province": s.province,
+                "city": s.city
             })
         })
 
@@ -131,12 +145,20 @@ class ChainByStateVis {
         if (vis.markers) {
             vis.markers.forEach(marker => vis.map.removeLayer(marker));
         }
+
+        // initialize markers array
         vis.markers = [];
 
         // Add new markers for the selected state
         vis.displayData.forEach(function(d) {
             if (d.province === state){
-                let marker = L.marker([d["lat"], d["lon"]]).addTo(vis.map);
+                // tooltip content
+                vis.tooltipContent = `<strong>${d.name}</strong><br>city: ${d.city}`;
+
+                let marker = L.marker([d["lat"], d["lon"]])
+                    .addTo(vis.map)
+                    .bindTooltip(vis.tooltipContent, { permanent: false, direction: 'top' }) // Add a tooltip
+                    .addTo(vis.map);
                 vis.markers.push(marker); // Store the marker reference
             }
         })
@@ -162,7 +184,11 @@ class ChainByStateVis {
 
         // Add new markers for the filtered data
         vis.filteredRestaurants.forEach(function(d) {
-            let marker = L.marker([d["lat"], d["lon"]]).addTo(vis.map);
+            vis.tooltipContent = `<strong>${d.name}</strong><br>city: ${d.city}`;
+            let marker = L.marker([d["lat"], d["lon"]])
+                .addTo(vis.map)
+                .bindTooltip(vis.tooltipContent, { permanent: false, direction: 'top' }) // Add a tooltip
+                .addTo(vis.map);
             vis.markers.push(marker); // Store the marker reference
         });
     }
