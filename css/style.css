@@ -95,10 +95,10 @@ h3{
     stroke: #FF671F;
 }
 
-#mapToolTip {
+#mapToolTip, #salesToolTip {
     pointer-events: none; /* Let mouse events pass through */
     position: absolute;
-    opacity: 0;
+    opacity: 0.8;
     background-color: white;
     border: solid;
     border-width: 1px;
@@ -110,4 +110,14 @@ h3{
     font-style: italic;
     text-align: center;
     padding: 30px;
+}
+
+#mapVisualizations {
+    width: 100%;
+    height: 100%;
+}
+
+#stateMapDiv {
+    width: 100%;
+    height: 100%;
 }

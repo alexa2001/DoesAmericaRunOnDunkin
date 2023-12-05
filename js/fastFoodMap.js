@@ -64,7 +64,7 @@ class FoodMapVis {
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
-            //.attr('id', 'mapTooltip')
+            .attr('id', 'mapToolTip')
 
         /////////////// LEGEND ///////////////
         // legend scale
@@ -103,6 +103,14 @@ class FoodMapVis {
             .attr("stop-color", "#F05E16")
             .attr("stop-opacity", 1);
 
+        // Hover style
+        vis.hoverColor = "#D22B2B"; // Change as desired
+        vis.hoverStrokeColor = "#7B1818"; // Change as desired
+        vis.hoverStrokeWidth = 3; // Change as desired
+        vis.defaultStrokeColor = "black";
+        vis.defaultStrokeWidth = 0.5;
+
+        // legend axis
         vis.legendAxis = d3.axisBottom(vis.legendScale);
 
         vis.legend
@@ -145,49 +153,63 @@ class FoodMapVis {
             .range(["white", "#F05E16"]);
         // console.log("color scale", vis.colorScale.domain())
 
-
-        // Update state vis with color and tooltip
+        // Apply color to states
         vis.states
-            // update color
             .attr("fill", d => {
                 let stateName = d.properties.name;
                 vis.storeCount = vis.chainDataByState[stateName];
-                //console.log("STORE COUNT", vis.storeCount)
                 return vis.colorScale(vis.storeCount);
             })
-            // add tooltip
             .on("mouseover", function(event, d) {
                 let stateName = d.properties.name;
+
+                // Change fill and stroke on hover
+                d3.select(this)
+                    .attr("fill", vis.hoverColor)
+                    .attr("stroke", vis.hoverStrokeColor)
+                    .attr("stroke-width", vis.hoverStrokeWidth);
+
+                // Update tooltip
                 vis.tooltip
                     .transition()
                     .duration(200)
                     .style("opacity", .9);
-                vis.tooltip
-                    .html(`<strong>State:</strong> ${d.properties.name}<br><strong>Restaurants:</strong> ${vis.chainDataByState[stateName]}`)
+                vis.tooltip.html(`<strong>State:</strong> ${d.properties.name}<br><strong>Restaurants:</strong> ${vis.chainDataByState[stateName]}`)
                     .style("left", (event.pageX) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mousemove", function(event) {
-                vis.tooltip
-                    .style("left", (event.pageX) + "px")
+                vis.tooltip.style("left", (event.pageX) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseout", function() {
-                vis.tooltip
-                    .transition()
+                // Revert fill and stroke when not hovered
+                d3.select(this)
+                    .attr("fill", d => {
+                        let stateName = d.properties.name;
+                        vis.storeCount = vis.chainDataByState[stateName];
+                        return vis.colorScale(vis.storeCount);
+                    })
+                    .attr("stroke", vis.defaultStrokeColor)
+                    .attr("stroke-width", vis.defaultStrokeWidth);
+
+                // Hide tooltip
+                vis.tooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
             });
 
+        // send information about selected state to chainByState.js
         vis.states.on("click", (event, d) => {
-            let stateName = d.properties.name; // Gets the name of the clicked state
-            updateStateMap(stateName); // Calls the global function to update the state map
+            let clickedState = nameConverter.getAbbreviation(d.properties.name); // Gets the name of the clicked state
+            console.log("clicked state", clickedState);
+            updateStateMap(clickedState); // Calls the global function to update the state map
         });
 
 
+        // Update legend
         vis.legendScale.domain([0, d3.max(Object.values(vis.chainDataByState))])
         vis.legendAxisGroup.call(vis.legendAxis);
-
 
     }
 }

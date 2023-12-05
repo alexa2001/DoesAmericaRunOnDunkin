@@ -37,41 +37,40 @@
         <h3>The fast food industry has a major influence in the economy and diet of the U.S. There are fast food restaurants everywhere...</h3>
     </div>
     <div class="section">
-        <h1>Fast Food Restaurants Across the US</h1>
-        <h3>See the density by state or click on a state for a view of each chain!</h3>
-        <p style="padding-left:5vh; padding-right:5vh">When completed, on clicking a state on the left a detailed view will appear on the right.
-            This detailed view will show the locations of each fast food chain location in the state.
-            The state view will then be filterable to show only certain chains (ex. just McDonalds locations).
-            Additionally, we might add new filtering for the left map to show not only the
-            number of stores but also sales in units and dollars. This will be our advanced visualization.</p>
-        <!-- Visualizations -->
-        <div class="row"
-             style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <div class="row">
-                            <div id="mapDiv" style="height: 71vh; width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div style="padding-right:10vh;padding-bottom:5vh">
-                                <h5>Select State</h5>
-                                <select id = "stateSelect" class="form-select" aria-label="Default select example">
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="CA">California</option>
-                                    <option value="NY">New York</option>
-                                </select>
-                            </div>
-                            <div id="chainVis" style="height: 400px; width: 400px; padding-bottom:10vh"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- HEADING -->
+        <div class="row d-flex align-items-center" style="height: 15vh; padding: 0">
+            <h1 style="text-align: center">Explore Fast Food Chains in the US</h1>
         </div>
 
+        <!-- Visualizations -->
+        <div class="row" style="height: 85vh">
+            <div class="col-7"> <!-- 75% width -->
+                <div id="mapDiv" style="height: 70vh; width: 100%;"></div>
+            </div>
+            <div class="col-5"> <!-- 25% width -->
+                <!-- Right column content -->
+                <row>
+                    <h5>Select a fast food chain or state to explore store statistics</h5>
+                    <select id="restaurantSelect" class="form-select" aria-label="Default select example" style="width: 30vh;">
+                        <!-- options -->
+                        <option value="">All Restaurant Chains</option>
+                        <option value="McDonald’s">McDonald's</option>
+                        <option value="Burger King">Burger King</option>
+                        <option value="Domino's">Domino's Pizza</option>
+                        <option value="Taco Bell">Taco Bell</option>
+                        <option value="Wendy's">Wendy's</option>
+                        <option value="Arby’s">Arby's</option>
+                        <option value="Subway">Subway</option>
+                        <option value="Dunkin' Donuts">Dunkin' Donuts</option>
+                    </select>
+                    <br>
+                    <div id="stateMapDiv" style="height: 35vh; width: 100%;"></div>
+                </row>
+                <row>
+                    <div id="salesDiv" style="height: 35vh; width: 100%;"></div>
+                </row>
+            </div>
+        </div>
     </div>
     <div class="section">
         <h3>The U.S. also sees a significant number of cardiovascular health issues...</h3>
@@ -160,7 +159,9 @@
 <script src="js/riskFactorPrevalence.js"></script>
 <script src="js/fullpage.js"></script>
 <script src="js/chainByState.js"></script>
+<script src="js/chainSales.js"></script>
 <script src="js/leaflet.js"></script>
+
 <!--<script type="text/javascript" src="../dist/fullpage.js"></script>-->
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
