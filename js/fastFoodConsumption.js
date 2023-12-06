@@ -26,17 +26,17 @@ let timelineTitle = svg.append("text")
     .text("A brief history of the fast food industry")
 
 const data = [
-    { date: "1921-01-01", event: "White Castle opens the first fast food chain" },
-    { date: "1937-01-01", event: "Krispy Kreme launches" },
-    { date: "1948-01-01", event: "Richard and Maurice Mcdonald " +
+    { date: "1921-01-01", abbr:"First fast food chain", event: "White Castle opens the first fast food chain"},
+    { date: "1937-01-01", abbr:"Krispy Kreme", event: "Krispy Kreme launches" },
+    { date: "1948-01-01", abbr:"McDonald's Assembly line", event: "Richard and Maurice Mcdonald " +
             "create an assembly line system to make ham" +
             "burgers and fries in their McDonal's restaurants\n" },
-    { date: "1950-01-01", event: "The first Dunkin' Donuts opens in Quincy, MA" },
-    { date: "1954-01-01", event: "The first Burger King opens in Miami" },
-    { date: "1965-01-01", event: "First Subway opens in Connecticut" },
-    { date: "1969-01-01", event: "First Wendy's launches" },
-    { date: "2002-01-01", event: "McDonalds reduces the amount of trans fat in their fries by 48%" },
-    { date: "2005-01-01", event: "American sales of fast food total $163.5 billion" },
+    { date: "1950-01-01", abbr:"", event: "The first Dunkin' Donuts opens in Quincy, MA" },
+    { date: "1954-01-01", abbr:"", event: "The first Burger King opens in Miami" },
+    { date: "1965-01-01", abbr:"", event: "First Subway opens in Connecticut" },
+    { date: "1969-01-01", abbr:"", event: "First Wendy's launches" },
+    { date: "2002-01-01", abbr:"", event: "McDonalds reduces the amount of trans fat in their fries by 48%" },
+    { date: "2005-01-01", abbr:"", event: "American sales of fast food total $163.5 billion" },
     // Add more events as needed
 ];
 
@@ -49,7 +49,7 @@ data.forEach(d => {
 
 const xScale = d3.scaleTime()
     .domain(d3.extent(data, d => d.date))
-    .range([margin.left, width - margin.right])
+    .range([margin.left, width * 0.7])
 
 let xAxis = d3.axisTop(xScale);
 
@@ -61,17 +61,65 @@ svg.select(".x-axis")
     // .transition()
     .call(xAxis);
 
-let events = svg.selectAll(".events")
+let myTooltip = d3.select("body").append('div')
+    .attr('class', "tooltip")
+
+const circs = svg.selectAll(".circle")
     .data(data)
     .enter()
-    .append("text")
-    .attr("class", "events")
-    .attr("x", d => xScale(d.date))
-    .attr("y", height * 0.50) // Adjust text position
-    .text(d => d.event)
-    .attr("text-anchor", "middle")
-    .style("font-size", "12px")
-    .style("fill", "black");
+    .append("circle")
+    .attr("class", "circle")
+    .attr("cx", d => xScale(d.date))
+    .attr("cy", function(d, i){
+        if( i % 2 === 0 ){
+            return (height * 0.5 - 40)
+        }
+        else{
+            return (height * 0.5 - 50)
+        }
+    })
+    .attr("r", 10)
+    .attr("fill", "#FF671F")
+    .attr("cursor", "pointer")
+    .on('mouseover', function (event, d){
+        myTooltip
+            .style("opacity", 1)
+            .style("left",  width*0.80 + "px")
+            .style("top", height * 0.20 + "px")
+            .html(
+                `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 10px; margin-right: 50px">
+                     <h4>${d.event}</h4>
+                </div>`
+            );
+    })
+    .on("mouseout", function(event, d){
+        myTooltip
+            .style("opacity", 0)
+            .style("left", 0)
+            .style("top", 0)
+            .html(``);
+    })
+
+
+// let events = svg.selectAll(".events")
+//     .data(data)
+//     .enter()
+//     .append("text")
+//     .attr("class", "events")
+//     .attr("x", d => xScale(d.date) + 10)
+//     .attr("y", function(d, i){
+//         if( i % 2 === 0 ){
+//             return (height * 0.5 - 20)
+//         }
+//         else{
+//             return (height * 0.5 - 30)
+//         }
+//     })
+//     .text(d => d.abbr)
+//     .attr("text-anchor", "right")
+//     .style("font-size", "15px")
+//     .style("fill", "black")
+//     .attr('font-family', 'monospace')
 
 
 let ticks = svg.selectAll('.line')
@@ -82,8 +130,14 @@ let ticks = svg.selectAll('.line')
     .attr('x1', d => xScale(d.date))
     .attr('y1', d => 200)
     .attr('x2', d => xScale(d.date))
-    .attr('y2', height * 0.50 - 20)
-    .attr('stroke', 'gray');
+    .attr("y2", function(d, i){
+        if( i % 2 === 0 ){
+            return (height * 0.5 - 40)
+        }
+        else{
+            return (height * 0.5 - 50)
+        }
+    })
 
 let desc = svg.append("text")
     .attr("x", 50)
