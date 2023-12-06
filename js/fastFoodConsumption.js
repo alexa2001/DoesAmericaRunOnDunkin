@@ -26,9 +26,17 @@ let timelineTitle = svg.append("text")
     .text("A brief history of the fast food industry")
 
 const data = [
-    { date: "1960-01-01", event: "Event 1" },
-    { date: "1970-03-15", event: "Event 2" },
-    { date: "2023-06-30", event: "Event 3" },
+    { date: "1921-01-01", event: "White Castle opens the first fast food chain" },
+    { date: "1937-01-01", event: "Krispy Kreme launches" },
+    { date: "1948-01-01", event: "Richard and Maurice Mcdonald " +
+            "create an assembly line system to make ham" +
+            "burgers and fries in their McDonal's restaurants\n" },
+    { date: "1950-01-01", event: "The first Dunkin' Donuts opens in Quincy, MA" },
+    { date: "1954-01-01", event: "The first Burger King opens in Miami" },
+    { date: "1965-01-01", event: "First Subway opens in Connecticut" },
+    { date: "1969-01-01", event: "First Wendy's launches" },
+    { date: "2002-01-01", event: "McDonalds reduces the amount of trans fat in their fries by 48%" },
+    { date: "2005-01-01", event: "American sales of fast food total $163.5 billion" },
     // Add more events as needed
 ];
 
@@ -59,69 +67,23 @@ let events = svg.selectAll(".events")
     .append("text")
     .attr("class", "events")
     .attr("x", d => xScale(d.date))
-    .attr("y", height / 2 - 10) // Adjust text position
+    .attr("y", height * 0.50) // Adjust text position
     .text(d => d.event)
     .attr("text-anchor", "middle")
     .style("font-size", "12px")
     .style("fill", "black");
 
-// const linedata = []
-//
-// data.forEach(function(d){
-//     linedata.push(
-//         {x:xScale(d.date), y:0},
-//         {x:xScale(d.date), y:100}
-//     )
-// })
 
-// Create a line generator function
-
-const lineGenerator = d3.line()
-    .x(d => d.x) // Set the x-coordinate based on your data
-    .y(d => d.y); // Set the y-coordinate based on your data
-
-// Append a path representing the line to the SVG
-let t = svg.selectAll(".tick")
-    .data([data])
+let ticks = svg.selectAll('.line')
+    .data(data)
     .enter()
-    .append("path")
-    .attr("class", "tick")
-    .attr("d", function(d){
-        console.log("D: ", d)
-        let lineData =
-            [
-                { x: xScale(d.date), y: 50 },
-                { x:  xScale(d.date), y: 150 }
-            ];
-
-        return lineGenerator(lineData)
-    })// Use the line generator with your data
-    .attr("stroke", "black") // Set the stroke color
-    .attr("stroke-width", 2) // Set the stroke width
-    .attr("fill", "none");
-
-// const lineGenerator = d3.line()
-//     .x(d => d.x) // Set the x-coordinate based on your data
-//     .y(d => d.y);
-
-// let t = svg.selectAll(".tick")
-//     .data(data)
-//     .enter()
-//     .append("path")
-//     .attr("class", "tick")
-//     .attr("d", function(d){
-//         let  lineData =
-//             [
-//                 {x: xScale(d.date), y: 30 },
-//                 { x: xScale(d.date), y: 150 }
-//             ]
-//         lineGenerator(lineData)
-//
-//     }) // Use the line generator with the data
-//     .attr("stroke", "black") // Set the stroke color
-//     .attr("stroke-width", 2) // Set the stroke width
-//     .attr("fill", "none"); // Ensure the line is not filled
-
+    .append('line')
+    .attr('class', 'line')
+    .attr('x1', d => xScale(d.date))
+    .attr('y1', d => 200)
+    .attr('x2', d => xScale(d.date))
+    .attr('y2', height * 0.50 - 20)
+    .attr('stroke', 'gray');
 
 let desc = svg.append("text")
     .attr("x", 50)
