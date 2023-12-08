@@ -26,7 +26,9 @@ let promises = [
     d3.csv("data/stateIncome.csv"),
     d3.csv("data/coronary_2012.csv"),
     // d3.csv("data/coronary_heart_disease_mortality.csv"),
-    d3.csv("data/fast_food_change.csv")
+    d3.csv("data/fast_food_change.csv"),
+    // d3.json("data/usa_counties.geojson")
+    d3.csv("data/cause_of_death_definitions.csv")
 ];
 
 Promise.all(promises)
@@ -55,10 +57,11 @@ function initMainPage(allDataArray){
     cardioTransitionVis = new CardioTransitionVis('cardiovascularTransition');
     chainByStateVis = new ChainByStateVis('stateMapDiv', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
+    stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
+    myRankChart = new rankChart('rankChart', allDataArray[4], allDataArray[9]);
     chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
-    myRankChart = new rankChart('rankChart', allDataArray[4]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
-    cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[0], allDataArray[7], allDataArray[8], allDataArray[2])
+    cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[7], allDataArray[8], allDataArray[2])
 }
 
 

@@ -1,14 +1,14 @@
 class cardioMap {
-    constructor(parentElement, topoData, coronaryData, fastFoodData, ffLocations) {
+    constructor(parentElement, coronaryData, fastFoodData) {
         this.parentElement = parentElement;
-        this.dataTopographic = topoData;
         this.fastFoodData = fastFoodData;
         this.coronaryData = coronaryData;
+        // this.countyLocations = countyLocations
+        // console.log("counties", this.countyLocations)
         // this.ffLocations = ffLocations;
 
-
-        console.log("fast food data", this.fastFoodData)
-        console.log("coronary data", this.coronaryData)
+        // console.log("fast food data", this.fastFoodData)
+        // console.log("coronary data", this.coronaryData)
         // console.log("location data", this.ffLocations)
 
 
@@ -33,11 +33,11 @@ class cardioMap {
 
         vis.colorScale = d3.scaleLinear()
             // .range(['blue', 'white', 'red']);
-            .range(['white', 'red']);
+            .range(['white', 'blue']);
 
 
         vis.radiusScale = d3.scaleLinear()
-            .range([1, 20])
+            .range([1, 10])
 
 
         // Zoom
@@ -50,6 +50,33 @@ class cardioMap {
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(vis.map);
+
+        // fetch('data/usa_counties.geojson')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         // Create a GeoJSON layer and add it to the map with a blue fill color
+        //         vis.countyMap = L.geoJSON(data, {
+        //             style: {
+        //                 fillColor: 'blue',
+        //                 weight: 2,
+        //                 opacity: 1,
+        //                 color: 'white',
+        //                 dashArray: '3',
+        //                 fillOpacity: 0.7
+        //             }
+        //         }).addTo(vis.map);
+        //     });
+
+        // vis.countyMap = L.geoJSON(vis.countyLocations, {
+        //     style: {
+        //         fillColor: 'blue',
+        //         weight: 2,
+        //         opacity: 1,
+        //         color: 'white',
+        //         dashArray: '3',
+        //         fillOpacity: 0.7
+        //     }
+        // }).addTo(vis.map);
 
         // legend scale
         vis.legendScaleColor = d3.scaleOrdinal()
@@ -67,7 +94,7 @@ class cardioMap {
         vis.defs = vis.svg.append("defs");
 
         vis.gradient = vis.defs.append("linearGradient")
-            .attr("id", "svgGradient")
+            .attr("id", "cardioGradient")
             .attr("x1", "0%")
             .attr("x2", "100%")
             .attr("y1", "100%")
@@ -82,7 +109,7 @@ class cardioMap {
         vis.gradient.append("stop")
             .attr("class", "end")
             .attr("offset", "100%")
-            .attr("stop-color", "red")
+            .attr("stop-color", "blue")
             .attr("stop-opacity", 1);
 
         vis.legendAxis = d3.axisBottom(vis.legendScaleColor)
@@ -95,7 +122,7 @@ class cardioMap {
             .attr("y", -200)
             .attr("width", (4*vis.width/5))
             .attr("height", 30)
-            .attr("fill", "url(#svgGradient)"); // pull gradient color scale
+            .attr("fill", "url(#cardioGradient)"); // pull gradient color scale
 
         let cardioSelectBox = vis.svg.append("foreignObject")
             .attr("x", 0)
@@ -178,7 +205,7 @@ class cardioMap {
             })
             vis.filteredData = vis.selectedAgeData
         }
-        console.log("age filtered", vis.filteredData)
+        // console.log("age filtered", vis.filteredData)
 
         // Filter by type of coronary heart disease
         if (vis.selectedCardio === "Stroke") {
@@ -222,10 +249,10 @@ class cardioMap {
 
         }
 
-
-        console.log("both filtered", vis.filteredData)
-        console.log("counties", vis.counties)
-        console.log("ffd", vis.fastFoodCounties)
+        //
+        // console.log("both filtered", vis.filteredData)
+        // console.log("counties", vis.counties)
+        // console.log("ffd", vis.fastFoodCounties)
 
 
         vis.updateVis()
@@ -237,15 +264,64 @@ class cardioMap {
 
         // Set up color scale
         vis.colorScale.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
-        console.log("color scale", vis.colorScale.domain())
-        console.log("color scale", vis.colorScale.range())
+        // console.log("color scale", vis.colorScale.domain())
+        // console.log("color scale", vis.colorScale.range())
         // console.log("color scale", vis.colorScale.range())
 
 
-        vis.radiusScale.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
+        vis.radiusScale.domain([d3.min(vis.filteredData, function(d) { return d["cardio_change"]; }), d3.max(vis.filteredData, function(d) { return d["cardio_change"]; })])
         // console.log("radius scale", vis.radiusScale.domain())
         // console.log("radius scale", vis.radiusScale.range())
         // console.log("radius scale", vis.radiusScale(d3.max(vis.filteredData, function(d) { return d["ff_change"]; })))
+
+        vis.geojsonLayer = L.geoJSON();
+
+        fetch('data/usa_counties.geojson')
+            .then(response => response.json())
+            .then(data => {
+                // Create a GeoJSON layer and add it to the map with a blue fill color
+                // vis.countyMap = L.geoJSON(data, {
+                //     style: {
+                //         fillColor: 'blue',
+                //         weight: 2,
+                //         opacity: 1,
+                //         color: 'white',
+                //         dashArray: '3',
+                //         fillOpacity: 0.7
+                //     }
+                // }).addTo(vis.map);
+                console.log(data)
+
+                vis.geojsonLayer.addData(data);
+
+                // Style the counties based on a variable (e.g., using 'STATEFP' as an example)
+                vis.geojsonLayer.setStyle(function (feature) {
+                    let county = feature.properties;
+                    return {
+                        fillColor: getColor(county),
+                        weight: 0.5,
+                        opacity: 1,
+                        color: 'white',
+                        // dashArray: '3',
+                        fillOpacity: 0.7
+                    };
+                });
+
+                vis.geojsonLayer.addTo(vis.map);
+            });
+
+        function getColor(county){
+            let color = 'transparent'
+            // console.log("colorful county",county)
+            vis.filteredData.forEach(function(data) {
+                if (county['name'] === data['county'] && county['STATE'] === data['state']){
+                    color = vis.colorScale(data['ff_change'])
+                    // console.log(vis.colorScale(data['ff_change']))
+                }
+            })
+            return color
+            // return 'blue'
+        }
 
         // Remove all circle markers from the map
         function removeAllCircleMarkers() {
@@ -270,16 +346,10 @@ class cardioMap {
 
             let radius
             let color
-            let strokeColor
 
-                if (circle["cardio_change"] >= 500){
-                    strokeColor = 'black'
-                }else{
-                    strokeColor = 'transparent'
-                }
-            if (circle["ff_change"]){
-                radius = vis.radiusScale(circle["ff_change"])
-                color = vis.colorScale(circle["ff_change"])
+            if (circle["cardio_change"]){
+                radius = vis.radiusScale(circle["cardio_change"])
+                color = 'black'
 
             }else{
                 radius = 1
@@ -289,33 +359,27 @@ class cardioMap {
             L.circleMarker([circle["Y_lat"], circle["X_long"]],
                 {
                 radius: radius,
-                color: strokeColor,
-                fillColor: color,
-                fillOpacity: 0.8,
+                color: color,
+                fillColor: 'black',
+                fillOpacity: 1,
                 weight: 1
             })
                 .bindPopup(popupContent)
-                .addTo(vis.map);
+                .addTo(vis.map).bringToFront()
 
-            // if (circle["cardio_change"] >= 500){
-            //     L.circleMarker([circle["Y_lat"], circle["X_long"]], {
-            //         radius: 2,
-            //         color: 'transparent',
-            //         fillColor: 'black',
-            //         fillOpacity: 1,
-            //         weight: 2
-            //     })
-            //         .bindPopup(popupContent)
-            //         .addTo(vis.map);
-            // }
         })
 
+        // After adding both layers to the map
+        // console.log(vis.map.getPane('overlayPane').children);
 
+// Alternatively, you can use the following to log all layers (not just overlayPane)
+        console.log(vis.map._layers);
 
         vis.legendScaleColor.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
 
         vis.legendAxisGroup
             .attr('transform', `translate(20, ${-170})`)
             .call(vis.legendAxis);
+
     }
 }
