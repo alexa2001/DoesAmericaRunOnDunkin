@@ -15,7 +15,7 @@ class ChainSalesVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 40, right: 20, bottom: 40, left: 20};
+        vis.margin = {top: 40, right: 30, bottom: 40, left: 5};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -64,7 +64,7 @@ class ChainSalesVis {
         vis.hoverStrokeColor = "#7B1818"; // Change as desired
         vis.hoverStrokeWidth = 3; // Change as desired
         vis.defaultStrokeColor = "black";
-        vis.defaultStrokeWidth = 0.5;
+        vis.defaultStrokeWidth = 1;
 
         // // Y-axis label
         // vis.svg.append("text")
@@ -153,6 +153,7 @@ class ChainSalesVis {
             .attr("y", d => vis.yScale(d.value))
             .attr("height", d => vis.height - vis.yScale(d.value))
             .attr("fill", "#F05E16")
+            .attr("stroke", "black")
             .on("mouseover", function(event, d) {
                 //highlight when hovering
                 d3.select(this)
@@ -192,6 +193,6 @@ class ChainSalesVis {
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", "rotate(-65)");
-        vis.yAxis.call(d3.axisLeft(vis.yScale));
+        //vis.yAxis.call(d3.axisLeft(vis.yScale));
     }
 }
