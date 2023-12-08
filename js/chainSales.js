@@ -15,9 +15,11 @@ class ChainSalesVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 40, right: 30, bottom: 40, left: 5};
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.width = window.screen.width * 0.30;
+        vis.height = window.screen.height *0.30;
+        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -38,20 +40,36 @@ class ChainSalesVis {
 
         // Scales setup
         vis.xScale = d3.scaleBand().range([0, vis.width]).padding(0.1);
-        vis.yScale = d3.scaleLinear().range([vis.height, 0]);
+        vis.yScale = d3.scaleLinear().range([vis.height *0.90, vis.height * 0.10]);
 
         // Axes setup
-        vis.xAxis = vis.svg.append("g").attr("transform", `translate(0,${vis.height})`);
-        vis.yAxis = vis.svg.append("g");
+        vis.xAxis = vis.svg.append("g")
+            .attr("transform", `translate(0,${vis.height * 0.90})`)
+            .attr("class", "x-axis axis")
+
+        vis.yAxis = vis.svg.append("g")
+            // .attr("transform", `translate(0,${0})`)
+            .attr("class", "y-axis axis")
 
         // Axis labels
         // X-axis label
         vis.svg.append("text")
             .attr("class", "x-axis-label")
-            .attr("text-anchor", "end")
-            .attr("x", vis.width / 2)
-            .attr("y", vis.height + vis.margin.bottom - 5)
+            .attr("text-anchor", "middle")
+            .attr("x", vis.width * 0.50)
+            .attr("y", vis.height * 0.97)
             .text("Category");  // Replace with your actual axis label
+
+        // y-axis label
+        vis.svg.append("text")
+            .attr("class", "y-axis-label")
+            .attr("text-anchor", "middle")
+            //
+            // .attr("font-size", 50)
+            .attr("x", vis.width / 2)
+            .attr("y", -50)
+            .attr("transform", `rotate(-90, ${vis.width/2}, ${vis.height/2})`)
+            .text("Value");  // Replace with your actual axis label
 
         /////////////// TOOLTIP ///////////////
         // Initialize tooltip
@@ -143,7 +161,8 @@ class ChainSalesVis {
         bars.attr("x", d => vis.xScale(d.category))
             .attr("width", vis.xScale.bandwidth())
             .attr("y", d => vis.yScale(d.value))
-            .attr("height", d => vis.height - vis.yScale(d.value));
+            .attr("height", d => vis.height - vis.yScale(d.value))
+            .attr("transform", `translate(0,${-1*vis.height*0.10})`);
 
         // Enter new bars
         bars.enter().append("rect")
@@ -181,18 +200,20 @@ class ChainSalesVis {
                     .attr("stroke-width", vis.defaultStrokeWidth);
                 // Hide tooltip
                 vis.tooltip.style("display", "none");
-            });
+            })
+            .attr("transform", `translate(0,${-1*vis.height*0.10})`);
 
         // Exit and remove old bars
         bars.exit().remove();
 
         // Update axes
-        vis.xAxis.call(d3.axisBottom(vis.xScale))
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-65)");
-        //vis.yAxis.call(d3.axisLeft(vis.yScale));
+        vis.xAxis = d3.axisBottom(vis.xScale)
+        vis.xAxis.tickSize(0).tickFormat("");
+
+        vis.yAxis = d3.axisLeft(vis.yScale)
+        vis.yAxis.tickSize(0).tickFormat("");
+
+        vis.svg.select(".x-axis").call(vis.xAxis)
+        vis.svg.select(".y-axis").call(vis.yAxis);
     }
 }
