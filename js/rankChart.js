@@ -1,8 +1,11 @@
 class rankChart {
-    constructor(parentElement, causeOfDeathData) {
+    constructor(parentElement, causeOfDeathData, causeDefinitions) {
         this.parentElement = parentElement;
+        // this.legendElement = legendElement
         this.data = causeOfDeathData;
         this.displayData = this.data;
+        this.definitions = causeDefinitions
+        console.log(this.definitions)
 
         // parse date method
         this.parseDate = d3.timeParse("%Y");
@@ -24,8 +27,8 @@ class rankChart {
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
         //
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        vis.height = 675;
-        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height;
+        // vis.height = 675;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height;
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
 
         // init drawing area
@@ -34,20 +37,11 @@ class rankChart {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
-        // // add title
-        // vis.svg.append('g')
-        //     .attr('class', 'title')
-        //     .attr('id', 'rank-title')
-        //     .append('text')
-        //     .text('Top 5 Causes of Death')
-        //     .attr('transform', `translate(${vis.width / 2}, 30)`)
-        //     .attr('text-anchor', 'middle');
-
         // init scales
-        vis.x = d3.scaleTime().range([vis.margin.right, vis.width - vis.margin.right]);
-        vis.y = d3.scaleLinear().range([vis.height - 2 * vis.margin.top, 2 * vis.margin.top]);
+        vis.x = d3.scaleTime().range([3*vis.margin.right, vis.width - vis.margin.right]);
+        vis.y = d3.scaleLinear().range([vis.height - 3 * vis.margin.top, 2 * vis.margin.top]);
 
-        vis.xTransform = vis.height - 3 * vis.margin.top / 2
+        vis.xTransform = vis.height - 5 * vis.margin.top / 2
         vis.rightYTransform = vis.width - vis.margin.right
 
         // init x & y axis
@@ -56,10 +50,63 @@ class rankChart {
             .attr("transform", "translate(0," + vis.xTransform + ")");
         vis.yAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
-            .attr("transform", "translate(" + vis.margin.right + ", 0)");
+            .attr("transform", "translate(" + 3 * vis.margin.right + ", -0)");
         vis.rightYAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
             .attr("transform", "translate(" + vis.rightYTransform + ", 0)");
+
+        vis.xAxis.append("text")
+            // .attr("fill", "red")
+            .style("fill", "black")
+            .attr("font-weight", 5)
+            .style("font-size", "16px")
+            .attr("x", vis.width/2)
+            .attr("y", 40)
+            .text("Year")
+
+        vis.yAxis.append("text")
+            // .attr("class", "y label")
+            .style("fill", "black")
+            .attr("font-weight", 5)
+            .style("font-size", "16px")
+            .attr("text-anchor", "middle")
+            .attr("x", -vis.height/2)
+            .attr("y", -40)
+            .attr("dy", ".75em")
+            .attr("transform", "rotate(-90)")
+            .text("Cause of Death Ranking")
+
+        vis.legendElement = "rankLegend"
+
+        vis.legendheight = document.getElementById(vis.legendElement).getBoundingClientRect().height;
+        vis.legendwidth = document.getElementById(vis.legendElement).getBoundingClientRect().width - vis.margin.right;
+
+        // init drawing area
+        vis.legendsvg = d3.select("#" + vis.legendElement).append("svg")
+            .attr("width", vis.legendwidth)
+            .attr("height", vis.legendheight)
+            // .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
+
+        // legend scale
+        vis.colorScale = d3.scaleOrdinal()
+            .range(vis.colors)
+        vis.legendScaleColor = d3.scaleOrdinal()
+            .range([0, (4*vis.width/5)]);
+
+        vis.legend = vis.legendsvg.append("g")
+            .attr('class', 'legend')
+            .attr('transform', `translate(20, ${vis.height - 200})`)
+
+        vis.legendTooltip = d3.select("#" + vis.legendElement).append('div')
+            .attr('class', "rank-tooltip tooltip")
+            .attr('id', 'rankLegendTooltip')
+            .style("z-index", 1)
+            .style("position", "absolute")
+            .style("padding", "10px")
+
+        //
+        // vis.legendAxisGroup = vis.legend.append("g")
+        //     .attr("class", "legend-axis")
 
         // create tooltip
         vis.tooltip = d3.select("#" + vis.parentElement).append('div')
@@ -71,12 +118,6 @@ class rankChart {
 
         // init pathGroup
         vis.pathGroup = vis.svg.append('g').attr('class', 'pathGroup')
-
-        // // init path
-        // vis.path = vis.pathGroup
-        //     .append('path')
-        //     .attr("class", "rank-path path")
-
 
         vis.line = d3.line()
             .x(function (d) {
@@ -99,12 +140,8 @@ class rankChart {
         vis.allStates = [["All States"],
             ['Alabama', 'AL'],
             ['Alaska', 'AK'],
-            // ['American Samoa', 'AS'],
             ['Arizona', 'AZ'],
             ['Arkansas', 'AR'],
-            // ['Armed Forces Americas', 'AA'],
-            // ['Armed Forces Europe', 'AE'],
-            // ['Armed Forces Pacific', 'AP'],
             ['California', 'CA'],
             ['Colorado', 'CO'],
             ['Connecticut', 'CT'],
@@ -112,7 +149,6 @@ class rankChart {
             ['District of Columbia', 'DC'],
             ['Florida', 'FL'],
             ['Georgia', 'GA'],
-            // ['Guam', 'GU'],
             ['Hawaii', 'HI'],
             ['Idaho', 'ID'],
             ['Illinois', 'IL'],
@@ -122,7 +158,6 @@ class rankChart {
             ['Kentucky', 'KY'],
             ['Louisiana', 'LA'],
             ['Maine', 'ME'],
-            // ['Marshall Islands', 'MH'],
             ['Maryland', 'MD'],
             ['Massachusetts', 'MA'],
             ['Michigan', 'MI'],
@@ -138,18 +173,15 @@ class rankChart {
             ['New York', 'NY'],
             ['North Carolina', 'NC'],
             ['North Dakota', 'ND'],
-            // ['Northern Mariana Islands', 'NP'],
             ['Ohio', 'OH'],
             ['Oklahoma', 'OK'],
             ['Oregon', 'OR'],
             ['Pennsylvania', 'PA'],
-            // ['Puerto Rico', 'PR'],
             ['Rhode Island', 'RI'],
             ['South Carolina', 'SC'],
             ['South Dakota', 'SD'],
             ['Tennessee', 'TN'],
             ['Texas', 'TX'],
-            // ['US Virgin Islands', 'VI'],
             ['Utah', 'UT'],
             ['Vermont', 'VT'],
             ['Virginia', 'VA'],
@@ -157,8 +189,15 @@ class rankChart {
             ['West Virginia', 'WV'],
             ['Wisconsin', 'WI'],
             ['Wyoming', 'WY']]
-        // vis.allStates = [["All States"]].concat(nameConverter.states)
 
+        // vis.topCauses = []
+        // vis.uniqueCauses = new Set();
+        //
+        // vis.allStates.forEach(state => {
+        //     vis.selectedState = state
+        //     vis.wrangleData()
+        //     }
+        // )
         let options = d3.select("#rankSelect")
             .selectAll("rank-option")
             .data(vis.allStates)
@@ -180,6 +219,12 @@ class rankChart {
     wrangleData() {
         let vis = this;
 
+        vis.allTopCauses = []
+        vis.allUniqueCauses = new Set();
+        // vis.allStates.forEach( state =>{
+        //
+        // vis.selectedState = state[0]
+
         vis.allData = this.displayData;
 
         // Sort data in order of highest number of deaths
@@ -187,6 +232,7 @@ class rankChart {
 
         // vis.includedStates = [];
         vis.selectedData = [];
+        // console.log(vis.selectedState)
 
         // Convert years into date format
         vis.allData.forEach(row => {
@@ -199,14 +245,8 @@ class rankChart {
             // }
         })
 
-        // console.log("all data", vis.allData)
-        // TO-DO: implement filter by state
-        // vis.includedStates = [];
-
-        // console.log("included states", vis.includedStates)
         if (vis.selectedState) {
             if (vis.selectedState === 'All States') {
-                // console.log("all chosen")
                 vis.filteredData = vis.allData
             } else {
                 vis.allData.forEach((entry, index) => {
@@ -289,6 +329,10 @@ class rankChart {
         // console.log("data by cause", vis.dataByCause)
         // console.log("data within rank", vis.dataByCause[0]["data"][0]["date"])
 
+        vis.topCauses = []
+        vis.uniqueCauses = new Set();
+
+
         // Loop through each cause of death
         vis.dataByCause.forEach((cause, index) => {
 
@@ -300,9 +344,25 @@ class rankChart {
             // Assign color to use in visualization
             cause.data.forEach((entry, i) => {
                 vis.dataByCause[index].data[i].color = this.colors[index]
+                if (entry.rank !== null && !vis.uniqueCauses.has(cause.cause)) {
+                    vis.topCauses.push(cause)
+                    vis.uniqueCauses.add(cause.cause)
+                }
+                if (entry.rank !== null && !vis.allUniqueCauses.has(cause.cause)) {
+                    vis.allTopCauses.push(cause)
+                    vis.allUniqueCauses.add(cause.cause);
+                }
             })
         })
+
+    // })
         // console.log("rank", vis.dataByCause)
+        // vis.dataByCause.forEach(cause => {
+        //     cause.forEach(date => {
+        //
+        //     })
+        // })
+        console.log("top causes", vis.allTopCauses)
 
         vis.updateVis()
     }
@@ -316,17 +376,43 @@ class rankChart {
             return d
         }));
         vis.y.domain([5, 1]);
+        vis.colorScale.domain(vis.dataByCause, function (d) {
+            return d.cause
+        });
+        console.log(vis.colorScale.domain())
+        console.log(vis.colorScale.range())
+
 
         // draw x & y axis
         vis.xAxis.transition().duration(400).call(d3.axisBottom(vis.x).tickFormat(d3.timeFormat("%Y")));
         vis.yAxis.transition().duration(400).call(d3.axisLeft(vis.y).ticks(5));
         vis.rightYAxis.transition().duration(400).call(d3.axisRight(vis.y).ticks(5));
 
+        const rects = vis.legend.selectAll("rect")
+            .data(vis.topCauses);
+
+        rects.exit()
+            .transition()
+            .duration(400)
+            .style("opacity", 0)  // Transition to opacity 0 before removal
+            .remove();
+
+        const labels = vis.legend.selectAll("text")
+            .data(vis.topCauses);
+
+        labels.exit()
+            .transition()
+            .duration(400)
+            .style("opacity", 0)  // Transition to opacity 0 before removal
+            .remove();
+
         vis.dataByCause.forEach((cause, index) => {
             const lineGenerator = d3.line()
                 .defined((d) => d.rank !== null)
                 .x(d => vis.x(d.date))
                 .y(d => vis.y(d.rank));
+
+            // console.log(lineGenerator(cause.data))
 
             // Select paths inside the loop
             const paths = vis.pathGroup.selectAll(`.path-${index}`)
@@ -452,7 +538,116 @@ class rankChart {
 
             });
 
+            vis.topCauses.forEach((cause, index) => {
+                vis.legendBoxes = vis.legend.selectAll(`.rect-${index}`)
+                    .data([cause.data]);
+
+                vis.legendBoxes.exit()
+                    .transition()
+                    .duration(400)
+                    .style("opacity", 0)  // Transition to opacity 0 before removal
+                    .remove();
+
+                vis.labels = vis.legend.selectAll(`.text-${index}`)
+                    .data([cause.data]);
+
+                vis.labels.exit()
+                    .transition()
+                    .duration(400)
+                    .style("opacity", 0)  // Transition to opacity 0 before removal
+                    .remove();
+
+                vis.legendBoxes
+                    .enter()
+                    .append("rect")
+                    .attr("class",`rect-${index}`)
+                    .attr("y", -350 + index * 40)
+                    .attr("x", 0)
+                    .attr("height", 20)
+                    .attr("width", 20)
+                    // .attr("r", 20)
+                    .merge(vis.legendBoxes)
+                    .attr("fill", (d, i) => d[i].color)
+
+                vis.labels
+                    .enter()
+                    .append("text")
+                    .attr("class", `text-${index}`)
+                    .attr("y", -335 + index * 40)
+                    .attr("x", 40)
+                    .attr("fill", "black")
+                    .merge(vis.labels)
+                    .text(cause.cause)
+
+                function defineCause(cause){
+                    let causeDefinition = null
+                    vis.definitions.forEach(definition => {
+                         if (definition.Cause === cause){
+                             causeDefinition = definition.Meaning
+                         }
+                     })
+                    return causeDefinition
+                }
+
+
+                vis.labels
+                    .on('mouseover', function(event, d){
+                        // console.log(event, d)
+                        d3.select(this)
+                            // .attr('stroke', date.color)
+                            .attr("fill", "gray")
+
+                        // update tooltip with data
+                        vis.legendTooltip
+                            .style("opacity", 1)
+                            // .style("left", event.pageX + 20 + "px")
+                            // .style("top", event.pageY + "px")
+                            .html(`
+                                 <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                                     <h4> ${defineCause(cause.cause)}</h4>
+                                 </div>`);
+
+                        // Adjust tooltip position
+                        const tooltipWidth = vis.tooltip.node().offsetWidth;
+                        const tooltipHeight = vis.tooltip.node().offsetHeight;
+
+                        const xPosition = event.pageX + 20;
+                        const yPosition = event.pageY;
+
+                        const rightOverflow = xPosition + tooltipWidth > window.innerWidth;
+                        const bottomOverflow = yPosition + tooltipHeight > window.innerHeight;
+
+                        if (rightOverflow) {
+                            vis.legendTooltip.style("left", event.pageX - tooltipWidth - 20 + "px");
+                        } else {
+                            vis.legendTooltip.style("left", xPosition + "px");
+                        }
+
+                        if (bottomOverflow) {
+                            vis.legendTooltip.style("top", event.pageY - tooltipHeight + "px");
+                        } else {
+                            vis.legendTooltip.style("top", yPosition + "px");
+                        }
+                    })
+                    .on('mouseout', function(event, d){
+                        // console.log(event, d)
+                        d3.select(this)
+                            // .attr('stroke', date.color)
+                            .attr('fill', "black")
+
+                        // hide tooltip
+                        vis.legendTooltip
+                            .style("opacity", 0)
+                            .style("left", 0 + "px")
+                            .style("top", 0 + "px")
+                            .html(`
+                            `);
+                    })
+
+            })
+
         })
+
     }
 
 }
