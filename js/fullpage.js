@@ -1145,7 +1145,7 @@
         resetSliders: false,
         fadingEffect: false,
         normalScrollElements: null,
-        scrollOverflow: true,
+        scrollOverflow: false,
         scrollOverflowReset: false,
         touchSensitivity: 5,
         touchWrapper: null,
