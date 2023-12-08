@@ -11,6 +11,8 @@ let medianIncomeVis;
 let chainByStateVis;
 let cardioMapVis;
 let brushVis;
+let titlePage;
+let chainSalesVis;
 
 // load data using promises
 let promises = [
@@ -50,16 +52,21 @@ function createVis() {
 
 
 function initMainPage(allDataArray){
-    chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], [42.3601, -71.0589]);
+    titlePage = new TitlePage('titlePage');
+    chainByStateVis = new ChainByStateVis('stateMapDiv', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
     myRankChart = new rankChart('rankChart', allDataArray[4], allDataArray[9]);
+    // chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
+    // myRankChart = new rankChart('rankChart', allDataArray[4]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
     cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[7], allDataArray[8], allDataArray[2])
 }
 
-// document.getElementById('stateSelect').addEventListener('change', function() {
-//     let selectedState = this.value;
-//     console.log("SELECTEDSTATE: ", selectedState)
-//     chainByStateVis = new ChainByStateVis('chainVis', allDataArray[2], stateCoord[selectedState]);
-// });
+
+// Respond to user input
+document.getElementById('restaurantSelect').addEventListener('change', function() {
+    let selectedRestaurant = this.value;
+    chainByStateVis.updateSelectedRestaurant(selectedRestaurant);
+    chainSalesVis.updateSelectedChain(selectedRestaurant);
+});
