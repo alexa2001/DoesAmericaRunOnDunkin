@@ -13,6 +13,7 @@ let cardioMapVis;
 let brushVis;
 let titlePage;
 let chainSalesVis;
+let cardioTransitionVis;
 
 // load data using promises
 let promises = [
@@ -51,6 +52,7 @@ function createVis() {
 
 function initMainPage(allDataArray){
     titlePage = new TitlePage('titlePage');
+    cardioTransitionVis = new CardioTransitionVis('cardiovascularTransition');
     chainByStateVis = new ChainByStateVis('stateMapDiv', allDataArray[2], [42.3601, -71.0589]);
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
