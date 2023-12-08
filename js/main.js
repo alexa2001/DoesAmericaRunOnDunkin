@@ -57,8 +57,7 @@ function initMainPage(allDataArray){
     foodMapVis = new FoodMapVis('mapDiv', allDataArray[0], allDataArray[1], allDataArray[2], allDataArray[3], allDataArray[4])
     stateMapVis = new StateMapVis('stateMapDiv', allDataArray[0], allDataArray[2])
     myRankChart = new rankChart('rankChart', allDataArray[4], allDataArray[9]);
-    // chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
-    // myRankChart = new rankChart('rankChart', allDataArray[4]);
+    chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
     cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[7], allDataArray[8], allDataArray[2])
 }
