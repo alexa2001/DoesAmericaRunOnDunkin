@@ -15,9 +15,9 @@ class medianIncome {
         // console.log(vis.incomeData)
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
-        // vis.width = 700;
-        vis.height = 800;
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.width = window.innerWidth;
+        vis.height = window.innerHeight;
+        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
@@ -26,6 +26,14 @@ class medianIncome {
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
+
+        vis.title = vis.svg.append("text")
+            .attr("x", vis.width/2)
+            .attr("y", vis.height * 0.1) // Adjust this value as needed
+            .attr("text-anchor", "middle")
+            .attr('font-size', 30)
+            .attr('font-family', 'monospace')
+            .text("Restaurant Count and Median Income Per State");
 
         // Scales
         vis.radiusScale = d3.scaleLinear()
@@ -52,13 +60,13 @@ class medianIncome {
         // Add labels for axes
         vis.svg.append("text")
             .attr("font-size", "20px")
-            .attr("transform", `translate(${vis.width * 0.5}, ${vis.height * 0.70})`)
+            .attr("transform", `translate(${vis.width * 0.5}, ${vis.height * 0.90})`)
             .style("text-anchor", "middle")
             .text("Median Income");
 
         vis.svg.append("text")
             .attr("y", 60)
-            .attr("x", 0-vis.height*0.3)
+            .attr("x", 0-vis.height*0.5)
             .attr("transform", "rotate(-90)")
             .attr("font-size", "20px")
             .style("text-anchor", "middle")
@@ -150,11 +158,11 @@ class medianIncome {
         // vis.radiusScale.domain([0, d3.max(vis.displayData, d=> d["median_income"])])
 
         vis.svg.select(".y-axis")
-            .attr("transform", "translate(130," + 65 + ")")
+            .attr("transform", "translate(130," + 150 + ")")
             .call(vis.yAxis);
 
         vis.svg.select(".x-axis")
-            .attr("transform", "translate(130," + (65 + (vis.height * 0.50)) + ")")
+            .attr("transform", "translate(130," + (150 + (vis.height * 0.50)) + ")")
             .call(vis.xAxis);
 
         // Rotate x-axis labels by 45 degrees
@@ -217,7 +225,7 @@ class medianIncome {
                     .style("top", 0)
                     .html(``);
             })
-            .attr("transform", "translate(130," + (65) + ")")
+            .attr("transform", "translate(130," + (150) + ")")
             .attr("r", 5)
             .attr("cy", function(d){
                 return vis.y(d["restaurant_count"]);
