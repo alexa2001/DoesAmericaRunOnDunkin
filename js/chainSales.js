@@ -120,7 +120,7 @@ class ChainSalesVis {
         }
 
         vis.xScale.domain(vis.chartData.map(d => d.category));
-        vis.yScale.domain([0, d3.max(vis.chartData, d => d.value)]);
+        vis.yScale.domain([0, d3.max(vis.chartData, d => d.value) * 1.3]);
 
         console.log("chart data on store:", vis.chartData);
 
