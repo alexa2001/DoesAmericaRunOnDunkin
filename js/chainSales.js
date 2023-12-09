@@ -155,8 +155,8 @@ class ChainSalesVis {
         // Update existing bars
         bars.attr("x", d => vis.xScale(d.category))
             .attr("width", vis.xScale.bandwidth())
-            .attr("y", d => vis.yScale(d.value))
-            .attr("height", d => vis.height - vis.yScale(d.value))
+            .attr("y", d => d.value === 0 ? vis.height : vis.yScale(d.value))
+            .attr("height", d => d.value === 0 ? 0 : vis.height - vis.yScale(d.value))
             .attr("transform", `translate(0,${-1*vis.height*0.10})`);
 
         // Enter new bars
