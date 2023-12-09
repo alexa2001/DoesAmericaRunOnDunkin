@@ -30,9 +30,9 @@ class cardioMap {
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width)
+            .attr("width", vis.width + margin.left + margin.right)
             .attr("height", vis.height)
-            .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
+            //.attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
         vis.colorScale = d3.scaleLinear()
             // .range(['blue', 'white', 'red']);
@@ -267,50 +267,39 @@ class cardioMap {
 
         // Set up color scale
         vis.colorScale.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
-        // console.log("color scale", vis.colorScale.domain())
-        // console.log("color scale", vis.colorScale.range())
-        // console.log("color scale", vis.colorScale.range())
 
 
         vis.radiusScale.domain([d3.min(vis.filteredData, function(d) { return d["cardio_change"]; }), d3.max(vis.filteredData, function(d) { return d["cardio_change"]; })])
-        // console.log("radius scale", vis.radiusScale.domain())
-        // console.log("radius scale", vis.radiusScale.range())
-        // console.log("radius scale", vis.radiusScale(d3.max(vis.filteredData, function(d) { return d["ff_change"]; })))
 
         vis.geojsonLayer = L.geoJSON();
 
+        // Add the county layer to the map
         fetch('data/usa_counties.geojson')
             .then(response => response.json())
             .then(data => {
-                // Create a GeoJSON layer and add it to the map with a blue fill color
                 // vis.countyMap = L.geoJSON(data, {
-                //     style: {
-                //         fillColor: 'blue',
-                //         weight: 2,
-                //         opacity: 1,
-                //         color: 'white',
-                //         dashArray: '3',
-                //         fillOpacity: 0.7
-                //     }
-                // }).addTo(vis.map);
-                console.log(data)
-
-                vis.geojsonLayer.addData(data);
-
-                // Style the counties based on a variable (e.g., using 'STATEFP' as an example)
+                //         style: {
+                //             fillColor: 'blue',
+                //             opacity: 0.3,
+                //             color: 'white',
+                //             dashArray: '3',
+                //             fillOpacity: 0.7
+                //         }
+                //     }).addTo(vis.map);
+                // Style the counties
                 vis.geojsonLayer.setStyle(function (feature) {
                     let county = feature.properties;
                     return {
                         fillColor: getColor(county),
                         weight: 0.5,
-                        opacity: 1,
+                        opacity: 0.7,
                         color: 'white',
                         // dashArray: '3',
-                        fillOpacity: 0.7
+                        //fillOpacity: 0.7
                     };
-                });
 
-                vis.geojsonLayer.addTo(vis.map);
+                    vis.geojsonLayer.addTo(vis.map);
+                });
             });
 
         function getColor(county){
@@ -335,10 +324,11 @@ class cardioMap {
             });
         }
 
+        // Remove all circle markers
         removeAllCircleMarkers()
 
-// Add circles for each location
 
+        // Add circles for each location
         vis.filteredData.forEach(function(circle) {
 
             let popupContent =  circle.county + ", " + circle.state + "<br/>";
@@ -349,10 +339,14 @@ class cardioMap {
 
             let radius
             let color
+            let opacity
+            let stroke
 
             if (circle["cardio_change"]){
                 radius = vis.radiusScale(circle["cardio_change"])
                 color = 'black'
+                opacity = 0.3
+                stroke = 'black'
 
             }else{
                 radius = 1
@@ -364,7 +358,7 @@ class cardioMap {
                 radius: radius,
                 color: color,
                 fillColor: 'black',
-                fillOpacity: 1,
+                fillOpacity: 0.3,
                 weight: 1
             })
                 .bindPopup(popupContent)
