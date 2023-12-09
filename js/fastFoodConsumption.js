@@ -1,27 +1,31 @@
-let margin = {top: 20, right: 20, bottom: 20, left: 40};
-let width = window.screen.width;
-let height = window.screen.height;
+// Fast Food Consumption Tranisition Page
+
+let margin = {top: 20, right: 100, bottom: 20, left: 50};
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+let centerX = width / 2;
 
 // init drawing area
 let svg = d3.select("#fast-food-consumption").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append('g')
-    .attr('transform', `translate (${margin.left}, ${margin.top})`);
+    //.attr('transform', `translate (${margin.left}, ${margin.top})`);
 
 let title = svg.append("text")
     .attr("x", width/2)
-    .attr("y", 50)
+    .attr("y", height * 0.1) // Adjust this value as needed
     .attr("text-anchor", "middle")
-    .attr('font-size', 30) // Font size
+    .attr('font-size', 30)
     .attr('font-family', 'monospace')
     .text("Fast Food Consumption")
 
 let timelineTitle = svg.append("text")
-    .attr("x", 200)
-    .attr("y", 150)
+    .attr("x", width/2)
+    .attr("y", height * 0.15) // Adjust this value as needed
     .attr("text-anchor", "middle")
-    .attr('font-size', 20) // Font size
+    .attr('font-size', 20)
     .attr('font-family', 'monospace')
     .text("A brief history of the fast food industry")
 
@@ -49,16 +53,17 @@ data.forEach(d => {
 
 const xScale = d3.scaleTime()
     .domain(d3.extent(data, d => d.date))
-    .range([margin.left, width * 0.7])
+    .range([margin.left, width - margin.right - 50]);
 
 let xAxis = d3.axisTop(xScale);
 
 svg.append("g")
     .attr("class", "x-axis axis");
 
+
+// xAxis
 svg.select(".x-axis")
-    .attr("transform", "translate(0," + 200 + ")")
-    // .transition()
+    .attr("transform", "translate(" + margin.left + "," + 200 + ")")
     .call(xAxis);
 
 let myTooltip = d3.select("body").append('div')
@@ -69,7 +74,8 @@ const circs = svg.selectAll(".circle")
     .enter()
     .append("circle")
     .attr("class", "circle")
-    .attr("cx", d => xScale(d.date))
+    //.attr("cx", d => xScale(d.date))
+    .attr("cx", d => xScale(d.date) + margin.left)
     .attr("cy", function(d, i){
         if( i % 2 === 0 ){
             return (height * 0.5 - 40)
@@ -82,14 +88,32 @@ const circs = svg.selectAll(".circle")
     .attr("fill", "#FF671F")
     .attr("cursor", "pointer")
     .on('mouseover', function (event, d){
+        // Define the date format
+        let formatDate = d3.timeFormat("%A, %B %d, %Y");
+
+        // Calculate the tooltip position
+        let left = event.pageX + 20;
+        let top = event.pageY;
+
+        // Get the width of the tooltip
+        let tooltipWidth = document.querySelector('.tooltip').offsetWidth;
+
+        // Check if the tooltip would extend beyond the right edge of the window
+        if (left + tooltipWidth > window.innerWidth) {
+            // Adjust the left position to the left of the mouse pointer
+            left = event.pageX - tooltipWidth - 20;
+        }
+
+        // update tooltip with data
         myTooltip
             .style("opacity", 1)
-            .style("left",  width*0.80 + "px")
-            .style("top", height * 0.20 + "px")
-            .html(
-                `<div style="border: thin solid grey; border-radius: 5px; background: white; padding: 10px; margin-right: 50px">
-                     <h4>${d.event}</h4>
-                </div>`
+            .style("left", left + "px")  // Position the tooltip 20px to the right of the mouse pointer
+            .style("top", top + "px")  // Position the tooltip at the same height as the mouse pointer
+            .html(`
+             <div style="border: thin solid grey; border-radius: 5px; background: white; padding: 10px">
+                 <h4><b>${formatDate(d.date)}</b></h4>
+                 <h4>${d.event}</h4>
+            </div>`
             );
     })
     .on("mouseout", function(event, d){
@@ -127,9 +151,11 @@ let ticks = svg.selectAll('.line')
     .enter()
     .append('line')
     .attr('class', 'line')
-    .attr('x1', d => xScale(d.date))
+    //.attr('x1', d => xScale(d.date))
     .attr('y1', d => 200)
-    .attr('x2', d => xScale(d.date))
+    //.attr('x2', d => xScale(d.date))
+    .attr('x1', d => xScale(d.date) + margin.left)
+    .attr('x2', d => xScale(d.date) + margin.left)
     .attr("y2", function(d, i){
         if( i % 2 === 0 ){
             return (height * 0.5 - 40)
@@ -140,10 +166,10 @@ let ticks = svg.selectAll('.line')
     })
 
 let desc = svg.append("text")
-    .attr("x", 50)
-    .attr("y", 400)
-    .attr("text-anchor", "middle")
-    .attr('font-size', 20) // Font size
+    .attr("x", margin.left)
+    .attr("y", height * 0.6) // Adjust this value as needed
+    //.attr("text-anchor", "start")
+    .attr('font-size', 20)
     .attr('font-family', 'monospace')
     .text("CDC Findings")
 
@@ -158,9 +184,9 @@ let listItems = svg.selectAll(".list")
     .enter()
     .append("text")
     .attr("class", "list")
-    .attr("x", 20) // Adjust x position
-    .attr("y", (d, i) => 450 + i * 20) // Adjust y position based on item index
-    .text(d => "\u2022 " + d) // Add a bullet point before each item
+    .attr("x", margin.left)
+    .attr("y", (d, i) => height * 0.7 + i * 20) // Adjust this value as needed
+    .text(d => "\u2022 " + d)
     .style("font-size", "14px")
     .attr('font-family', 'monospace')
     .style("fill", "black");

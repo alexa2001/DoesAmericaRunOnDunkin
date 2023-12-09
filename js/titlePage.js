@@ -21,9 +21,9 @@ class TitlePage{
         vis.logoDims = 50;
         vis.radius = 250;
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
-        vis.width = window.screen.width;
-        vis.height = window.screen.height;
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.width = window.innerWidth;
+        vis.height = window.innerHeight;
 
         console.log(`center: (${vis.width/2}, ${vis.height/2})`) //(640, 360)
 
