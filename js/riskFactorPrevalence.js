@@ -10,10 +10,10 @@ class RiskFactorPrevalence{
         let vis = this;
         // console.log(vis.data);
 
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 40};
-        // vis.width = 700;
-        vis.height = 700;
-        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.width = window.screen.width * 0.90;
+        vis.height = window.screen.height * 0.75;
+        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         vis.tooltip = d3.select("body").append('div')
@@ -27,10 +27,19 @@ class RiskFactorPrevalence{
             .append('g')
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
+        vis.title = vis.svg.append('text')
+            .attr('x', vis.width/2) // X-coordinate of the text
+            .attr('y', 0) // Y-coordinate of the text
+            .attr('fill', 'black') // Text color
+            .attr("text-anchor", "middle")
+            .attr('font-size', '20px') // Font size
+            .attr('font-weight', 'bold')
+            .text("Risk Factor Prevalence Over Time");
+
         vis.obesityLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',40) // Y-coordinate of the text
+            .attr('y', vis.height * 0.05) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -40,7 +49,7 @@ class RiskFactorPrevalence{
         vis.obesityInfo = vis.svg.append('circle')
             .attr("class", "obesityInfo")
             .attr('cx', vis.width/2 + 50)
-            .attr("cy", 35)
+            .attr("cy", vis.height * 0.04)
             .attr("r", 10)
             .attr("fill", "blue")
             .attr("cursor", "pointer")
@@ -69,7 +78,7 @@ class RiskFactorPrevalence{
         vis.obesityInfoSym = vis.svg.append('text')
             .attr("class", "obesityInfo")
             .attr('x', vis.width/2 + 50)
-            .attr("y", 40)
+            .attr("y", vis.height * 0.04 + 5)
             .attr("text-anchor", "middle")
             .attr("fill", "white")
             .attr('font-weight', 'bold')
@@ -94,7 +103,7 @@ class RiskFactorPrevalence{
         vis.hypertensionLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',240) // Y-coordinate of the text
+            .attr('y', vis.height * 0.40) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -103,8 +112,8 @@ class RiskFactorPrevalence{
 
         vis.hypertensionInfo = vis.svg.append('circle')
             .attr("class", "hypertensionInfo")
-            .attr('cx', vis.width/2 + 80)
-            .attr("cy", 235)
+            .attr('cx', vis.width/2 + 70)
+            .attr("cy", vis.height * 0.40)
             .attr("r", 10)
             .attr("fill", "blue")
             .attr("cursor", "pointer")
@@ -132,8 +141,8 @@ class RiskFactorPrevalence{
             })
 
         vis.hypertensionInfoSym = vis.svg.append('text')
-            .attr('x', vis.width/2 + 80)
-            .attr("y", 240)
+            .attr('x', vis.width/2 + 70)
+            .attr("y", vis.height * 0.40 + 5)
             .attr("text-anchor", "middle")
             .attr("fill", "white")
             .attr('font-weight', 'bold')
@@ -158,7 +167,7 @@ class RiskFactorPrevalence{
         vis.highcholesterolLabel = vis.svg.append('text')
             .attr("class", "label")
             .attr('x', vis.width/2) // X-coordinate of the text
-            .attr('y',485) // Y-coordinate of the text
+            .attr('y',vis.height * 0.80) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
@@ -167,8 +176,8 @@ class RiskFactorPrevalence{
 
         vis.cholesterolInfo = vis.svg.append('circle')
             .attr("class", "hypertensionInfo")
-            .attr('cx', vis.width/2 + 95)
-            .attr("cy", 480)
+            .attr('cx', vis.width/2 + 70)
+            .attr("cy", vis.height * 0.80)
             .attr("r", 10)
             .attr("fill", "blue")
             .attr("cursor", "pointer")
@@ -194,8 +203,8 @@ class RiskFactorPrevalence{
             })
 
         vis.cholesterolInfoSym = vis.svg.append('text')
-            .attr('x', vis.width/2 + 95)
-            .attr("y", 485)
+            .attr('x', vis.width/2 + 70)
+            .attr("y", vis.height * 0.80 + 5)
             .attr("text-anchor", "middle")
             .attr("fill", "white")
             .attr('font-weight', 'bold')
@@ -329,7 +338,7 @@ class RiskFactorPrevalence{
             .attr("cx", function(d, i){
                 return vis.xScale(i);
             })
-            .attr("cy", 110)
+            .attr("cy", vis.height * 0.20)
             .attr("r", function(d){
                 return d.Percent;
 
@@ -348,7 +357,7 @@ class RiskFactorPrevalence{
             .attr("x", function(d, i){
                 return vis.xScale(i);
             })
-            .attr("y", 175)
+            .attr("y", vis.height * 0.20 + 60)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
@@ -403,7 +412,7 @@ class RiskFactorPrevalence{
                 // console.log(`label x: ${i}, label xScale: ${vis.xScale(i)}`)
                 return vis.xScaleHypertension(i);
             })
-            .attr("cy", 340)
+            .attr("cy", vis.height * 0.55)
             .attr("r", function(d){
                 return d.Percent*0.80;
 
@@ -422,7 +431,7 @@ class RiskFactorPrevalence{
             .attr("x", function(d, i){
                 return vis.xScaleHypertension(i);
             })
-            .attr("y", 415)
+            .attr("y", vis.height * 0.55 + 60)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
@@ -477,7 +486,7 @@ class RiskFactorPrevalence{
                 // console.log(`label x: ${i}, label xScale: ${vis.xScale(i)}`)
                 return vis.xScaleCholesterol(i);
             })
-            .attr("cy", 540)
+            .attr("cy", vis.height * 0.90)
             .attr("r", function(d){
                 return d.Percent;
 
@@ -496,7 +505,7 @@ class RiskFactorPrevalence{
             .attr("x", function(d, i){
                 return vis.xScaleCholesterol(i);
             })
-            .attr("y", 615)
+            .attr("y", vis.height * 0.90 + 30)
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
