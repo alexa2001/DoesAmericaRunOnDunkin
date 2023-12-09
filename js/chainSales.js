@@ -15,9 +15,9 @@ class ChainSalesVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 20, right: 20, bottom: 50, left: 20};
         vis.width = window.screen.width * 0.30;
-        vis.height = window.screen.height *0.30;
+        vis.height = Math.max(window.screen.height * 0.25, vis.margin.top + vis.margin.bottom);
         // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -57,19 +57,18 @@ class ChainSalesVis {
             .attr("class", "x-axis-label")
             .attr("text-anchor", "middle")
             .attr("x", vis.width * 0.50)
-            .attr("y", vis.height * 0.97)
-            .text("Category");  // Replace with your actual axis label
+            .attr("y", 40)  // Increase this value as needed
+            .text("Nationwide Sales Metrics");
 
         // y-axis label
-        vis.svg.append("text")
-            .attr("class", "y-axis-label")
-            .attr("text-anchor", "middle")
-            //
-            // .attr("font-size", 50)
-            .attr("x", vis.width / 2)
-            .attr("y", -50)
-            .attr("transform", `rotate(-90, ${vis.width/2}, ${vis.height/2})`)
-            .text("Value");  // Replace with your actual axis label
+        // vis.svg.append("text")
+        //     .attr("class", "y-axis-label")
+        //     .attr("text-anchor", "middle")
+        //     // .attr("font-size", 50)
+        //     .attr("x", vis.width / 2)
+        //     .attr("y", -50)
+        //     .attr("transform", `rotate(-90, ${vis.width/2}, ${vis.height/2})`)
+        //     .text("Value");  // Replace with your actual axis label
 
         /////////////// TOOLTIP ///////////////
         // Initialize tooltip
@@ -83,15 +82,6 @@ class ChainSalesVis {
         vis.hoverStrokeWidth = 3; // Change as desired
         vis.defaultStrokeColor = "black";
         vis.defaultStrokeWidth = 1;
-
-        // // Y-axis label
-        // vis.svg.append("text")
-        //     .attr("class", "y-axis-label")
-        //     .attr("text-anchor", "end")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", -vis.margin.left + 20)
-        //     .attr("x", -vis.height / 2)
-        //     .text("Value");  // Replace with your actual axis label
 
         vis.wrangleData(vis.selectedChain);
     }
@@ -109,7 +99,7 @@ class ChainSalesVis {
             vis.displayData.push({
                 "name": d.FastFoodChain,
                 "Systemwide Sales (millions of dollars)": +d.SystemwideSales,
-                "Sales per Unit (thousands of dollars)": +d.AvgSalesPerUnit,
+                "Unit Sales (thousands of dollars)": +d.AvgSalesPerUnit,
                 "Franchise Stores": +d.FranchisedStores,
                 "Company Stores": +d.CompanyStores,
                 "Total Units Sold": +d.TotalUnits,
@@ -142,7 +132,14 @@ class ChainSalesVis {
     updateSelectedChain(chainName) {
         let vis = this;
 
-        vis.selectedChain = chainName;
+        // If "all restaurant chains" is selected, revert to "McDonald’s"
+        if (chainName === "") {
+            vis.selectedChain = "McDonald’s";
+        } else {
+            vis.selectedChain = chainName;
+        }
+
+        //vis.selectedChain = chainName;
         vis.wrangleData(vis.selectedChain);
     }
 
@@ -206,14 +203,29 @@ class ChainSalesVis {
         // Exit and remove old bars
         bars.exit().remove();
 
-        // Update axes
-        vis.xAxis = d3.axisBottom(vis.xScale)
-        vis.xAxis.tickSize(0).tickFormat("");
+        // Craete custom x axis labels
+        let categoryLabels = {
+            "Systemwide Sales (millions of dollars)": "System Sales (M)",
+            "Unit Sales (thousands of dollars)": "Unit Sales (K)",
+            "Franchise Stores": "Franchise Stores",
+            "Company Stores": "Company Stores",
+            "Total Units Sold": "Total Units Sold"
+        };
 
-        vis.yAxis = d3.axisLeft(vis.yScale)
+        // Update axes
+        vis.xAxis = d3.axisBottom(vis.xScale);
+
+        vis.yAxis = d3.axisLeft(vis.yScale);
         vis.yAxis.tickSize(0).tickFormat("");
 
-        vis.svg.select(".x-axis").call(vis.xAxis)
-        vis.svg.select(".y-axis").call(vis.yAxis);
+        // Update the x-axis
+        vis.xAxis = d3.axisBottom(vis.xScale)
+            .tickFormat(d => categoryLabels[d]);
+
+
+        // Call the x-axis
+        vis.svg.select(".x-axis").call(vis.xAxis);
+        // Call the y-axis
+        //vis.svg.select(".y-axis").call(vis.yAxis); // not calling because y axis is inconsistent in scale
     }
 }
