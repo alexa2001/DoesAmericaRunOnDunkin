@@ -121,3 +121,7 @@ h3{
     width: 100%;
     height: 100%;
 }
+
+.fp-tooltip {
+    color: black !important; /* Change the text color */
+}

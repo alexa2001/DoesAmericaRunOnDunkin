@@ -11,8 +11,8 @@ class RiskFactorPrevalence{
         // console.log(vis.data);
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        vis.width = window.screen.width * 0.90;
-        vis.height = window.screen.height * 0.75;
+        vis.width = window.innerWidth * 0.90;
+        vis.height = window.innerHeight * 0.75;
         // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 

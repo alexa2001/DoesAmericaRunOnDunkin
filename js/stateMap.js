@@ -36,10 +36,8 @@ class StateMapVis {
 
         // set margins, width, and height
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        vis.width = 700;
-        vis.height = 900;
-        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         // Zoom
         vis.viewpoint = {'width': 850, 'height': 610};
