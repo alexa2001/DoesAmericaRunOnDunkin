@@ -27,12 +27,11 @@ class TitlePage{
 
         console.log(`center: (${vis.width/2}, ${vis.height/2})`) //(640, 360)
 
-// init drawing area
+        // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-            .append('g')
-            .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
+            .append('g');
 
 
 
@@ -103,12 +102,15 @@ class TitlePage{
     }
 
     makeCircles(r){
-        console.log("r: ", r)
         let vis=this;
+
+        console.log("r: ", r)
+
         let colorPalette = d3.scaleOrdinal(d3.schemeCategory10);
+
         vis.circle = vis.svg.append("circle")
-            .attr("cx", 50)
-            .attr("cy", 50)
+            .attr("cx", vis.width/2)  // Center of the circle is the title
+            .attr("cy", vis.height/2)  // Center of the circle is the title
             .attr("r", 40)
             .attr("stroke", "white")
             .attr("stroke-width", 3)
@@ -117,81 +119,82 @@ class TitlePage{
 
         vis.logo = vis.svg.append("image")
             .attr("xlink:href", vis.logos[r]) // Set the image URL
-            .attr('x', 50) // X position of the image
-            .attr("y", 50) // Y position of the image
+            .attr('x', vis.width/2 - vis.logoDims/2) // X position of the image is the title
+            .attr("y", vis.height/2 - vis.logoDims/2) // Y position of the image is the title
             .attr("width", vis.logoDims) // Set the width of the image
             .attr("height", vis.logoDims);
+
 
 // Function to animate the circle's movement
         function moveCircle() {
 
             vis.logo.transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, (r%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, (r%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, (r%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, (r%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("x",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).x + 640 - vis.logoDims/2)
-                .attr("y",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).y + 360 - vis.logoDims/2)
+                .attr("x",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).x + vis.width/2 - vis.logoDims/2)
+                .attr("y",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).y + vis.height/2 - vis.logoDims/2)
                 // .on("end", moveCircle);
 
 
             vis.circle.transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, (r%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, (r%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, (r%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, (r%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+1)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+2)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+3)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+4)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+5)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+6)%7/7)*360).y + vis.height/2)
                 .transition()
                 .duration(2000) // Animation duration in milliseconds
-                .attr("cx",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).x + 640)
-                .attr("cy",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).y + 360)
+                .attr("cx",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).x + vis.width/2)
+                .attr("cy",  vis.circleXY(vis.radius, ((r+7)%7/7)*360).y + vis.height/2)
                 // .on("end", moveCircle);
 
         }
