@@ -33,8 +33,8 @@ class SummaryPage {
             .style('font-size', '2vw') // Use viewport units for font size
             .attr('font-family', 'monospace')
             .attr('weight', 'bold')
-            .attr('fill', 'black')
-            .text("Takeaways");
+            .attr('fill', 'white')
+            .text("Health and Fast Food: Takeaways");
 
         // First rectangle with orange outline
         vis.svg.append("rect")
@@ -46,7 +46,9 @@ class SummaryPage {
             .attr("ry", 10) // vertical corner radius
             .attr("stroke", "#F05E16") // border color
             .attr("stroke-width", 2) // border width
-            .attr("fill", "white"); // fill color
+            .attr("fill", "white") // fill color
+            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("stroke-opacity", 1); // stroke opacity
 
         // Add second nested rectangle with fill
         vis.svg.append("rect")
@@ -102,7 +104,9 @@ class SummaryPage {
             .attr("ry", 10) // vertical corner radius
             .attr("stroke", "black") // border color
             .attr("stroke-width", 2) // border width
-            .attr("fill", "white"); // fill color
+            .attr("fill", "white") // fill color
+            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("stroke-opacity", 1); // stroke opacity
 
         // nested fourth title rectangle with black outline
         vis.svg.append("rect")
@@ -126,7 +130,9 @@ class SummaryPage {
             .attr("ry", 10) // vertical corner radius
             .attr("stroke", "black") // border color
             .attr("stroke-width", 2) // border width
-            .attr("fill", "white"); // fill color
+            .attr("fill", "white") // fill color
+            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("stroke-opacity", 1); // stroke opacity
 
         // nested sixth title rectangle with black outline
         vis.svg.append("rect")
