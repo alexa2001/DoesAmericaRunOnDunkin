@@ -221,19 +221,25 @@ class ChainSalesVis {
             "Total Units Sold": "Total Units Sold"
         };
 
-        // Update axes
-        vis.xAxis = d3.axisBottom(vis.xScale);
-
-        vis.yAxis = d3.axisLeft(vis.yScale);
-        vis.yAxis.tickSize(0).tickFormat("");
 
         // Update the x-axis
         vis.xAxis = d3.axisBottom(vis.xScale)
             .tickFormat(d => categoryLabels[d]);
 
-
         // Call the x-axis
-        vis.svg.select(".x-axis").call(vis.xAxis);
+        vis.svg.select(".x-axis")
+            .call(vis.xAxis)
+            .selectAll("text") // Select the labels of the x-axis
+            .attr("fill", "white"); // Set the fill color to white
+
+        vis.svg.select(".x-axis")
+            .selectAll("line") // Select the ticks of the x-axis and make white
+            .attr("stroke", "white");
+
+        // Update the y-axis
+        vis.yAxis = d3.axisLeft(vis.yScale);
+        vis.yAxis.tickSize(0).tickFormat("");
+
         // Call the y-axis
         //vis.svg.select(".y-axis").call(vis.yAxis); // not calling because y axis is inconsistent in scale
     }

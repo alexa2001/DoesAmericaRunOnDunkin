@@ -41,7 +41,7 @@ class RiskFactorPrevalence{
             .attr('y', vis.height * 0.05) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
-            .attr('font-size', '20px') // Font size
+            .attr('font-size', '25px') // Font size
             .attr('font-family', 'monospace, serif')
             .attr("fill", vis.textColor)
             .text("Obesity");
@@ -51,7 +51,7 @@ class RiskFactorPrevalence{
             .attr('cx', vis.width/2 + 50)
             .attr("cy", vis.height * 0.04)
             .attr("r", 10)
-            .attr("fill", "blue")
+            .attr("fill", "#1C404C")
             .attr("cursor", "pointer")
             .on('click', function (event){
                 vis.tooltip
@@ -106,7 +106,7 @@ class RiskFactorPrevalence{
             .attr('y', vis.height * 0.40) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
-            .attr('font-size', '20px') // Font size
+            .attr('font-size', '25px') // Font size
             .attr('font-family', 'monospace, serif')
             .attr("fill", vis.textColor)
             .text("Hypertension");
@@ -116,7 +116,7 @@ class RiskFactorPrevalence{
             .attr('cx', vis.width/2 + 70)
             .attr("cy", vis.height * 0.40)
             .attr("r", 10)
-            .attr("fill", "blue")
+            .attr("fill", "#1C404C")
             .attr("cursor", "pointer")
             .on('click', function (event){
                 vis.tooltip
@@ -171,7 +171,7 @@ class RiskFactorPrevalence{
             .attr('y',vis.height * 0.80) // Y-coordinate of the text
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
-            .attr('font-size', '20px') // Font size
+            .attr('font-size', '25px') // Font size
             .attr('font-family', 'monospace, serif')
             .attr("fill", vis.textColor)
             .text("High Cholesterol");
@@ -181,7 +181,7 @@ class RiskFactorPrevalence{
             .attr('cx', vis.width/2 + 70)
             .attr("cy", vis.height * 0.80)
             .attr("r", 10)
-            .attr("fill", "blue")
+            .attr("fill", "#1C404C")
             .attr("cursor", "pointer")
             .on('click', function (event){
                 vis.tooltip
