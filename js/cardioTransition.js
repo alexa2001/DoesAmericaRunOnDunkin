@@ -44,7 +44,8 @@ class CardioTransitionVis {
             .attr("cx", Math.random() * vis.width)  // Random x position
             .attr("cy", Math.random() * vis.height) // Random y position
             .attr("r", 20)                          // Radius of the circle
-            .style("fill", "red");                  // Color of the circle
+            .attr("stroke", "#7B1818")                // Color of the circle border
+            .style("fill", "#D22B2B");                  // Color of the circle
 
         //console.log("circle drawn")
 
