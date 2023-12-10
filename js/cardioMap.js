@@ -30,7 +30,7 @@ class cardioMap {
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width + margin.left + margin.right)
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height)
             //.attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
