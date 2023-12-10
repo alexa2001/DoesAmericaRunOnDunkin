@@ -35,11 +35,11 @@ class FoodAndHealth{
         let cornerRadius = 10;
 
         const lineData = [
-            { x1: vis.width / 2, y1: (vis.height / 2 - 180), x2: 300, y2: 100 }, //head
+            { x1: vis.width / 2, y1: (vis.height / 2 - 180), x2: 300, y2: 140 }, //head
             { x1: vis.width / 2 + 10, y1: (vis.height / 2 - 170), x2: 900, y2: 150 }, //face
-            { x1: vis.width / 2, y1: (vis.height / 2 - 100), x2: 200, y2: 200 }, //heart
-            { x1: vis.width / 2, y1: (vis.height / 2 - 50), x2: 300, y2: 400 }, //stomach
-            { x1: vis.width / 2 + 50, y1: (vis.height / 2 - 50), x2: 900, y2: 300 } //arm
+            { x1: vis.width / 2, y1: (vis.height / 2 - 100), x2: 200, y2: 300 }, //heart
+            { x1: vis.width / 2, y1: (vis.height / 2 - 50), x2: 300, y2: 525 }, //stomach
+            { x1: vis.width / 2 + 50, y1: (vis.height / 2 - 50), x2: 900, y2: 310 } //arm
         ];
 
 
@@ -55,12 +55,21 @@ class FoodAndHealth{
             .attr("stroke", "#FF671F") // Set the line color
             .attr("stroke-width", 3); // Set the line width
 
+        vis.svg.selectAll("circle")
+            .data(lineData) // Bind data to line elements
+            .enter().append("circle") // Append a line for each data point
+            .attr("class", "line-class") // Apply a class to the line
+            .attr("cx", d => d.x1) // Set x-coordinate of starting point
+            .attr("cy", d => d.y1) // Set y-coordinate of starting point
+            .attr("r", 5)
+            .attr("fill", "#FF671F"); // Set the line width
+
         //head
         vis.svg.append("rect")
-            .attr("x", 50)
+            .attr("x", 45)
             .attr("y", 95)
-            .attr("width", 300)
-            .attr("height", 80)
+            .attr("width", 308)
+            .attr("height", 83)
             .attr("rx", cornerRadius)
             .style("fill", "lightblue")
             .style("stroke", "#FF671F")
@@ -68,9 +77,9 @@ class FoodAndHealth{
 
         //chest
         vis.svg.append("rect")
-            .attr("x", 170)
+            .attr("x", 160)
             .attr("y", 240)
-            .attr("width", 160)
+            .attr("width", 180)
             .attr("height", 140)
             .attr("rx", cornerRadius)
             .style("fill", "lightblue")
@@ -79,10 +88,10 @@ class FoodAndHealth{
 
         //stomach
         vis.svg.append("rect")
-            .attr("x", 175)
+            .attr("x", 163)
             .attr("y", 440)
-            .attr("width", 200)
-            .attr("height", 100)
+            .attr("width", 225)
+            .attr("height", 110)
             .attr("rx", cornerRadius)
             .style("fill", "lightblue")
             .style("stroke", "#FF671F")
@@ -90,7 +99,7 @@ class FoodAndHealth{
 
         //skin
         vis.svg.append("rect")
-            .attr("x", 820)
+            .attr("x", 810)
             .attr("y", 120)
             .attr("width", 230)
             .attr("height", 50)
@@ -103,7 +112,7 @@ class FoodAndHealth{
         vis.svg.append("rect")
             .attr("x", 865)
             .attr("y", 275)
-            .attr("width", 180)
+            .attr("width", 220)
             .attr("height", 60)
             .attr("rx", cornerRadius)
             .style("fill", "lightblue")
@@ -131,7 +140,8 @@ class FoodAndHealth{
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr('font-family', 'monospace');
         const headLines = head.split("\n");
         headText.selectAll("tspan")
             .data(headLines)
@@ -152,7 +162,8 @@ class FoodAndHealth{
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr('font-family', 'monospace');
         const heartLines = heart.split("\n");
         heartText.selectAll("tspan")
             .data(heartLines)
@@ -168,7 +179,8 @@ class FoodAndHealth{
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr('font-family', 'monospace');
         const skinLines = skin.split("\n");
         skinText.selectAll("tspan")
             .data(skinLines)
@@ -188,7 +200,8 @@ class FoodAndHealth{
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr('font-family', 'monospace');
         const stomachLines = stomach.split("\n");
         stomachText.selectAll("tspan")
             .data(stomachLines)
@@ -206,12 +219,13 @@ class FoodAndHealth{
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .attr('font-family', 'monospace');
         const armLines = arm.split("\n");
         armText.selectAll("tspan")
             .data(armLines)
             .enter().append("tspan")
-            .attr("x", 950)
+            .attr("x", 975)
             .attr("dy", "1.2em")
             .text(d => d);
 
