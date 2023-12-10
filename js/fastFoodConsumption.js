@@ -19,6 +19,7 @@ let title = svg.append("text")
     .attr("text-anchor", "middle")
     .attr('font-size', 30)
     .attr('font-family', 'monospace')
+    .attr("fill", "white")
     .text("Fast Food Consumption")
 
 let timelineTitle = svg.append("text")
@@ -27,6 +28,7 @@ let timelineTitle = svg.append("text")
     .attr("text-anchor", "middle")
     .attr('font-size', 20)
     .attr('font-family', 'monospace')
+    .attr("fill", "white")
     .text("A brief history of the fast food industry")
 
 const data = [
@@ -73,7 +75,8 @@ const xScale = d3.scaleTime()
 let xAxis = d3.axisTop(xScale);
 
 svg.append("g")
-    .attr("class", "x-axis axis");
+    .attr("class", "x-axis axis")
+    .style("stroke", "white");
 
 
 // xAxis
@@ -100,7 +103,7 @@ const circs = svg.selectAll(".circle")
         }
     })
     .attr("r", 10)
-    .attr("fill", "#FF671F")
+    .attr("fill", "#F4D9AE")
     .attr("cursor", "pointer")
     .on('mouseover', function (event, d){
         // Define the date format
@@ -144,7 +147,8 @@ let ticks = svg.selectAll('.line')
     .data(data)
     .enter()
     .append('line')
-    .attr('class', 'line')
+    .attr('class', 'timeline')
+    .attr("stroke", "#F4D9AE")
     //.attr('x1', d => xScale(d.date))
     .attr('y1', d => 200)
     //.attr('x2', d => xScale(d.date))
@@ -165,6 +169,7 @@ let CDC = svg.append("text")
     //.attr("text-anchor", "start")
     .attr('font-size', 20)
     .attr('font-family', 'monospace')
+    .attr("fill", "white")
     .text("CDC Findings")
 
 let popularity = svg.append("text")
@@ -173,6 +178,7 @@ let popularity = svg.append("text")
     //.attr("text-anchor", "start")
     .attr('font-size', 20)
     .attr('font-family', 'monospace')
+    .attr("fill", "white")
     .text("Why is it so popular?")
 
 let findings = [
@@ -197,7 +203,7 @@ let listItems = svg.selectAll(".list")
     .text(d => "\u2022 " + d)
     .style("font-size", "14px")
     .attr('font-family', 'monospace')
-    .style("fill", "black");
+    .style("fill", "white")
 
 let factItems = svg.selectAll(".facts-list")
     .data(facts)
@@ -209,4 +215,4 @@ let factItems = svg.selectAll(".facts-list")
     .text(d => "\u2022 " + d)
     .style("font-size", "14px")
     .attr('font-family', 'monospace')
-    .style("fill", "black");
+    .style("fill", "white")

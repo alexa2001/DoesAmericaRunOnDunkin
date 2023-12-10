@@ -66,10 +66,10 @@ class FoodAndHealth{
 
         //head
         vis.svg.append("rect")
-            .attr("x", 45)
-            .attr("y", 95)
-            .attr("width", 308)
-            .attr("height", 83)
+            .attr("x", 40)
+            .attr("y", 90)
+            .attr("width", 325)
+            .attr("height", 95)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
@@ -77,10 +77,10 @@ class FoodAndHealth{
 
         //chest
         vis.svg.append("rect")
-            .attr("x", 160)
-            .attr("y", 240)
-            .attr("width", 180)
-            .attr("height", 140)
+            .attr("x", 150)
+            .attr("y", 235)
+            .attr("width", 200)
+            .attr("height", 155)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
@@ -88,10 +88,10 @@ class FoodAndHealth{
 
         //stomach
         vis.svg.append("rect")
-            .attr("x", 163)
-            .attr("y", 440)
-            .attr("width", 225)
-            .attr("height", 110)
+            .attr("x", 153)
+            .attr("y", 435)
+            .attr("width", 245)
+            .attr("height", 115)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
@@ -99,10 +99,10 @@ class FoodAndHealth{
 
         //skin
         vis.svg.append("rect")
-            .attr("x", 810)
-            .attr("y", 120)
-            .attr("width", 230)
-            .attr("height", 50)
+            .attr("x", 805)
+            .attr("y", 115)
+            .attr("width", 250)
+            .attr("height", 65)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
@@ -110,10 +110,10 @@ class FoodAndHealth{
 
         //arm
         vis.svg.append("rect")
-            .attr("x", 865)
-            .attr("y", 275)
-            .attr("width", 220)
-            .attr("height", 60)
+            .attr("x", 860)
+            .attr("y", 270)
+            .attr("width", 235)
+            .attr("height", 75)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")

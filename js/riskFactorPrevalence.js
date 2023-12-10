@@ -8,14 +8,12 @@ class RiskFactorPrevalence{
 
     initVis(){
         let vis = this;
-        // console.log(vis.data);
+
+        vis.textColor = "white";
 
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = window.innerWidth * 0.90;
         vis.height = window.innerHeight * 0.75;
-        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
-
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip")
 
@@ -33,8 +31,8 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
-            .attr('font-weight', 'bold')
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text("Risk Factor Prevalence Over Time");
 
         vis.obesityLabel = vis.svg.append('text')
@@ -44,8 +42,8 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
-            .attr('font-weight', 'bold')
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text("Obesity");
 
         vis.obesityInfo = vis.svg.append('circle')
@@ -109,8 +107,8 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
-            .attr('font-weight', 'bold')
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text("Hypertension");
 
         vis.hypertensionInfo = vis.svg.append('circle')
@@ -174,8 +172,8 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
-            .attr('font-weight', 'bold')
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text("High Cholesterol");
 
         vis.cholesterolInfo = vis.svg.append('circle')
@@ -233,6 +231,7 @@ class RiskFactorPrevalence{
             .attr("y", 0)
             .attr('font-size', '18px') // Font size
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text("Select Age Group:")
         ;
 
@@ -317,8 +316,8 @@ class RiskFactorPrevalence{
             .merge(obesityCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
-                    .attr('stroke', 'black')
-                    .attr('fill', "#DA1884");
+                    .attr('stroke', '#7B1818')
+                    .attr('fill', "#D22B2B");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -332,7 +331,7 @@ class RiskFactorPrevalence{
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#FF671F')
+                    .attr('fill', '#F4D9AE')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -348,7 +347,7 @@ class RiskFactorPrevalence{
                 return d.Percent;
 
             })
-            .attr('fill', '#FF671F');
+            .attr('fill', '#F4D9AE');
 
         let obesityLabels = vis.svg.selectAll(".obesityLabels")
             .data(vis.filteredObesityCircles);
@@ -367,6 +366,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text(d => d.SurveyYears)
 
         //HYPERTENSION
@@ -391,8 +391,8 @@ class RiskFactorPrevalence{
             .merge(hypertensionCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
-                    .attr('stroke', 'black')
-                    .attr('fill', "#DA1884");
+                    .attr('stroke', '#7B1818')
+                    .attr('fill', "#D22B2B");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -406,7 +406,7 @@ class RiskFactorPrevalence{
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#FF671F')
+                    .attr('fill', '#F4D9AE')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -423,7 +423,7 @@ class RiskFactorPrevalence{
                 return d.Percent*0.80;
 
             })
-            .attr('fill', '#FF671F');
+            .attr('fill', '#F4D9AE');
 
         let hypertensionLabels = vis.svg.selectAll(".hypertensionLabels")
             .data(vis.filteredHypertensionCircles);
@@ -442,6 +442,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text(d => d.SurveyYears)
 
         //HIGH CHOLESTEROL
@@ -466,8 +467,8 @@ class RiskFactorPrevalence{
             .merge(cholesterolCircles)
             .on('mouseover', function (event, d){
                 d3.select(this)
-                    .attr('stroke', 'black')
-                    .attr('fill', "#DA1884");
+                    .attr('stroke', '#7B1818')
+                    .attr('fill', "#D22B2B");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -481,7 +482,7 @@ class RiskFactorPrevalence{
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#FF671F')
+                    .attr('fill', '#F4D9AE')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -498,7 +499,7 @@ class RiskFactorPrevalence{
                 return d.Percent;
 
             })
-            .attr('fill', '#FF671F');
+            .attr('fill', '#F4D9AE');
 
         let cholesterolLabels = vis.svg.selectAll(".cholesterolLabels")
             .data(vis.filteredCholesterolCircles);
@@ -517,6 +518,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
             .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor)
             .text(d => d.SurveyYears)
 
     }
