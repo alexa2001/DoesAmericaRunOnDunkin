@@ -132,13 +132,31 @@ class medianIncome {
         vis.y.domain([0, d3.max(vis.displayData, d=> d["restaurant_count"])]);
         // vis.radiusScale.domain([0, d3.max(vis.displayData, d=> d["median_income"])])
 
+        // Change the color of the y-axis and its labels to white
         vis.svg.select(".y-axis")
             .attr("transform", "translate(130," + 150 + ")")
-            .call(vis.yAxis);
+            .call(vis.yAxis)
+            .selectAll("text")
+            .attr("fill", "white");
+        vis.svg.select(".y-axis")
+            .selectAll("path")
+            .attr("stroke", "white");
+        vis.svg.select(".y-axis")
+            .selectAll("line")
+            .attr("stroke", "white");
 
+        // Change the color of the x-axis and its labels to white
         vis.svg.select(".x-axis")
             .attr("transform", "translate(130," + (150 + (vis.height * 0.50)) + ")")
-            .call(vis.xAxis);
+            .call(vis.xAxis)
+            .selectAll("text")
+            .attr("fill", "white");
+        vis.svg.select(".x-axis")
+            .selectAll("path")
+            .attr("stroke", "white");
+        vis.svg.select(".x-axis")
+            .selectAll("line")
+            .attr("stroke", "white");
 
         // Rotate x-axis labels by 45 degrees
         vis.svg.selectAll(".x-axis text")
