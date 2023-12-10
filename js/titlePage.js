@@ -33,8 +33,6 @@ class TitlePage{
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append('g');
 
-
-
         vis.title = vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/2)
@@ -74,30 +72,6 @@ class TitlePage{
         vis.makeCircles(5);
         vis.makeCircles(6);
 
-        // for (let theta=0; theta<=360; theta += (360/7)) {
-        //     console.log("theta: ", theta)
-        //     let answer = vis.circleXY(300, theta);
-        //     vis.circ = vis.svg.append("circle")
-        //         .attr("class", "logoCircle")
-        //         .attr('cx', answer.x + 640)
-        //         .attr("cy", answer.y + 360)
-        //         .attr("r", 50)
-        //         .attr("stroke", "white")
-        //         .attr("stroke-width", 3)
-        //         .transition()
-        //         .attr("fill", colorPalette(theta))
-        //
-        //
-        //     vis.logo = vis.svg.append("image")
-        //         .attr("xlink:href", vis.logos[index]) // Set the image URL
-        //         .attr('x', answer.x + 640 - 35) // X position of the image
-        //         .attr("y", answer.y + 360 - 35) // Y position of the image
-        //         .attr("width", 70) // Set the width of the image
-        //         .attr("height", 70);
-        //
-        //     index += 1;
-        // }
-
 
     }
 
@@ -114,7 +88,7 @@ class TitlePage{
             .attr("r", 40)
             .attr("stroke", "white")
             .attr("stroke-width", 3)
-            .attr("fill", "#ffd1dc")
+            .attr("fill", "#F4D9AE")
 
 
         vis.logo = vis.svg.append("image")
@@ -201,8 +175,5 @@ class TitlePage{
         moveCircle();
 
     }
-
-
-// Start the animation
 
 }

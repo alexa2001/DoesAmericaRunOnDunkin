@@ -33,6 +33,7 @@ class medianIncome {
             .attr("text-anchor", "middle")
             .attr('font-size', 30)
             .attr('font-family', 'monospace')
+            .attr("fill", "white")
             .text("Restaurant Count and Median Income Per State");
 
         // Scales
@@ -62,6 +63,8 @@ class medianIncome {
             .attr("font-size", "20px")
             .attr("transform", `translate(${vis.width * 0.5}, ${vis.height * 0.90})`)
             .style("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr('font-family', 'monospace, serif')
             .text("Median Income");
 
         vis.svg.append("text")
@@ -70,37 +73,9 @@ class medianIncome {
             .attr("transform", "rotate(-90)")
             .attr("font-size", "20px")
             .style("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr('font-family', 'monospace, serif')
             .text("Restaurant Count");
-
-
-        // let selectBox = vis.svg.append("foreignObject")
-        //     .attr("x", 0)
-        //     .attr("y", 20)
-        //     .attr("width", 128)
-        //     .attr("height", 500)
-        //     .attr("class", "select-box")
-        //     .append("xhtml:body")
-        //     .html('<select id="selectState"></select>');
-        //
-        // let options = d3.select("#selectState")
-        //     .selectAll("option")
-        //     .data([
-        //         "Massachusetts",
-        //         "California",
-        //         "New York",
-        //         "Texas"
-        //     ])
-        //     .enter()
-        //     .append("option")
-        //     .text(d => d);
-        //
-        // d3.select("#selectState").on("change", function() {
-        //     const selectedOption = d3.select(this).property("value");
-        //     console.log("Selected option:", selectedOption);
-        //
-        //     // Call updateVis() when the selection changes
-        //     vis.updateVis();
-        // });
 
         vis.wrangleData();
 
@@ -177,23 +152,7 @@ class medianIncome {
         //
         let circle = vis.svg.selectAll("circle")
             .data(vis.displayData);
-        //
-        // const lineGenerator = d3.line()
-        //     .x(d => vis.x(d["name"]))
-        //     .y(d => vis.y(d["restaurant_count"]))
-        //     .curve(d3.curveLinear);
-        //
-        // path
-        //     .enter()
-        //     .append("path")
-        //     .attr("class", "line")
-        //     .merge(path)
-        //     .attr("transform", "translate(130," + (65) + ")")
-        //     .attr("d", lineGenerator)
-        //     .attr("stroke-width", 2);
-        //
-        // path.exit().remove();
-        //
+
         circle
             .enter()
             .append("circle")
@@ -201,8 +160,9 @@ class medianIncome {
             .merge(circle)
             .on('mouseover', function (event, d){
                 d3.select(this)
-                    .attr('stroke', 'black')
-                    .attr('fill', "#DA1884");
+                    .attr('stroke-width', 3)
+                    .attr('stroke', '#7B1818')
+                    .attr('fill', "#D22B2B");
                 vis.tooltip
                     .style("opacity", 1)
                     .style("left", event.pageX + 20 + "px")
@@ -218,7 +178,7 @@ class medianIncome {
             .on("mouseout", function(event, d){
                 d3.select(this)
                     .attr('stroke', 'none')
-                    .attr('fill', '#FF671F')
+                    .attr('fill', '#F4D9AE')
                 vis.tooltip
                     .style("opacity", 0)
                     .style("left", 0)
@@ -233,7 +193,7 @@ class medianIncome {
             .attr("cx", function(d){
                 return vis.x(d["median_income"]);
             })
-            .attr("fill", '#FF671F')
+            .attr("fill", '#F4D9AE')
             .attr("class", "labels")
             .attr("cursor", "pointer");
         circle.exit().remove();

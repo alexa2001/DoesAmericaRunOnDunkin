@@ -14,6 +14,8 @@ class ChainSalesVis {
     initVis() {
         let vis = this;
 
+        vis.textColor = "white";
+
         // set margins, width, and height
         vis.margin = {top: 20, right: 40, bottom: 50, left: 10};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
@@ -28,7 +30,9 @@ class ChainSalesVis {
         // init title
         vis.title = vis.svg.append('g')
             .attr('class', 'title')
-            .attr('id', 'chart-title');
+            .attr('id', 'chart-title')
+            .attr('font-family', 'monospace, serif')
+            .attr('fill', vis.textColor)
         vis.title.append('text')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle');
@@ -56,6 +60,8 @@ class ChainSalesVis {
             .attr("text-anchor", "middle")
             .attr("x", vis.width * 0.50)
             .attr("y", 40)  // Increase this value as needed
+            .attr("font-family", "monospace")
+            .attr("fill", vis.textColor)
             .text("Nationwide Sales Metrics");
 
         // y-axis label

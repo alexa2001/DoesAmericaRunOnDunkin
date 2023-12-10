@@ -21,13 +21,9 @@ class rankChart {
     initVis() {
         let vis = this;
 
-        // set margins, width, and height
-        // vis.margin = {top: 20, right: 20, bottom: 150, left: 100};
-        // vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        // vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
-        //
+        vis.textColor = "white";
+
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
-        // vis.height = 675;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height;
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
 
@@ -47,33 +43,34 @@ class rankChart {
         // init x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--x")
-            .attr("transform", "translate(0," + vis.xTransform + ")");
+            .attr("transform", "translate(0," + vis.xTransform + ")")
+            .style("stroke", "white");
         vis.yAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
-            .attr("transform", "translate(" + 3 * vis.margin.right + ", -0)");
+            .attr("transform", "translate(" + 3 * vis.margin.right + ", -0)")
+            .style("stroke", "white");
         vis.rightYAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
-            .attr("transform", "translate(" + vis.rightYTransform + ", 0)");
+            .attr("transform", "translate(" + vis.rightYTransform + ", 0)")
+            .style("stroke", "white");
 
         vis.xAxis.append("text")
-            // .attr("fill", "red")
-            .style("fill", "black")
-            .attr("font-weight", 5)
+            // .attr("font-weight", 5)
             .style("font-size", "16px")
             .attr("x", vis.width/2)
             .attr("y", 40)
+            .attr('font-family', 'monospace')
             .text("Year")
 
         vis.yAxis.append("text")
-            // .attr("class", "y label")
-            .style("fill", "black")
-            .attr("font-weight", 5)
+            // .attr("font-weight", 5)
             .style("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("x", -vis.height/2)
             .attr("y", -40)
             .attr("dy", ".75em")
             .attr("transform", "rotate(-90)")
+            .attr('font-family', 'monospace')
             .text("Cause of Death Ranking")
 
         vis.legendElement = "rankLegend"
@@ -85,7 +82,6 @@ class rankChart {
         vis.legendsvg = d3.select("#" + vis.legendElement).append("svg")
             .attr("width", vis.legendwidth)
             .attr("height", vis.legendheight)
-            // .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
         // legend scale
         vis.colorScale = d3.scaleOrdinal()
@@ -103,10 +99,6 @@ class rankChart {
             .style("z-index", 1)
             .style("position", "absolute")
             .style("padding", "10px")
-
-        //
-        // vis.legendAxisGroup = vis.legend.append("g")
-        //     .attr("class", "legend-axis")
 
         // create tooltip
         vis.tooltip = d3.select("#" + vis.parentElement).append('div')
@@ -203,6 +195,8 @@ class rankChart {
             .data(vis.allStates)
             .enter()
             .append("option")
+            .attr('font-family', 'monospace')
+            .attr("fill", vis.textColor)
             .text((d) => d[0]);
 
         d3.select("#rankSelect").on("change", function () {
@@ -575,7 +569,8 @@ class rankChart {
                     .attr("class", `text-${index}`)
                     .attr("y", -335 + index * 40)
                     .attr("x", 40)
-                    .attr("fill", "black")
+                    .attr('font-family', 'monospace')
+                    .attr("fill", vis.textColor)
                     .merge(vis.labels)
                     .text(cause.cause)
 
@@ -633,7 +628,8 @@ class rankChart {
                         // console.log(event, d)
                         d3.select(this)
                             // .attr('stroke', date.color)
-                            .attr('fill', "black")
+                            .attr('font-family', 'monospace')
+                            .attr("fill", vis.textColor)
 
                         // hide tooltip
                         vis.legendTooltip

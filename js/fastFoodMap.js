@@ -18,6 +18,8 @@ class FoodMapVis {
     initVis() {
         let vis = this;
 
+        vis.textColor = "white";
+
         // set margins, width, and height
         vis.margin = {top: 20, right: 30, bottom: 20, left: 20};
 
@@ -38,7 +40,8 @@ class FoodMapVis {
             .text('Fast Food Restaurants by State')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle')
-            .attr('font-family', 'Avenir, serif');
+            .attr('font-family', 'monospace, serif')
+            .attr("fill", vis.textColor);
 
         console.log("here")
 
