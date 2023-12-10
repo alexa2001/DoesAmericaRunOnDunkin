@@ -11,7 +11,7 @@ class ChainByStateVis {
     initVis(){
         let vis = this;
 
-        vis.margin = {top: 10, right: 20, bottom: 10, left: 20};
+        vis.margin = {top: 10, right: 30, bottom: 10, left: 20};
 
         // Dynamically set the size of the map container
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;

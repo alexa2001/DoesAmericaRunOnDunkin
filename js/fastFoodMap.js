@@ -19,7 +19,7 @@ class FoodMapVis {
         let vis = this;
 
         // set margins, width, and height
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 20, right: 30, bottom: 20, left: 20};
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width;
         vis.height = window.innerHeight - margin.top - margin.bottom;
@@ -78,7 +78,7 @@ class FoodMapVis {
         //creating a legend group
         vis.legend = vis.svg.append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${vis.width/ 2}, ${vis.height - 80})`)
+            .attr('transform', `translate(${vis.width/ 2}, ${vis.height * 0.8})`);
 
         vis.legendAxisGroup = vis.legend.append("g")
             .attr("class", "legend-axis")
