@@ -17,6 +17,14 @@ class CardioTransitionVis {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
+        // Set up a timer to draw a circle every 30 seconds
+        setInterval(() => {
+            vis.drawCircle();
+        }, 33000);
+
+        // Draw the circles before the text so that the text is on top
+        vis.drawCircle()
+
         // Print text at the center of the SVG
         vis.svg.append("text")
             .attr("x", vis.width/2)
@@ -25,13 +33,6 @@ class CardioTransitionVis {
             .attr("font-size", 25)          // Font size
             .attr("font-weight", "bold")    // Font weight
             .text("Cardiovascular Disease is the leading cause of death in the US")
-
-        // Set up a timer to draw a circle every 30 seconds
-        setInterval(() => {
-            vis.drawCircle();
-        }, 33000);
-
-        vis.drawCircle()
     }
 
     drawCircle() {

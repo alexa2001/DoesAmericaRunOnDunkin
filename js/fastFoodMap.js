@@ -37,7 +37,8 @@ class FoodMapVis {
             .append('text')
             .text('Fast Food Restaurants by State')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
-            .attr('text-anchor', 'middle');
+            .attr('text-anchor', 'middle')
+            .attr('style', 'font-family: Avenir, serif');
 
         console.log("here")
 

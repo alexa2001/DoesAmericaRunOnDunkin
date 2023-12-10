@@ -34,6 +34,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
+            .attr('font-family', 'Avenir, serif')
             .text("Risk Factor Prevalence Over Time");
 
         vis.obesityLabel = vis.svg.append('text')
