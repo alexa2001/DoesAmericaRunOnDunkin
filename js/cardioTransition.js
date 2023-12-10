@@ -32,6 +32,7 @@ class CardioTransitionVis {
             .attr("text-anchor", "middle")  // Center the text
             .attr("font-size", 25)          // Font size
             .attr("font-weight", "bold")    // Font weight
+            .attr('font-family', 'Avenir, serif')
             .text("Cardiovascular Disease is the leading cause of death in the US")
     }
 
@@ -68,6 +69,7 @@ class CardioTransitionVis {
                 .attr("y", vis.height/2 + i * 35)  // Increment the y attribute for each line
                 .attr("text-anchor", "middle")     // Center the text
                 .attr("font-size", 20)             // Font size
+                .attr('font-family', 'Avenir, serif')
                 .text(line);
         });
     }
