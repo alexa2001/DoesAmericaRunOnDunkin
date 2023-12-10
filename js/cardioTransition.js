@@ -65,13 +65,20 @@ class CardioTransitionVis {
 
         // Append each line of text as a separate text element
         lines.forEach((line, i) => {
-            vis.svg.append("text")
+            let text = vis.svg.append("text")
                 .attr("x", vis.width/2)
-                .attr("y", vis.height/2 + i * 35)  // Increment the y attribute for each line
+                //.attr("y", vis.height/2 + i * 35)  // Increment the y attribute for each line
+                .attr("y", i < 1 ? vis.height/2 + i * 35 : vis.height/2 + i * 35 + 20)
                 .attr("text-anchor", "middle")     // Center the text
                 .attr("font-size", 20)             // Font size
                 .attr('font-family', 'monospace, serif')
                 .text(line);
+
+            // If it's one of the first two lines, make the text semibold
+            if (i < 1) {
+                text.style("font-weight", "bold");
+            }
         });
+
     }
 }

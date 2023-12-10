@@ -47,7 +47,7 @@ class SummaryPage {
             .attr("stroke", "#F05E16") // border color
             .attr("stroke-width", 2) // border width
             .attr("fill", "white") // fill color
-            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("fill-opacity", 0.9) // fill opacity
             .attr("stroke-opacity", 1); // stroke opacity
 
         // Add second nested rectangle with fill
@@ -102,10 +102,10 @@ class SummaryPage {
             .attr("height", 230) // height
             .attr("rx", 10) // horizontal corner radius
             .attr("ry", 10) // vertical corner radius
-            .attr("stroke", "black") // border color
+            .attr("stroke", "#2D8077") // border color
             .attr("stroke-width", 2) // border width
             .attr("fill", "white") // fill color
-            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("fill-opacity", 0.9) // fill opacity
             .attr("stroke-opacity", 1); // stroke opacity
 
         // nested fourth title rectangle with black outline
@@ -116,9 +116,9 @@ class SummaryPage {
             .attr("height", 50) // height
             .attr("rx", 10) // horizontal corner radius
             .attr("ry", 10) // vertical corner radius
-            .attr("stroke", "black") // border color
+            .attr("stroke", "#2D8077") // border color
             .attr("stroke-width", 2) // border width
-            .attr("fill", "black"); // fill color
+            .attr("fill", "#2D8077"); // fill color
 
         // fifth rectangle with black outline
         vis.svg.append("rect")
@@ -128,10 +128,10 @@ class SummaryPage {
             .attr("height", 230) // height
             .attr("rx", 10) // horizontal corner radius
             .attr("ry", 10) // vertical corner radius
-            .attr("stroke", "black") // border color
+            .attr("stroke", "#2D8077") // border color
             .attr("stroke-width", 2) // border width
             .attr("fill", "white") // fill color
-            .attr("fill-opacity", 0.8) // fill opacity
+            .attr("fill-opacity", 0.9) // fill opacity
             .attr("stroke-opacity", 1); // stroke opacity
 
         // nested sixth title rectangle with black outline
@@ -142,9 +142,9 @@ class SummaryPage {
             .attr("height", 50) // height
             .attr("rx", 10) // horizontal corner radius
             .attr("ry", 10) // vertical corner radius
-            .attr("stroke", "black") // border color
+            .attr("stroke", "#2D8077") // border color
             .attr("stroke-width", 2) // border width
-            .attr("fill", "black"); // fill color
+            .attr("fill", "#2D8077"); // fill color
 
         // economic impact text
         vis.econLines = [
