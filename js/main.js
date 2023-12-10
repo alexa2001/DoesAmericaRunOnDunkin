@@ -10,10 +10,11 @@ let medianIncomeVis;
 let chainByStateVis;
 let cardioMapVis;
 let brushVis;
-let titlePage;
 let chainSalesVis;
 let cardioTransitionVis;
 let foodAndHealthVis;
+let titlePage;
+let summaryPage;
 
 // load data using promises
 let promises = [
@@ -49,6 +50,7 @@ function initMainPage(allDataArray){
     chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
     cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[7], allDataArray[8], allDataArray[2])
+    summaryPage = new SummaryPage('summaryFindings');
 }
 
 function createVis() {

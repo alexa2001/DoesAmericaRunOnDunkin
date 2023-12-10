@@ -22,7 +22,7 @@ class FoodMapVis {
         vis.margin = {top: 20, right: 30, bottom: 20, left: 20};
 
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width;
-        vis.height = window.innerHeight - margin.top - margin.bottom;
+        vis.height = window.innerHeight - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")

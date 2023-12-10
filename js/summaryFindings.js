@@ -1,20 +1,50 @@
 // Summary Findings Page
+class SummaryPage {
+    constructor(parentElement) {
+        this.parentElement = parentElement;
 
-// let margin = {top: 20, right: 20, bottom: 20, left: 20};
-// let width = document.getElementById("summaryFindings").getBoundingClientRect().width - margin.left - margin.right;
-// let height = document.getElementById("summaryFindings").getBoundingClientRect().height - margin.top - margin.bottom;
-//
-// // init drawing area
-// let svg = d3.select("#summaryFindings").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//
-// let title = svg.append("text")
-//     .attr("x", 200)
-//     .attr("y", 200) // Adjust this value as needed
-//     .attr("text-anchor", "middle")
-//     .attr('font-size', 30)
-//     .attr('font-family', 'monospace')
-//     .attr('fill', 'black') // Use 'fill' instead of 'color'
-//     .text("Takeaways")
+        this.initVis();
+    }
+
+    initVis() {
+        let vis = this;
+
+        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.width = document.getElementById("summaryFindings").getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = document.getElementById("summaryFindings").getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+
+        //init drawing area
+        vis.svg = d3.select("#summaryFindings").append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+
+        vis.updateVis();
+    }
+
+    updateVis() {
+        let vis = this;
+
+        vis.title = vis.svg.append("text")
+            .attr("x", vis.width/2)
+            .attr("y", vis.height * 0.2)
+            .attr("text-anchor", "middle")
+            .attr('font-size', 30)
+            .attr('font-family', 'monospace')
+            .attr('fill', 'black')
+            .text("Takeaways")
+
+        vis.bodyText = vis.svg.append("text")
+            .attr("x", vis.width/2)
+            .attr("y", vis.height * 0.4)
+            .attr("text-anchor", "middle")
+    }
+}
+
+// Text to include on the summary findings page
+// why fast food is still so popular, regardless of health data,
+// and also talking about how there’s not really too much of a correlation
+// between income and fast food restaurants? The number of fast food restaurants
+// in a state seems more related to the size of that state than income
+// Also the obesity risk factor prevalence seems to be consistent over all age group
+// but hypertension spikes after 40 years old
+// So maybe like our future considerations/actions should be that older groups should be more concerned about their health/diet?
