@@ -71,7 +71,7 @@ class FoodAndHealth{
             .attr("width", 308)
             .attr("height", 83)
             .attr("rx", cornerRadius)
-            .style("fill", "lightblue")
+            .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
             .style("stroke-width", 2);
 
@@ -82,7 +82,7 @@ class FoodAndHealth{
             .attr("width", 180)
             .attr("height", 140)
             .attr("rx", cornerRadius)
-            .style("fill", "lightblue")
+            .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
             .style("stroke-width", 2);
 
@@ -93,7 +93,7 @@ class FoodAndHealth{
             .attr("width", 225)
             .attr("height", 110)
             .attr("rx", cornerRadius)
-            .style("fill", "lightblue")
+            .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
             .style("stroke-width", 2);
 
@@ -104,7 +104,7 @@ class FoodAndHealth{
             .attr("width", 230)
             .attr("height", 50)
             .attr("rx", cornerRadius)
-            .style("fill", "lightblue")
+            .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
             .style("stroke-width", 2);
 
@@ -115,7 +115,7 @@ class FoodAndHealth{
             .attr("width", 220)
             .attr("height", 60)
             .attr("rx", cornerRadius)
-            .style("fill", "lightblue")
+            .style("fill", "#ffbf87")
             .style("stroke", "#FF671F")
             .style("stroke-width", 2);
 
