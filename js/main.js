@@ -38,20 +38,7 @@ Promise.all(promises)
 
 createVis();
 
-function createVis() {
-
-    //risk factor visualization
-    d3.csv('data/obesity_hypertension_cholesterol.csv').then(function(data) {
-        data.forEach(function(d) {
-            d.Percent = +d.Percent;
-        });
-        riskFactorVis = new RiskFactorPrevalence("riskfactorvis", data);
-    });
-
-}
-
-
-
+// Create pages using classes and data from promises
 function initMainPage(allDataArray){
     titlePage = new TitlePage('titlePage');
     cardioTransitionVis = new CardioTransitionVis('cardiovascularTransition');
@@ -62,6 +49,16 @@ function initMainPage(allDataArray){
     chainSalesVis = new ChainSalesVis('salesDiv', allDataArray[1], allDataArray[2]);
     medianIncomeVis = new medianIncome('medianIncome', allDataArray[6], allDataArray[2]);
     cardioMapVis = new cardioMap('cardioSelectDiv', allDataArray[7], allDataArray[8], allDataArray[2])
+}
+
+function createVis() {
+    //risk factor visualization
+    d3.csv('data/obesity_hypertension_cholesterol.csv').then(function(data) {
+        data.forEach(function(d) {
+            d.Percent = +d.Percent;
+        });
+        riskFactorVis = new RiskFactorPrevalence("riskfactorvis", data);
+    });
 }
 
 
