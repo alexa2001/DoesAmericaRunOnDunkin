@@ -34,7 +34,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
-            .attr('font-family', 'Avenir, serif')
+            .attr('font-family', 'monospace, serif')
             .text("Risk Factor Prevalence Over Time");
 
         vis.obesityLabel = vis.svg.append('text')
@@ -45,6 +45,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
+            .attr('font-family', 'monospace, serif')
             .text("Obesity");
 
         vis.obesityInfo = vis.svg.append('circle')
@@ -109,6 +110,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
+            .attr('font-family', 'monospace, serif')
             .text("Hypertension");
 
         vis.hypertensionInfo = vis.svg.append('circle')
@@ -173,6 +175,7 @@ class RiskFactorPrevalence{
             .attr("text-anchor", "middle")
             .attr('font-size', '20px') // Font size
             .attr('font-weight', 'bold')
+            .attr('font-family', 'monospace, serif')
             .text("High Cholesterol");
 
         vis.cholesterolInfo = vis.svg.append('circle')
@@ -229,6 +232,7 @@ class RiskFactorPrevalence{
             .attr("x", 0)
             .attr("y", 0)
             .attr('font-size', '18px') // Font size
+            .attr('font-family', 'monospace, serif')
             .text("Select Age Group:")
         ;
 
@@ -362,6 +366,7 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
+            .attr('font-family', 'monospace, serif')
             .text(d => d.SurveyYears)
 
         //HYPERTENSION
@@ -436,6 +441,7 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
+            .attr('font-family', 'monospace, serif')
             .text(d => d.SurveyYears)
 
         //HIGH CHOLESTEROL
@@ -510,6 +516,7 @@ class RiskFactorPrevalence{
             .attr('fill', 'black') // Text color
             .attr("text-anchor", "middle")
             .attr('font-size', '15px') // Font size
+            .attr('font-family', 'monospace, serif')
             .text(d => d.SurveyYears)
 
     }

@@ -33,12 +33,10 @@ class TitlePage{
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
             .append('g');
 
-
-
         vis.title = vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/2)
-            .attr("fill", "white")
+            // .attr("fill", "white")
             .attr("text-anchor", "middle")
             .attr('font-size', 25) // Font size
             .attr('font-family', 'monospace')
@@ -47,7 +45,7 @@ class TitlePage{
         vis.subtitle = vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/2 + 60)
-            .attr("fill", "white")
+            // .attr("fill", "white")
             .attr("text-anchor", "middle")
             .attr('font-size', 15) // Font size
             .attr('font-family', 'monospace')
@@ -114,7 +112,7 @@ class TitlePage{
             .attr("r", 40)
             .attr("stroke", "white")
             .attr("stroke-width", 3)
-            .attr("fill", "#ffd1dc")
+            .attr("fill", "#ffbf87")
 
 
         vis.logo = vis.svg.append("image")

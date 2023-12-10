@@ -28,7 +28,8 @@ class ChainSalesVis {
         // init title
         vis.title = vis.svg.append('g')
             .attr('class', 'title')
-            .attr('id', 'chart-title');
+            .attr('id', 'chart-title')
+            .attr('font-family', 'monospace, serif')
         vis.title.append('text')
             .attr('transform', `translate(${vis.width / 2}, 20)`)
             .attr('text-anchor', 'middle');
@@ -56,6 +57,7 @@ class ChainSalesVis {
             .attr("text-anchor", "middle")
             .attr("x", vis.width * 0.50)
             .attr("y", 40)  // Increase this value as needed
+            .attr("font-family", "monospace")
             .text("Nationwide Sales Metrics");
 
         // y-axis label

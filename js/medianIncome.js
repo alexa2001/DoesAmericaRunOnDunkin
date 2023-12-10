@@ -62,6 +62,7 @@ class medianIncome {
             .attr("font-size", "20px")
             .attr("transform", `translate(${vis.width * 0.5}, ${vis.height * 0.90})`)
             .style("text-anchor", "middle")
+            .attr('font-family', 'monospace, serif')
             .text("Median Income");
 
         vis.svg.append("text")
@@ -70,6 +71,7 @@ class medianIncome {
             .attr("transform", "rotate(-90)")
             .attr("font-size", "20px")
             .style("text-anchor", "middle")
+            .attr('font-family', 'monospace, serif')
             .text("Restaurant Count");
 
 
