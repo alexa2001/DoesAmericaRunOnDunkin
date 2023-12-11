@@ -97,7 +97,7 @@ class SummaryPage {
         // third rectangle with black outline
         vis.svg.append("rect")
             .attr("x", vis.width/3 - (vis.width/3.5) + vis.margin.left) // Subtract half of the rectangle's width
-            .attr("y", vis.height * 0.55 - 35) // y position
+            .attr("y", vis.height * 0.6 - 35) // y position
             .attr("width", vis.width/2.5) // width
             .attr("height", 230) // height
             .attr("rx", 10) // horizontal corner radius
@@ -111,7 +111,7 @@ class SummaryPage {
         // nested fourth title rectangle with black outline
         vis.svg.append("rect")
             .attr("x", vis.width/3 - (vis.width/3.5) + vis.margin.left) // Subtract half of the rectangle's width
-            .attr("y", vis.height * 0.55 - 35) // y position
+            .attr("y", vis.height * 0.6 - 35) // y position
             .attr("width", vis.width/4) // width
             .attr("height", 50) // height
             .attr("rx", 10) // horizontal corner radius
@@ -123,7 +123,7 @@ class SummaryPage {
         // fifth rectangle with black outline
         vis.svg.append("rect")
             .attr("x", vis.width/2 + vis.margin.right) // Subtract half of the rectangle's width
-            .attr("y", vis.height * 0.55 - 35) // y position
+            .attr("y", vis.height * 0.6 - 35) // y position
             .attr("width", vis.width/2.5) // width
             .attr("height", 230) // height
             .attr("rx", 10) // horizontal corner radius
@@ -137,7 +137,7 @@ class SummaryPage {
         // nested sixth title rectangle with black outline
         vis.svg.append("rect")
             .attr("x", vis.width/2 + vis.margin.left) // Subtract half of the rectangle's width
-            .attr("y", vis.height * 0.55 - 35) // y position
+            .attr("y", vis.height * 0.6 - 35) // y position
             .attr("width", vis.width/4) // width
             .attr("height", 50) // height
             .attr("rx", 10) // horizontal corner radius
@@ -160,7 +160,7 @@ class SummaryPage {
         vis.econLines.forEach((line, i) => {
             let text = vis.svg.append("text")
                 .attr("x", vis.width - (vis.width / 1.07) + 10)
-                .attr("y", vis.height * 0.6 + i * 35)  // Increment the y attribute for each line
+                .attr("y", vis.height * 0.65 + i * 35)  // Increment the y attribute for each line
                 .attr("text-anchor", "start")     // Center the text
                 .attr("font-size", 15)             // Font size
                 .attr('font-family', 'Avenir, serif')
@@ -183,7 +183,7 @@ class SummaryPage {
         vis.healthLines.forEach((line, i) => {
             let text = vis.svg.append("text")
                 .attr("x", vis.width - (vis.width/2) + 30)
-                .attr("y", vis.height * 0.6 + i * 35)  // Increment the y attribute for each line
+                .attr("y", vis.height * 0.65 + i * 35)  // Increment the y attribute for each line
                 .attr("text-anchor", "start")     // Center the text
                 .attr("font-size", 15)             // Font size
                 .attr('font-family', 'Avenir, serif')
@@ -194,7 +194,7 @@ class SummaryPage {
 
         vis.svg.append("text")
             .attr("x", vis.width - (vis.width/1.07) + 10)
-            .attr("y", vis.height * 0.55)
+            .attr("y", vis.height * 0.6)
             .attr("text-anchor", "start")
             .attr('font-size', 20)
             .attr('font-family', 'monospace')
@@ -204,7 +204,7 @@ class SummaryPage {
 
         vis.svg.append("text")
             .attr("x", vis.width - (vis.width/2) + 30)
-            .attr("y", vis.height * 0.55)
+            .attr("y", vis.height * 0.6)
             .attr("text-anchor", "start")
             .attr('font-size', 20)
             .attr('font-family', 'monospace')
