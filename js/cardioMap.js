@@ -3,14 +3,6 @@ class cardioMap {
         this.parentElement = parentElement;
         this.fastFoodData = fastFoodData;
         this.coronaryData = coronaryData;
-        // this.countyLocations = countyLocations
-        // console.log("counties", this.countyLocations)
-        // this.ffLocations = ffLocations;
-
-        // console.log("fast food data", this.fastFoodData)
-        // console.log("coronary data", this.coronaryData)
-        // console.log("location data", this.ffLocations)
-
 
         this.initVis()
     }
@@ -20,30 +12,28 @@ class cardioMap {
 
         // set margins, width, and height
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
-        vis.width = window.innerWidth + vis.margin.left + vis.margin.right;
-        vis.height = window.innerHeight - vis.margin.top - vis.margin.bottom;
 
         // init drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
-            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("width", vis.width + margin.left + margin.right)
             .attr("height", vis.height)
-            //.attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
+        // Initialize and set range of scales
         vis.colorScale = d3.scaleLinear()
-            // .range(['blue', 'white', 'red']);
-            .range(['white', 'blue']);
-
+            .range(['white', '#95190C']);
 
         vis.radiusScale = d3.scaleLinear()
             .range([1, 10])
 
 
-        // Zoom
+        // Zoom for map
         vis.viewpoint = {'width': 975, 'height': 610};
         vis.zoom = vis.width / vis.viewpoint.width;
 
-
+        // Create map
         vis.map = L.map('cardioMapDiv', {
             maxBounds: [
                 [30, -130], // Southwest coordinates
@@ -55,46 +45,23 @@ class cardioMap {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(vis.map);
 
-        // fetch('data/usa_counties.geojson')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         // Create a GeoJSON layer and add it to the map with a blue fill color
-        //         vis.countyMap = L.geoJSON(data, {
-        //             style: {
-        //                 fillColor: 'blue',
-        //                 weight: 2,
-        //                 opacity: 1,
-        //                 color: 'white',
-        //                 dashArray: '3',
-        //                 fillOpacity: 0.7
-        //             }
-        //         }).addTo(vis.map);
-        //     });
-
-        // vis.countyMap = L.geoJSON(vis.countyLocations, {
-        //     style: {
-        //         fillColor: 'blue',
-        //         weight: 2,
-        //         opacity: 1,
-        //         color: 'white',
-        //         dashArray: '3',
-        //         fillOpacity: 0.7
-        //     }
-        // }).addTo(vis.map);
-
-        // legend scale
+        // Create color legend scale and group
         vis.legendScaleColor = d3.scaleOrdinal()
             .range([0, (4*vis.width/5)]);
 
         vis.legend = vis.svg.append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(20, ${vis.height - 200})`)
+            .attr('transform', `translate(20, ${vis.height + 65})`)
+
+        // Create radius legend group
+        vis.radiusLegend = vis.svg.append("g")
+            .attr('class', 'legend')
+            .attr('transform', `translate(20, ${vis.height + 100})`)
 
         vis.legendAxisGroup = vis.legend.append("g")
             .attr("class", "legend-axis")
 
-
-        // Create linear color gradient
+        // Create linear color gradient to use for legend
         vis.defs = vis.svg.append("defs");
 
         vis.gradient = vis.defs.append("linearGradient")
@@ -113,7 +80,7 @@ class cardioMap {
         vis.gradient.append("stop")
             .attr("class", "end")
             .attr("offset", "100%")
-            .attr("stop-color", "blue")
+            .attr("stop-color", '#95190C')
             .attr("stop-opacity", 1);
 
         vis.legendAxis = d3.axisBottom(vis.legendScaleColor)
@@ -128,23 +95,24 @@ class cardioMap {
             .attr("height", 30)
             .attr("fill", "url(#cardioGradient)"); // pull gradient color scale
 
+        // Create age and cardiovascular disease select boxes and input options
         let cardioSelectBox = vis.svg.append("foreignObject")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", 200)
+            .attr("x", "5vh")
+            .attr("y", 10)
+            .attr("width", "30vh")
             .attr("height", 30)
             .attr("class", "select-box")
             .append("xhtml:body")
-            .html('<select id="cardioSelect"></select>');
+            .html('<select id="cardioSelect" class="form-select" aria-label= "Default select example" style="width: 30vh"></select>');
 
         let ageSelectBox = vis.svg.append("foreignObject")
-            .attr("x", 0)
-            .attr("y", 50)
-            .attr("width", 120)
+            .attr("x", "5vh")
+            .attr("y", 60)
+            .attr("width", "30vh")
             .attr("height", 30)
             .attr("class", "select-box")
             .append("xhtml:body")
-            .html('<select id="ageSelect"></select>');
+            .html('<select id="ageSelect" class="form-select" aria-label= "Default select example" style="width: 30vh"></select>');
 
         let ageOptions = d3.select("#ageSelect")
             .selectAll("option")
@@ -160,9 +128,9 @@ class cardioMap {
             .append("option")
             .text(d => d);
 
+        // Change displayed data based on selections
         d3.select("#ageSelect").on("change", function() {
             vis.selectedAge = d3.select(this).property("value");
-            // console.log("Selected option:", selectedOption);
 
             // Call updateVis() when the selection changes
             vis.wrangleData();
@@ -170,11 +138,11 @@ class cardioMap {
 
         d3.select("#cardioSelect").on("change", function() {
             vis.selectedCardio = d3.select(this).property("value");
-            // console.log("Selected option:", selectedOption);
 
             // Call updateVis() when the selection changes
             vis.wrangleData();
         });
+
 
 
         vis.wrangleData()
@@ -192,7 +160,7 @@ class cardioMap {
         vis.fastFoodCounties = [];
 
 
-        // Filter by age group
+        // Filter by selected age group
         if (vis.selectedAge === "65 and over") {
             vis.allCoronaryData.forEach(entry => {
                 if (entry['Stratification1'] === "Ages 65 years and older") {
@@ -209,9 +177,8 @@ class cardioMap {
             })
             vis.filteredData = vis.selectedAgeData
         }
-        // console.log("age filtered", vis.filteredData)
 
-        // Filter by type of coronary heart disease
+        // Filter by selected type of coronary heart disease
         if (vis.selectedCardio === "Stroke") {
             vis.filteredData.forEach(entry => {
                 if (entry['Topic'] === "Stroke") {
@@ -227,7 +194,6 @@ class cardioMap {
 
                     }
                 })
-
 
             })
             vis.filteredData = vis.selectedCardioData
@@ -253,11 +219,6 @@ class cardioMap {
 
         }
 
-        //
-        // console.log("both filtered", vis.filteredData)
-        // console.log("counties", vis.counties)
-        // console.log("ffd", vis.fastFoodCounties)
-
 
         vis.updateVis()
 
@@ -266,11 +227,48 @@ class cardioMap {
     updateVis () {
         let vis = this;
 
-        // Set up color scale
+        // Set up color scale domain
         vis.colorScale.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
 
-
+        // Set up radius scale domain
         vis.radiusScale.domain([d3.min(vis.filteredData, function(d) { return d["cardio_change"]; }), d3.max(vis.filteredData, function(d) { return d["cardio_change"]; })])
+
+        // Set up radius legend data
+        vis.min = d3.min(vis.filteredData, function(d) { return d["cardio_change"]; })
+        vis.max = d3.max(vis.filteredData, function(d) { return d["cardio_change"]; })
+        vis.range = vis.max - vis.min
+        vis.mid1 = vis.range/3 + vis.min
+        vis.mid2 = 2*vis.range/3 + vis.min
+        vis.radiusLegendData = [vis.min, vis.mid1, vis.mid2, vis.max]
+        vis.radiusLabelData = [vis.min, vis.max]
+
+        // Enter, update, exit radius legend circles and labels
+        vis.circles = vis.radiusLegend.selectAll("circle")
+            .data(vis.radiusLegendData)
+
+        vis.circles
+            .enter()
+            .append("circle")
+            .attr("cx", (d,i) => i * 40 + 40)
+            .attr("cy", -150)
+            .attr("r", (d) => vis.radiusScale(d))
+            .merge(vis.circles)
+            .attr("fill", "black")
+
+        vis.radiusLabels = vis.radiusLegend.selectAll("text.label")
+            .data(vis.radiusLabelData)
+
+        vis.radiusLabels
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("x", (d,i) => i * 110 - 15 + 40)
+            .attr("y", -110)
+            .merge(vis.radiusLabels)
+            .attr("fill", "black")
+            .text(function (d) {
+                return d.toFixed(2)
+            })
 
         vis.geojsonLayer = L.geoJSON();
 
@@ -278,101 +276,94 @@ class cardioMap {
         fetch('data/usa_counties.geojson')
             .then(response => response.json())
             .then(data => {
-                // vis.countyMap = L.geoJSON(data, {
-                //         style: {
-                //             fillColor: 'blue',
-                //             opacity: 0.3,
-                //             color: 'white',
-                //             dashArray: '3',
-                //             fillOpacity: 0.7
-                //         }
-                //     }).addTo(vis.map);
+                vis.countyMap = L.geoJSON(data, {
+                    style: {
+                        fillColor: 'transparent',
+                        opacity: 1,
+                        color: 'transparent',
+                        dashArray: '3',
+                        fillOpacity: 1
+                    }
+                }).addTo(vis.map);
+
                 // Style the counties
-                vis.geojsonLayer.setStyle(function (feature) {
+                vis.countyMap.setStyle(function (feature) {
                     let county = feature.properties;
                     return {
                         fillColor: getColor(county),
                         weight: 0.5,
-                        opacity: 0.7,
-                        color: 'white',
-                        // dashArray: '3',
-                        //fillOpacity: 0.7
-                    };
+                        opacity: 1,
+                        color: 'transparent',
+                        dashArray: '3',
+                        fillOpacity: 1
+                    }})
 
-                    vis.geojsonLayer.addTo(vis.map);
-                });
+                vis.countyMap.addTo(vis.map);
+
+                // Remove all circle markers from the map
+                function removeAllCircleMarkers() {
+                    vis.map.eachLayer(layer => {
+                        if (layer instanceof L.CircleMarker) {
+                            vis.map.removeLayer(layer);
+                        }
+                    });
+                }
+
+                // Remove all circle markers
+                removeAllCircleMarkers()
+
+                // Add circles for each location
+                vis.filteredData.forEach(function(circle) {
+                    let popupContent =  circle.county + ", " + circle.state + "<br/>";
+                    let ff_change =  "Fast Food Expenditure Per Capita: $" + circle.ff_change + "</br>";
+                    let cardio_change =  "Cardiovascular Disease Mortality per 100,000: " + circle.cardio_change;
+                    popupContent += ff_change;
+                    popupContent += cardio_change;
+
+                    let radius
+                    let color
+                    let opacity
+                    let stroke
+
+                    if (circle["cardio_change"]){
+                        radius = vis.radiusScale(circle["cardio_change"])
+                        color = 'black'
+                        opacity = 0.3
+                        stroke = 'black'
+
+                    }else{
+                        radius = 1
+                        color = 'transparent'
+                    }
+
+                    // Create circles with fast food and cardio info
+                    L.circleMarker([circle["Y_lat"], circle["X_long"]],
+                        {
+                            radius: radius,
+                            color: color,
+                            fillColor: 'black',
+                            fillOpacity: 0.3,
+                            weight: 1
+                        })
+                        .bindPopup(popupContent)
+                        .addTo(vis.map).bringToFront()
+
+                })
             });
 
+        // Color based on scale of fast food
         function getColor(county){
             let color = 'transparent'
-            // console.log("colorful county",county)
+
             vis.filteredData.forEach(function(data) {
                 if (county['name'] === data['county'] && county['STATE'] === data['state']){
                     color = vis.colorScale(data['ff_change'])
-                    // console.log(vis.colorScale(data['ff_change']))
                 }
             })
             return color
-            // return 'blue'
         }
 
-        // Remove all circle markers from the map
-        function removeAllCircleMarkers() {
-            vis.map.eachLayer(layer => {
-                if (layer instanceof L.CircleMarker) {
-                    vis.map.removeLayer(layer);
-                }
-            });
-        }
-
-        // Remove all circle markers
-        removeAllCircleMarkers()
-
-
-        // Add circles for each location
-        vis.filteredData.forEach(function(circle) {
-
-            let popupContent =  circle.county + ", " + circle.state + "<br/>";
-            let ff_change =  "Fast Food Expenditure Per Capita: $" + circle.ff_change + "</br>";
-            let cardio_change =  "Cardiovascular Disease Mortality per 100,000: " + circle.cardio_change;
-            popupContent += ff_change;
-            popupContent += cardio_change;
-
-            let radius
-            let color
-            let opacity
-            let stroke
-
-            if (circle["cardio_change"]){
-                radius = vis.radiusScale(circle["cardio_change"])
-                color = 'black'
-                opacity = 0.3
-                stroke = 'black'
-
-            }else{
-                radius = 1
-                color = 'transparent'
-            }
-
-            L.circleMarker([circle["Y_lat"], circle["X_long"]],
-                {
-                radius: radius,
-                color: color,
-                fillColor: 'black',
-                fillOpacity: 0.3,
-                weight: 1
-            })
-                .bindPopup(popupContent)
-                .addTo(vis.map).bringToFront()
-
-        })
-
-        // After adding both layers to the map
-        // console.log(vis.map.getPane('overlayPane').children);
-
-// Alternatively, you can use the following to log all layers (not just overlayPane)
-        console.log(vis.map._layers);
-
+        // Create color legend axis
         vis.legendScaleColor.domain([d3.min(vis.filteredData, function(d) { return d["ff_change"]; }), d3.max(vis.filteredData, function(d) { return d["ff_change"]; })])
 
         vis.legendAxisGroup

@@ -83,25 +83,25 @@
         <div id="cardiovascularTransition"></div>
     </div>
     <div class="section">
-<!--        <h4>Risk Factor Prevalence Over Time</h4>-->
-<!--        <p class = "subtitle">Hover over each circle to see the percentage of age-adjusted prevalence of high total cholesterol, hypertension, and obesity among US adults aged 20 and over between 1999-2000 to 2017-2018</p>-->
         <div id="riskfactorvis"></div>
     </div>
     <div class="section">
         <h1 style="text-align: center; font-family: monospace; color: white">Top 5 Causes of Death</h1>
+        <div class="row d-flex align-items-center" style="height: 15vh; padding: 0">
+            <h4 style="text-align: center; font-family: monospace, serif; color: white">Explore the trends in the leading of causes of death in each state</h4>
+        </div>
         <div class="row"
              style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
             <div class="col">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-8">
                         <div class="row">
                             <div id="rankChart" style="height: 71vh; width: 100%;"></div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="row">
                             <div style="padding-right:1vh">
-<!--                                <p>insert text</p>-->
                                 <div id="rankLegend" style="height: 71vh; width: 100%;"></div>
                             </div>
                         </div>
@@ -110,35 +110,36 @@
             </div>
         </div>
     </div>
-<!--    <div class="section" id="rankChart"></div>-->
     <div class="section">
         <div id="fastFoodAndHealth"></div>
     </div>
     <div class="section">
         <h1 style="text-align: center; font-family: monospace, serif ;color: white">Cardiovascular Disease and Fast Food Change Across the U.S.</h1>
-<!--        <h3>See the density by state or click on a state for a view of each chain!</h3>-->
-        <!-- Visualizations -->
-        <div class="row"
-             style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
+        <div class="row d-flex align-items-center" style="height: 15vh; padding: 0">
+            <h4 style="text-align: center; font-family: monospace, serif; color: white">Click on a circle to see the fast food sales and cardiovascular mortality per capita for each county</h4>
+        </div>
+        <div class="row" style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
             <div class="col">
                 <div class="row">
-                    <div class="col-9">
-                        <div class="row">
-                            <div id="cardioMapDiv" style="height: 71vh; width: 100%;"></div>
-                        </div>
-                    </div>
                     <div class="col-3">
                         <div class="row">
                             <div style="padding-right:1vh">
-<!--                                <p>Circles with black outline represent cardiovascular disease mortality greater than 500 deaths per 100,000</p>-->
-                                <div id="cardioSelectDiv" style="height: 71vh; width: 100%;"></div>
+                                <p style="text-align: left; padding-left:5vh; padding-right:5vh; font-family: monospace, serif ;color: white">Use the select boxes below to see cardiovascular disease mortality rates based on disease and age group</p>
+                                <div id="cardioSelectDiv" style="height: 40vh; width: 100%;"></div>
+                                <p style="text-align: left; padding-left:5vh; padding-right:5vh; font-family: monospace, serif ;color: white">Color represents the fast food expenditure per capita</p>
+                                <p style="text-align: left; padding-left:5vh; padding-right:5vh; font-family: monospace, serif ;color: white">Circle radius represents the cardiovascular disease mortality per 100,000</p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div id="cardioMapDiv" style="padding-left: 5vh; height: 71vh; width: 95%"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <h1>Cardiovascular Disease and Systemic Sales by Fast Food Chains Across the U.S.</h1>-->
+        <!--        <h1>Cardiovascular Disease and Systemic Sales by Fast Food Chains Across the U.S.</h1>-->
 <!--        <div id="cardioMapDiv"></div>-->
     </div>
     <div class="section">
@@ -215,13 +216,9 @@
 <!--<script type="text/javascript" src="../dist/fullpage.js"></script>-->
 <script type="text/javascript">
     var myFullpage = new fullpage('#fullpage', {
-        // anchors: ["title1", "title2", "title3", "title4", "title5", "title6", "title7", "title8", "title9", "title10"],
-        //color theme: #DE9E46, #F4D9AE, #CD4F41, #1C404C and #2D8077.
         sectionsColor: ["#1C404C", "#2D8077","#2D8077","#F4D9AE","#2D8077","#2D8077","#F4D9AE","#2D8077","#2D8077","#1C404C", "#1C404C"],
-        // navigationTooltips: ["title1", "title2", "title3", "title4", "title5", "title6", "title7", "title8", "title9", "title10"]
-        navigationTooltips: ["Does America Run on Dunkin'?", "History of Fast Food in the US", "Fast Food Restaurants Mapped", "CardioVascular Disease in the US", "Risk Factor Prevalence Over Time",
-            "Top 5 Causes of Death", "Long Term Cost of Fast Food", "Cardiovascular Disease and Fast Food Change Across the U.S.","Restaurant Count and Median Income Per State", "Takeaways", "Sources and About"],
-        // scrollOverflow: false
+        navigationTooltips: ["Does America Run on Dunkin'?", "History of Fast Food in the US", "Fast Food Restaurants Mapped", "Cardiovascular Disease in the US", "Risk Factor Prevalence Over Time",
+            "Leading Causes of Death", "Long Term Cost of Fast Food", "Heart Disease and Fast Food","Restaurants and Median Income", "Takeaways", "Sources and About"],
     });
 </script>
 <script src="js/leaflet/leaflet.js"></script>

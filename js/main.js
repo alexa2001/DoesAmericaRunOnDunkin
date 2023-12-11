@@ -26,9 +26,7 @@ let promises = [
     d3.csv("data/top-50-fast-food-chains.csv"),
     d3.csv("data/stateIncome.csv"),
     d3.csv("data/coronary_2012.csv"),
-    // d3.csv("data/coronary_heart_disease_mortality.csv"),
     d3.csv("data/fast_food_change.csv"),
-    // d3.json("data/usa_counties.geojson")
     d3.csv("data/cause_of_death_definitions.csv")
 ];
 

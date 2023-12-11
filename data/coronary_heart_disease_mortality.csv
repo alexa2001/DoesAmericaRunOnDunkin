@@ -267,99 +267,7 @@ LocationID,Year,LocationAbbr,LocationDesc,GeographicLevel,DataSource,Class,Topic
 1133,2011-2018,AL,Winston,County,NVSS,Cardiovascular Diseases,Stroke,17.9,%,Total percent change,,,-5.8,47.7,Age group,Ages 35-64 years,T6,-87.37340225,34.14963502
 1133,2011-2018,AL,Winston,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,28.6,%,Total percent change,,,-7.7,78.5,Age group,Ages 35-64 years,T2,-87.37340225,34.14963502
 1133,2011-2018,AL,Winston,County,NVSS,Cardiovascular Diseases,Stroke,-0.8,%,Total percent change,,,-19.6,23.6,Age group,Ages 65 years and older,T6,-87.37340225,34.14963502
-2013,2011-2018,AK,Aleutians East,County,NVSS,Cardiovascular Diseases,Stroke,-26.4,%,Total percent change,,,-56.4,16.9,Age group,Ages 35-64 years,T6,-115.614915,22.31052723
-2013,2011-2018,AK,Aleutians East,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-33.4,%,Total percent change,,,-60.2,35.1,Age group,Ages 35-64 years,T2,-115.614915,22.31052723
-2013,2011-2018,AK,Aleutians East,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-115.614915,22.31052723
-2013,2011-2018,AK,Aleutians East,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-115.614915,22.31052723
-2016,2011-2018,AK,Aleutians West,County,NVSS,Cardiovascular Diseases,Stroke,-25.1,%,Total percent change,,,-59.4,39.6,Age group,Ages 35-64 years,T6,-118.4417133,20.98813275
-2016,2011-2018,AK,Aleutians West,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-33.3,%,Total percent change,,,-62.7,26.4,Age group,Ages 35-64 years,T2,-118.4417133,20.98813275
-2016,2011-2018,AK,Aleutians West,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-118.4417133,20.98813275
-2016,2011-2018,AK,Aleutians West,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-118.4417133,20.98813275
-2020,2011-2018,AK,Anchorage,County,NVSS,Cardiovascular Diseases,Stroke,-36.8,%,Total percent change,,,-52.9,-3.7,Age group,Ages 35-64 years,T6,-113.2711831,25.57628952
-2020,2011-2018,AK,Anchorage,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-2.2,%,Total percent change,,,-19.2,26.6,Age group,Ages 35-64 years,T2,-113.2711831,25.57628952
-2020,2011-2018,AK,Anchorage,County,NVSS,Cardiovascular Diseases,Stroke,-7.1,%,Total percent change,,,-25.2,14.5,Age group,Ages 65 years and older,T6,-113.2711831,25.57628952
-2020,2011-2018,AK,Anchorage,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-17.2,%,Total percent change,,,-30.2,-3.4,Age group,Ages 65 years and older,T2,-113.2711831,25.57628952
-2050,2011-2018,AK,Bethel,County,NVSS,Cardiovascular Diseases,Stroke,-30.8,%,Total percent change,,,-49.6,5.1,Age group,Ages 35-64 years,T6,-115.5534469,24.93654012
-2050,2011-2018,AK,Bethel,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-2.8,%,Total percent change,,,-31.2,33.4,Age group,Ages 35-64 years,T2,-115.5534469,24.93654012
-2050,2011-2018,AK,Bethel,County,NVSS,Cardiovascular Diseases,Stroke,-6.7,%,Total percent change,,,-28.7,32.7,Age group,Ages 65 years and older,T6,-115.5534469,24.93654012
-2050,2011-2018,AK,Bethel,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-4.5,%,Total percent change,,,-26,42.3,Age group,Ages 65 years and older,T2,-115.5534469,24.93654012
-2060,2011-2018,AK,Bristol Bay,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T2,-114.6561541,24.07428338
-2060,2011-2018,AK,Bristol Bay,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-114.6561541,24.07428338
-2060,2011-2018,AK,Bristol Bay,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T6,-114.6561541,24.07428338
-2060,2011-2018,AK,Bristol Bay,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-114.6561541,24.07428338
-2068,2011-2018,AK,Denali,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-113.7888507,26.62565271
-2068,2011-2018,AK,Denali,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-113.7888507,26.62565271
-2068,2011-2018,AK,Denali,County,NVSS,Cardiovascular Diseases,Stroke,-22.2,%,Total percent change,,,-42.5,31.6,Age group,Ages 35-64 years,T6,-113.7888507,26.62565271
-2068,2011-2018,AK,Denali,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-19.3,%,Total percent change,,,-46.6,27.2,Age group,Ages 35-64 years,T2,-113.7888507,26.62565271
-2070,2011-2018,AK,Dillingham,County,NVSS,Cardiovascular Diseases,Stroke,-32.8,%,Total percent change,,,-57.3,15,Age group,Ages 35-64 years,T6,-115.1016982,24.47886975
-2070,2011-2018,AK,Dillingham,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-9.7,%,Total percent change,,,-52.1,62.9,Age group,Ages 35-64 years,T2,-115.1016982,24.47886975
-2070,2011-2018,AK,Dillingham,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-115.1016982,24.47886975
-2070,2011-2018,AK,Dillingham,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-115.1016982,24.47886975
-2090,2011-2018,AK,Fairbanks North Star,County,NVSS,Cardiovascular Diseases,Stroke,-27.7,%,Total percent change,,,-46.3,4.2,Age group,Ages 35-64 years,T6,-113.274427,27.32948942
-2090,2011-2018,AK,Fairbanks North Star,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-12.2,%,Total percent change,,,-34.8,21.5,Age group,Ages 35-64 years,T2,-113.274427,27.32948942
-2090,2011-2018,AK,Fairbanks North Star,County,NVSS,Cardiovascular Diseases,Stroke,20.7,%,Total percent change,,,-13.2,49.5,Age group,Ages 65 years and older,T6,-113.274427,27.32948942
-2090,2011-2018,AK,Fairbanks North Star,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,0.2,%,Total percent change,,,-23.9,24.7,Age group,Ages 65 years and older,T2,-113.274427,27.32948942
-2122,2011-2018,AK,Kenai Peninsula,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-16.3,%,Total percent change,,,-32.7,3.1,Age group,Ages 65 years and older,T2,-113.6800473,25.029365
-2122,2011-2018,AK,Kenai Peninsula,County,NVSS,Cardiovascular Diseases,Stroke,-28.8,%,Total percent change,,,-46.4,3.7,Age group,Ages 35-64 years,T6,-113.6800473,25.029365
-2122,2011-2018,AK,Kenai Peninsula,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-12.2,%,Total percent change,,,-33.2,18.3,Age group,Ages 35-64 years,T2,-113.6800473,25.029365
-2122,2011-2018,AK,Kenai Peninsula,County,NVSS,Cardiovascular Diseases,Stroke,0,%,Total percent change,,,-23,28.4,Age group,Ages 65 years and older,T6,-113.6800473,25.029365
-2150,2011-2018,AK,Kodiak Island,County,NVSS,Cardiovascular Diseases,Stroke,-36.4,%,Total percent change,,,-59.8,-2.3,Age group,Ages 35-64 years,T6,-113.8680382,23.75149511
-2150,2011-2018,AK,Kodiak Island,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-26.4,%,Total percent change,,,-58,52.6,Age group,Ages 35-64 years,T2,-113.8680382,23.75149511
-2150,2011-2018,AK,Kodiak Island,County,NVSS,Cardiovascular Diseases,Stroke,-13.7,%,Total percent change,,,-44,42.8,Age group,Ages 65 years and older,T6,-113.8680382,23.75149511
-2150,2011-2018,AK,Kodiak Island,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-31.6,%,Total percent change,,,-53.6,-5,Age group,Ages 65 years and older,T2,-113.8680382,23.75149511
-2158,2011-2018,AK,Kusilvak,County,NVSS,Cardiovascular Diseases,Stroke,-31.7,%,Total percent change,,,-52.4,35,Age group,Ages 35-64 years,T6,-116.3744831,25.396397
-2158,2011-2018,AK,Kusilvak,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,4.2,%,Total percent change,,,-31.7,79.6,Age group,Ages 35-64 years,T2,-116.3744831,25.396397
-2158,2011-2018,AK,Kusilvak,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-116.3744831,25.396397
-2158,2011-2018,AK,Kusilvak,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-116.3744831,25.396397
-2164,2011-2018,AK,Lake and Peninsula,County,NVSS,Cardiovascular Diseases,Stroke,-36.1,%,Total percent change,,,-55.6,-8.5,Age group,Ages 35-64 years,T6,-114.544117,24.03235098
-2164,2011-2018,AK,Lake and Peninsula,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-35.3,%,Total percent change,,,-59.5,18.1,Age group,Ages 35-64 years,T2,-114.544117,24.03235098
-2164,2011-2018,AK,Lake and Peninsula,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-114.544117,24.03235098
-2164,2011-2018,AK,Lake and Peninsula,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-114.544117,24.03235098
-2170,2011-2018,AK,Matanuska-Susitna,County,NVSS,Cardiovascular Diseases,Stroke,-21.8,%,Total percent change,,,-42.8,25.2,Age group,Ages 35-64 years,T6,-113.5253692,26.05635998
-2170,2011-2018,AK,Matanuska-Susitna,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-18.4,%,Total percent change,,,-40.7,11.4,Age group,Ages 35-64 years,T2,-113.5253692,26.05635998
-2170,2011-2018,AK,Matanuska-Susitna,County,NVSS,Cardiovascular Diseases,Stroke,2.5,%,Total percent change,,,-20.7,28.3,Age group,Ages 65 years and older,T6,-113.5253692,26.05635998
-2170,2011-2018,AK,Matanuska-Susitna,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-20.8,%,Total percent change,,,-33.6,2.4,Age group,Ages 65 years and older,T2,-113.5253692,26.05635998
-2180,2011-2018,AK,Nome,County,NVSS,Cardiovascular Diseases,Stroke,6.2,%,Total percent change,,,-35.3,61.6,Age group,Ages 65 years and older,T6,-116.6195133,26.66086111
-2180,2011-2018,AK,Nome,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-4.5,%,Total percent change,,,-43.1,68.4,Age group,Ages 35-64 years,T2,-116.6195133,26.66086111
-2180,2011-2018,AK,Nome,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,10.5,%,Total percent change,,,-28.9,77.9,Age group,Ages 65 years and older,T2,-116.6195133,26.66086111
-2180,2011-2018,AK,Nome,County,NVSS,Cardiovascular Diseases,Stroke,-28.3,%,Total percent change,,,-49.6,22.7,Age group,Ages 35-64 years,T6,-116.6195133,26.66086111
-2185,2011-2018,AK,North Slope,County,NVSS,Cardiovascular Diseases,Stroke,-17.2,%,Total percent change,,,-42.8,29,Age group,Ages 35-64 years,T6,-115.0263681,28.99972549
-2185,2011-2018,AK,North Slope,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,28.3,%,Total percent change,,,-27.7,139,Age group,Ages 35-64 years,T2,-115.0263681,28.99972549
-2185,2011-2018,AK,North Slope,County,NVSS,Cardiovascular Diseases,Stroke,18.5,%,Total percent change,,,-22.7,84,Age group,Ages 65 years and older,T6,-115.0263681,28.99972549
-2185,2011-2018,AK,North Slope,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,29.8,%,Total percent change,,,-18.1,111.9,Age group,Ages 65 years and older,T2,-115.0263681,28.99972549
-2188,2011-2018,AK,Northwest Arctic,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,20.1,%,Total percent change,,,-27.3,78.6,Age group,Ages 35-64 years,T2,-115.9262192,27.74062189
-2188,2011-2018,AK,Northwest Arctic,County,NVSS,Cardiovascular Diseases,Stroke,25.2,%,Total percent change,,,-14.4,77.7,Age group,Ages 65 years and older,T6,-115.9262192,27.74062189
-2188,2011-2018,AK,Northwest Arctic,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,34,%,Total percent change,,,-5,79.3,Age group,Ages 65 years and older,T2,-115.9262192,27.74062189
-2188,2011-2018,AK,Northwest Arctic,County,NVSS,Cardiovascular Diseases,Stroke,-15.4,%,Total percent change,,,-40.1,20.2,Age group,Ages 35-64 years,T6,-115.9262192,27.74062189
-2220,2011-2018,AK,Sitka,County,NVSS,Cardiovascular Diseases,Stroke,-33.9,%,Total percent change,,,-62.6,9.6,Age group,Ages 35-64 years,T6,-109.5757479,25.16524804
-2220,2011-2018,AK,Sitka,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-4.4,%,Total percent change,,,-44.4,54.4,Age group,Ages 35-64 years,T2,-109.5757479,25.16524804
-2220,2011-2018,AK,Sitka,County,NVSS,Cardiovascular Diseases,Stroke,-10.2,%,Total percent change,,,-44.1,34.6,Age group,Ages 65 years and older,T6,-109.5757479,25.16524804
-2220,2011-2018,AK,Sitka,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,18.1,%,Total percent change,,,-22.6,79.6,Age group,Ages 65 years and older,T2,-109.5757479,25.16524804
-2240,2011-2018,AK,Southeast Fairbanks,County,NVSS,Cardiovascular Diseases,Stroke,-29.5,%,Total percent change,,,-46.7,16.5,Age group,Ages 35-64 years,T6,-112.4882901,27.15684603
-2240,2011-2018,AK,Southeast Fairbanks,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-25.6,%,Total percent change,,,-51.6,10.6,Age group,Ages 35-64 years,T2,-112.4882901,27.15684603
-2240,2011-2018,AK,Southeast Fairbanks,County,NVSS,Cardiovascular Diseases,Stroke,2.1,%,Total percent change,,,-29.7,40,Age group,Ages 65 years and older,T6,-112.4882901,27.15684603
-2240,2011-2018,AK,Southeast Fairbanks,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-19.1,%,Total percent change,,,-45.1,12.4,Age group,Ages 65 years and older,T2,-112.4882901,27.15684603
-2261,2011-2018,AK,Valdez-Cordova,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-11.8,%,Total percent change,,,-41.8,21.5,Age group,Ages 35-64 years,T2,-112.3666183,26.07378696
-2261,2011-2018,AK,Valdez-Cordova,County,NVSS,Cardiovascular Diseases,Stroke,-4.5,%,Total percent change,,,-25.3,32.6,Age group,Ages 65 years and older,T6,-112.3666183,26.07378696
-2261,2011-2018,AK,Valdez-Cordova,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-15.3,%,Total percent change,,,-44.5,11.9,Age group,Ages 65 years and older,T2,-112.3666183,26.07378696
-2261,2011-2018,AK,Valdez-Cordova,County,NVSS,Cardiovascular Diseases,Stroke,-31.1,%,Total percent change,,,-55.3,5,Age group,Ages 35-64 years,T6,-112.3666183,26.07378696
-2290,2011-2018,AK,Yukon-Koyukuk,County,NVSS,Cardiovascular Diseases,Stroke,-27,%,Total percent change,,,-45.5,9.4,Age group,Ages 35-64 years,T6,-114.3345074,27.33585519
-2282,2011-2018,AK,Yakutat,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T6,-111.2031827,25.7343086
-2282,2011-2018,AK,Yakutat,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T2,-111.2031827,25.7343086
-2282,2011-2018,AK,Yakutat,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-111.2031827,25.7343086
-2282,2011-2018,AK,Yakutat,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-111.2031827,25.7343086
-2290,2011-2018,AK,Yukon-Koyukuk,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-18.4,%,Total percent change,,,-37,27.1,Age group,Ages 35-64 years,T2,-114.3345074,27.33585519
-2290,2011-2018,AK,Yukon-Koyukuk,County,NVSS,Cardiovascular Diseases,Stroke,7.9,%,Total percent change,,,-26.8,39.6,Age group,Ages 65 years and older,T6,-114.3345074,27.33585519
-2290,2011-2018,AK,Yukon-Koyukuk,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-7.6,%,Total percent change,,,-31.3,23.4,Age group,Ages 65 years and older,T2,-114.3345074,27.33585519
-2901,2011-2018,AK,"Prince of Wales-Hyder, Ketchikan Gateway, Petersburg, Wrangell",County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-30.9,%,Total percent change,,,-51.9,15.6,Age group,Ages 35-64 years,T2,-108.6217608,25.07126589
-2901,2011-2018,AK,"Prince of Wales-Hyder, Ketchikan Gateway, Petersburg, Wrangell",County,NVSS,Cardiovascular Diseases,Stroke,-9.5,%,Total percent change,,,-45.7,46.6,Age group,Ages 65 years and older,T6,-108.6217608,25.07126589
-2901,2011-2018,AK,"Prince of Wales-Hyder, Ketchikan Gateway, Petersburg, Wrangell",County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-17.2,%,Total percent change,,,-43.7,10.9,Age group,Ages 65 years and older,T2,-108.6217608,25.07126589
-2901,2011-2018,AK,"Prince of Wales-Hyder, Ketchikan Gateway, Petersburg, Wrangell",County,NVSS,Cardiovascular Diseases,Stroke,-31,%,Total percent change,,,-56.1,22,Age group,Ages 35-64 years,T6,-108.6217608,25.07126589
 4001,2011-2018,AZ,Apache,County,NVSS,Cardiovascular Diseases,Stroke,10.4,%,Total percent change,,,-8.6,32,Age group,Ages 65 years and older,T6,-109.488815,35.39549174
-2902,2011-2018,AK,"Juneau, Hoonah-Angoon, Skagway, Haines",County,NVSS,Cardiovascular Diseases,Stroke,-15.9,%,Total percent change,,,-47.8,21.2,Age group,Ages 65 years and older,T6,-109.8425085,25.68783851
-2902,2011-2018,AK,"Juneau, Hoonah-Angoon, Skagway, Haines",County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,9,%,Total percent change,,,-29.4,49.9,Age group,Ages 65 years and older,T2,-109.8425085,25.68783851
-2902,2011-2018,AK,"Juneau, Hoonah-Angoon, Skagway, Haines",County,NVSS,Cardiovascular Diseases,Stroke,-32.3,%,Total percent change,,,-61.7,21.6,Age group,Ages 35-64 years,T6,-109.8425085,25.68783851
-2902,2011-2018,AK,"Juneau, Hoonah-Angoon, Skagway, Haines",County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-3.5,%,Total percent change,,,-44.1,84.7,Age group,Ages 35-64 years,T2,-109.8425085,25.68783851
 4001,2011-2018,AZ,Apache,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,13.2,%,Total percent change,,,-4.8,32.1,Age group,Ages 65 years and older,T2,-109.488815,35.39549174
 4001,2011-2018,AZ,Apache,County,NVSS,Cardiovascular Diseases,Stroke,19,%,Total percent change,,,-2.9,46.5,Age group,Ages 35-64 years,T6,-109.488815,35.39549174
 4001,2011-2018,AZ,Apache,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,14.1,%,Total percent change,,,-12.7,47.1,Age group,Ages 35-64 years,T2,-109.488815,35.39549174
@@ -2160,26 +2068,6 @@ LocationID,Year,LocationAbbr,LocationDesc,GeographicLevel,DataSource,Class,Topic
 13321,2011-2018,GA,Worth,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-31.9,%,Total percent change,,,-46,-8.6,Age group,Ages 35-64 years,T2,-83.8511181,31.55165218
 13321,2011-2018,GA,Worth,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-44.2,%,Total percent change,,,-53.2,-28.8,Age group,Ages 65 years and older,T2,-83.8511181,31.55165218
 13321,2011-2018,GA,Worth,County,NVSS,Cardiovascular Diseases,Stroke,11.8,%,Total percent change,,,-10.2,38.2,Age group,Ages 35-64 years,T6,-83.8511181,31.55165218
-15001,2011-2018,HI,Hawaii,County,NVSS,Cardiovascular Diseases,Stroke,20.2,%,Total percent change,,,-18.2,87.8,Age group,Ages 35-64 years,T6,-101.8281322,24.58081851
-15001,2011-2018,HI,Hawaii,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,9.4,%,Total percent change,,,-16.8,39.6,Age group,Ages 35-64 years,T2,-101.8281322,24.58081851
-15001,2011-2018,HI,Hawaii,County,NVSS,Cardiovascular Diseases,Stroke,-6.4,%,Total percent change,,,-22.2,15.7,Age group,Ages 65 years and older,T6,-101.8281322,24.58081851
-15001,2011-2018,HI,Hawaii,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-16,%,Total percent change,,,-27.2,-2.3,Age group,Ages 65 years and older,T2,-101.8281322,24.58081851
-15003,2011-2018,HI,Honolulu,County,NVSS,Cardiovascular Diseases,Stroke,16.8,%,Total percent change,,,-4,46.1,Age group,Ages 35-64 years,T6,-104.6750679,26.57874864
-15003,2011-2018,HI,Honolulu,County,NVSS,Cardiovascular Diseases,Stroke,5.2,%,Total percent change,,,-3.4,16.3,Age group,Ages 65 years and older,T6,-104.6750679,26.57874864
-15003,2011-2018,HI,Honolulu,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,4.4,%,Total percent change,,,-3,13.1,Age group,Ages 65 years and older,T2,-104.6750679,26.57874864
-15003,2011-2018,HI,Honolulu,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-1.6,%,Total percent change,,,-14.8,12.5,Age group,Ages 35-64 years,T2,-104.6750679,26.57874864
-15005,2011-2018,HI,Kalawao,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T6,-103.575616,26.24262951
-15005,2011-2018,HI,Kalawao,County,NVSS,Cardiovascular Diseases,Stroke,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T6,-103.575616,26.24262951
-15005,2011-2018,HI,Kalawao,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 65 years and older,T2,-103.575616,26.24262951
-15005,2011-2018,HI,Kalawao,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,,%,Total percent change,~,Value suppressed,,,Age group,Ages 35-64 years,T2,-103.575616,26.24262951
-15007,2011-2018,HI,Kauai,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-33,%,Total percent change,,,-58.3,1.1,Age group,Ages 35-64 years,T2,-106.4369621,27.24981084
-15007,2011-2018,HI,Kauai,County,NVSS,Cardiovascular Diseases,Stroke,-11.7,%,Total percent change,,,-37.2,25.6,Age group,Ages 65 years and older,T6,-106.4369621,27.24981084
-15007,2011-2018,HI,Kauai,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-27.8,%,Total percent change,,,-45.3,-5.3,Age group,Ages 65 years and older,T2,-106.4369621,27.24981084
-15007,2011-2018,HI,Kauai,County,NVSS,Cardiovascular Diseases,Stroke,3.3,%,Total percent change,,,-33.6,63.9,Age group,Ages 35-64 years,T6,-106.4369621,27.24981084
-15009,2011-2018,HI,Maui,County,NVSS,Cardiovascular Diseases,Stroke,25.5,%,Total percent change,,,-13.8,84.5,Age group,Ages 35-64 years,T6,-103.1314767,25.91139837
-15009,2011-2018,HI,Maui,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-31.2,%,Total percent change,,,-47.7,-6.1,Age group,Ages 35-64 years,T2,-103.1314767,25.91139837
-15009,2011-2018,HI,Maui,County,NVSS,Cardiovascular Diseases,Stroke,5,%,Total percent change,,,-15.3,36.8,Age group,Ages 65 years and older,T6,-103.1314767,25.91139837
-15009,2011-2018,HI,Maui,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-34.9,%,Total percent change,,,-46,-22.5,Age group,Ages 65 years and older,T2,-103.1314767,25.91139837
 16001,2011-2018,ID,Ada,County,NVSS,Cardiovascular Diseases,Stroke,18.6,%,Total percent change,,,-8.9,57.2,Age group,Ages 35-64 years,T6,-116.2412687,43.45089227
 16001,2011-2018,ID,Ada,County,NVSS,Cardiovascular Diseases,Coronary Heart Disease,-0.3,%,Total percent change,,,-18.8,19,Age group,Ages 35-64 years,T2,-116.2412687,43.45089227
 16001,2011-2018,ID,Ada,County,NVSS,Cardiovascular Diseases,Stroke,13.6,%,Total percent change,,,-2.9,32.5,Age group,Ages 65 years and older,T6,-116.2412687,43.45089227
