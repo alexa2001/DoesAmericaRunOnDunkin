@@ -54,7 +54,7 @@ class TitlePage{
         vis.logos = [
             "./images/BKLogo.png",
             "./images/chickfilaLogo.png",
-            "./images/DDLogo.png",
+            "./images/DDlogo.png",
             "./images/mcdonaldsLogo.png",
             "./images/popeyesLogo.png",
             "./images/starbucksLogo.png",
