@@ -65,7 +65,7 @@ class SummaryPage {
         // Define the lines of text
         // fast food popularity text
         vis.lines = [
-            "Fast food is remains incredibly popular in the US, regardless of health data",
+            "Fast food remains incredibly popular in the US, regardless of health data",
             "The popularity continues as fast food is easy to obtain, cheap, and efficient",
             "32% percent of Americans stated that they ate fast food because it was cheap",
             "Americans typically spend over $50 Billion annually on fast food, a huge amount"
@@ -88,10 +88,10 @@ class SummaryPage {
                 text.style("font-weight", "500");
                 text.style("fill", "white")
             }
-            // If it's one of the last two lines, make the text italic
-            if (i >= vis.lines.length - 2) {
-                text.style("font-style", "italic");
-            }
+            // // If it's one of the last two lines, make the text italic
+            // if (i >= vis.lines.length - 2) {
+            //     text.style("font-style", "italic");
+            // }
         });
 
         // third rectangle with black outline
