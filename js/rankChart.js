@@ -558,7 +558,7 @@ class rankChart {
                 vis.labels
                     .on('mouseover', function(event, d){
                         d3.select(this)
-                            .attr("fill", "gray")
+                            .attr("fill", "white")
 
                         // update tooltip with data
                         vis.legendTooltip

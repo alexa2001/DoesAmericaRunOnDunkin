@@ -66,9 +66,9 @@ class FoodAndHealth{
 
         //head
         vis.svg.append("rect")
-            .attr("x", 40)
-            .attr("y", 90)
-            .attr("width", 325)
+            .attr("x", 50)
+            .attr("y", 110)
+            .attr("width", 330)
             .attr("height", 95)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
@@ -99,9 +99,9 @@ class FoodAndHealth{
 
         //skin
         vis.svg.append("rect")
-            .attr("x", 805)
+            .attr("x", 795)
             .attr("y", 115)
-            .attr("width", 250)
+            .attr("width", 260)
             .attr("height", 65)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
@@ -110,9 +110,9 @@ class FoodAndHealth{
 
         //arm
         vis.svg.append("rect")
-            .attr("x", 860)
+            .attr("x", 855)
             .attr("y", 270)
-            .attr("width", 235)
+            .attr("width", 240)
             .attr("height", 75)
             .attr("rx", cornerRadius)
             .style("fill", "#ffbf87")
@@ -136,7 +136,7 @@ class FoodAndHealth{
             "\nsugar on a regular basis can lead to" +
             "\nyour body to continue to crave it";
         const headText = vis.svg.append("text")
-            .attr("y", 100)
+            .attr("y", 120)
             .attr("font-family", "Arial")
             .attr("font-size", 14)
             .attr("fill", "black")
@@ -146,7 +146,7 @@ class FoodAndHealth{
         headText.selectAll("tspan")
             .data(headLines)
             .enter().append("tspan")
-            .attr("x", 200)
+            .attr("x", 215)
             .attr("dy", "1.2em")
             .text(d => d);
 
