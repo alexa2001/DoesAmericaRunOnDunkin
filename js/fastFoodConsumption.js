@@ -11,11 +11,10 @@ let svg = d3.select("#fast-food-consumption").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append('g')
-    //.attr('transform', `translate (${margin.left}, ${margin.top})`);
 
 let title = svg.append("text")
     .attr("x", width/2)
-    .attr("y", height * 0.1) // Adjust this value as needed
+    .attr("y", height * 0.1)
     .attr("text-anchor", "middle")
     .attr('font-size', 30)
     .attr('font-family', 'monospace')
@@ -24,7 +23,7 @@ let title = svg.append("text")
 
 let timelineTitle = svg.append("text")
     .attr("x", width/2)
-    .attr("y", height * 0.15) // Adjust this value as needed
+    .attr("y", height * 0.15)
     .attr("text-anchor", "middle")
     .attr('font-size', 20)
     .attr('font-family', 'monospace')
@@ -125,8 +124,8 @@ const circs = svg.selectAll(".circle")
         // update tooltip with data
         myTooltip
             .style("opacity", 1)
-            .style("left", left + "px")  // Position the tooltip 20px to the right of the mouse pointer
-            .style("top", top + "px")  // Position the tooltip at the same height as the mouse pointer
+            .style("left", left + "px")
+            .style("top", top + "px")
             .html(`
              <div style="border: thin solid grey; border-radius: 5px; background: white; padding: 10px">
                  <h4><b>${formatDate(d.date)}</b></h4>
@@ -174,8 +173,7 @@ let CDC = svg.append("text")
 
 let popularity = svg.append("text")
     .attr("x", margin.left)
-    .attr("y", height * 0.75) // Adjust this value as needed
-    //.attr("text-anchor", "start")
+    .attr("y", height * 0.75)
     .attr('font-size', 20)
     .attr('font-family', 'monospace')
     .attr("fill", "white")
@@ -199,7 +197,7 @@ let listItems = svg.selectAll(".list")
     .append("text")
     .attr("class", "list")
     .attr("x", margin.left)
-    .attr("y", (d, i) => height * 0.60 + i * 20) // Adjust this value as needed
+    .attr("y", (d, i) => height * 0.60 + i * 20)
     .text(d => "\u2022 " + d)
     .style("font-size", "14px")
     .attr('font-family', 'monospace')
@@ -211,7 +209,7 @@ let factItems = svg.selectAll(".facts-list")
     .append("text")
     .attr("class", "facts-list")
     .attr("x", margin.left)
-    .attr("y", (d, i) => height * 0.80 + i * 20) // Adjust this value as needed
+    .attr("y", (d, i) => height * 0.80 + i * 20)
     .text(d => "\u2022 " + d)
     .style("font-size", "14px")
     .attr('font-family', 'monospace')

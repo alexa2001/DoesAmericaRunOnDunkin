@@ -491,7 +491,6 @@ class RiskFactorPrevalence{
             })
             .transition()
             .attr("cx", function(d, i){
-                // console.log(`label x: ${i}, label xScale: ${vis.xScale(i)}`)
                 return vis.xScaleCholesterol(i);
             })
             .attr("cy", vis.height * 0.90)

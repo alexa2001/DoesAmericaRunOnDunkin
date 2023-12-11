@@ -120,15 +120,10 @@ class FoodAndHealth{
             .style("stroke-width", 2);
 
 
-
-
-
         vis.lineData = [
             {x1: 0, y1: 40, x2: 300, y2: 50},
 
         ]
-
-
 
 
         const head = "Eating too little nutrients can affect" +

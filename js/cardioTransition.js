@@ -17,15 +17,12 @@ class CardioTransitionVis {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        // Set up a timer to draw a circle every 30 seconds
         setInterval(() => {
             vis.drawCircle();
         }, 33000);
 
-        // Draw the circles before the text so that the text is on top
         vis.drawCircle()
 
-        // Print text at the center of the SVG
         vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/3)
@@ -39,7 +36,7 @@ class CardioTransitionVis {
     drawCircle() {
         let vis = this;
 
-        // Draw the circle at a random position within the SVG
+
         vis.svg.append("circle")
             .attr("cx", Math.random() * vis.width)  // Random x position
             .attr("cy", Math.random() * vis.height) // Random y position
@@ -55,7 +52,7 @@ class CardioTransitionVis {
     updateVis() {
         let vis = this;
 
-        // Define the lines of text
+
         let lines = [
             "One person dies every 33 seconds in the United States from cardiovascular disease",
             "In total about 695,000 people in the United States died from heart disease in 2021",
