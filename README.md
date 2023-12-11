@@ -2,7 +2,7 @@
 
 ### Description
 
-This website was created by Hailey Olcott, Debbie Obiajulu, and Alexa Lagunas for CS171 Fall 2023. Our website looks into fast food trends and health trends over the last few years across the U.S. to find a relationship between U.S. fast food consumption and overall health.
+This website was created by Hailey Olcott, Debbie Obiajulu, and Alexa Lagunas for CS171 Fall 2023. Our website looks into fast food trends and health trends over the last few years across the U.S. to find a relationship between U.S. fast food consumption and overall health. This website was built with HTML, CSS, and D3 Javascript. We installed the [Leaflet](https://leafletjs.com/) library to create an interactive map and [fullpage.js](https://alvarotrigo.com/fullPage/) to create a seamless scrolling user experience. 
 
 ### Instructions
 
