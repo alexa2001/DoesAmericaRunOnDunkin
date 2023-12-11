@@ -17,12 +17,6 @@ class CardioTransitionVis {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        setInterval(() => {
-            vis.drawCircle();
-        }, 33000);
-
-        vis.drawCircle()
-
         vis.svg.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/3)
@@ -31,6 +25,12 @@ class CardioTransitionVis {
             .attr("font-weight", "bold")    // Font weight
             .attr('font-family', 'monospace, serif')
             .text("Cardiovascular Disease is the leading cause of death in the US")
+
+        setInterval(() => {
+            vis.drawCircle();
+        }, 33000);
+
+        vis.drawCircle()
     }
 
     drawCircle() {

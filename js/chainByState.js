@@ -170,12 +170,15 @@ class ChainByStateVis {
 
         vis.selectedRestaurantName = restaurantName;
         vis.selectedChainState = vis.selectedState;
-        console.log(this.selectedState)
 
         // Filter to see if matches the selected restaurant chain, or show all if the selected name is ""
         vis.filteredRestaurants = vis.displayData.filter(d =>
             (vis.selectedRestaurantName === "" || d.name === vis.selectedRestaurantName) &&
             d.province === vis.selectedState);
+
+        console.log('Selected Restaurant:', vis.selectedRestaurantName);
+        console.log('Selected State:', vis.selectedState);
+        console.log('Filtered Restaurants:', vis.filteredRestaurants);
 
         // Clear existing markers
         if (vis.markers) {
@@ -185,6 +188,7 @@ class ChainByStateVis {
 
         // Add new markers for the filtered data
         vis.filteredRestaurants.forEach(function(d) {
+            console.log('Adding marker for:', d.name);
             vis.tooltipContent = `<strong>${d.name}</strong><br>city: ${d.city}`;
             let marker = L.marker([d["lat"], d["lon"]])
                 .addTo(vis.map)

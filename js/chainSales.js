@@ -38,7 +38,7 @@ class ChainSalesVis {
             .attr('text-anchor', 'middle');
 
         // starting selected chain
-        vis.selectedChain = "McDonald’s";
+        vis.selectedChain = "McDonald's";
 
         // Scales setup
         vis.xScale = d3.scaleBand().range([0, vis.width]).padding(0.1);
@@ -138,7 +138,7 @@ class ChainSalesVis {
 
         // If "all restaurant chains" is selected, revert to "McDonald’s"
         if (chainName === "") {
-            vis.selectedChain = "McDonald’s";
+            vis.selectedChain = "McDonald's";
         } else {
             vis.selectedChain = chainName;
         }
