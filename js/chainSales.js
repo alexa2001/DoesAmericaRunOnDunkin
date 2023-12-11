@@ -4,9 +4,9 @@ class ChainSalesVis {
         this.restaurantSalesData = chainData;
         this.restaurantLocationData = foodLocationData;
 
-
-        console.log("restaurant locations", this.restaurantLocationData)
-        console.log("restaurant sales", this.restaurantSalesData)
+        // Check the data is loaded correctly
+        // console.log("restaurant locations", this.restaurantLocationData)
+        // console.log("restaurant sales", this.restaurantSalesData)
 
         this.initVis()
     }
@@ -50,7 +50,6 @@ class ChainSalesVis {
             .attr("class", "x-axis axis")
 
         vis.yAxis = vis.svg.append("g")
-            // .attr("transform", `translate(0,${0})`)
             .attr("class", "y-axis axis")
 
         // Axis labels
@@ -63,16 +62,6 @@ class ChainSalesVis {
             .attr("font-family", "monospace")
             .attr("fill", vis.textColor)
             .text("Nationwide Sales Metrics");
-
-        // y-axis label
-        // vis.svg.append("text")
-        //     .attr("class", "y-axis-label")
-        //     .attr("text-anchor", "middle")
-        //     // .attr("font-size", 50)
-        //     .attr("x", vis.width / 2)
-        //     .attr("y", -50)
-        //     .attr("transform", `rotate(-90, ${vis.width/2}, ${vis.height/2})`)
-        //     .text("Value");  // Replace with your actual axis label
 
         /////////////// TOOLTIP ///////////////
         // Initialize tooltip
@@ -93,7 +82,7 @@ class ChainSalesVis {
     wrangleData(selectedChain){
         let vis = this;
 
-        console.log("CHAIN: ", selectedChain);
+        //console.log("CHAIN: ", selectedChain);
         //console.log("DATA: ", vis.restaurantSalesData);
 
         vis.displayData = [];
@@ -109,26 +98,26 @@ class ChainSalesVis {
                 "Total Units Sold": +d.TotalUnits,
             })
         })
-        console.log("CLEAN DISPLAYDATA:", vis.displayData);
+        //console.log("CLEAN DISPLAYDATA:", vis.displayData);
 
         // select for given chain and map to chart data structure
         vis.chainData = vis.displayData.filter(d => d.name === selectedChain)
 
-        // Example data transformation
+        // Data transformation
         vis.chartData = [];
         if (vis.chainData.length > 0) {
-            let data = vis.chainData[0]; // Assuming the first element is the one you're interested in
+            let data = vis.chainData[0]; // the first element is the one we want
             for (let key in data) {
                 if (data.hasOwnProperty(key) && key !== 'name') {
                     vis.chartData.push({ category: key, value: data[key] });
                 }
             }
         }
+        //console.log("chart data on store:", vis.chartData);
 
+        // Update domains
         vis.xScale.domain(vis.chartData.map(d => d.category));
         vis.yScale.domain([0, d3.max(vis.chartData, d => d.value) * 1.3]);
-
-        console.log("chart data on store:", vis.chartData);
 
         vis.updateVis();
     }
@@ -137,6 +126,7 @@ class ChainSalesVis {
         let vis = this;
 
         // If "all restaurant chains" is selected, revert to "McDonald’s"
+        // Do this because there is no system-wide sales data for "all restaurant chains"
         if (chainName === "") {
             vis.selectedChain = "McDonald's";
         } else {
@@ -153,6 +143,7 @@ class ChainSalesVis {
         // Bind data to bars
         let bars = vis.svg.selectAll(".bar").data(vis.chartData);
 
+        // Add title for the selected chain
         vis.title.select('text')
             .text(vis.selectedChain)
             .attr('transform', `translate(${vis.width / 2}, 20)`)
@@ -161,9 +152,9 @@ class ChainSalesVis {
         // Update existing bars
         bars.attr("x", d => vis.xScale(d.category))
             .attr("width", vis.xScale.bandwidth())
-            .attr("y", d => d.value === 0 ? vis.height : vis.yScale(d.value))
-            .attr("height", d => d.value === 0 ? 0 : vis.height - vis.yScale(d.value))
-            .attr("transform", `translate(0,${-1*vis.height*0.10})`);
+            .attr("y", d => d.value === 0 ? vis.height : vis.yScale(d.value)) // make height 0 is value is 0
+            .attr("height", d => d.value === 0 ? 0 : vis.height - vis.yScale(d.value)) // make height 0 is value is 0
+            .attr("transform", `translate(0,${-1*vis.height*0.10})`); // shift up to make room for x-axis
 
         // Enter new bars
         bars.enter().append("rect")
@@ -191,8 +182,8 @@ class ChainSalesVis {
                     Value:</strong> ${d.category === "Systemwide Sales (millions of dollars)" ? (d.value).toLocaleString() + " million or $"+ (d.value*1000000).toLocaleString() :
                         d.category === "Unit Sales (thousands of dollars)" ? (d.value).toLocaleString() + " thousand or $"+ (d.value*1000).toLocaleString() :
                             d.category.includes("Sales") ? "$" + d.value.toLocaleString() : d.value.toLocaleString()}`);
-                // vis.tooltip.style("display", "block")
-                //     .html(`<strong>Category:</strong> ${d.category}<br><strong>Value:</strong> ${d.value.toLocaleString()}`);
+                // Adjust tooltip to show both the stored value for the category and the actual value as a dollar amount
+                // add commas to numbers and dollar signs to dollar values
             })
             .on("mousemove", function(event) {
                 vis.tooltip.style("left", (event.pageX) + "px")
@@ -212,7 +203,7 @@ class ChainSalesVis {
         // Exit and remove old bars
         bars.exit().remove();
 
-        // Craete custom x axis labels
+        // Create custom x axis labels to fit everything neatly
         let categoryLabels = {
             "Systemwide Sales (millions of dollars)": "System Sales (M)",
             "Unit Sales (thousands of dollars)": "Unit Sales (K)",

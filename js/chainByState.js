@@ -95,11 +95,12 @@ class ChainByStateVis {
         }
 
 
-        console.log("CHAINS", this.chainData)
+        //console.log("CHAINS", this.chainData)
 
         // set view
         vis.map = L.map('stateMapDiv').setView(vis.stateCoord[vis.selectedState], 7);
 
+        // set up leaflet
         L.Icon.Default.imagePath = 'images/leafletImages/';
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -118,7 +119,6 @@ class ChainByStateVis {
         vis.displayData = []
 
         // Prepare data by looping over stations and populating empty data structure
-
         vis.chainData.forEach(function(s){
             vis.displayData.push({
                 "name": s.name,
@@ -156,6 +156,7 @@ class ChainByStateVis {
                 // tooltip content
                 vis.tooltipContent = `<strong>${d.name}</strong><br>city: ${d.city}`;
 
+                // Add markers for the lat and lon of each store and bind tooltip
                 let marker = L.marker([d["lat"], d["lon"]])
                     .addTo(vis.map)
                     .bindTooltip(vis.tooltipContent, { permanent: false, direction: 'top' }) // Add a tooltip
@@ -176,9 +177,9 @@ class ChainByStateVis {
             (vis.selectedRestaurantName === "" || d.name === vis.selectedRestaurantName) &&
             d.province === vis.selectedState);
 
-        console.log('Selected Restaurant:', vis.selectedRestaurantName);
-        console.log('Selected State:', vis.selectedState);
-        console.log('Filtered Restaurants:', vis.filteredRestaurants);
+        // console.log('Selected Restaurant:', vis.selectedRestaurantName);
+        // console.log('Selected State:', vis.selectedState);
+        // console.log('Filtered Restaurants:', vis.filteredRestaurants);
 
         // Clear existing markers
         if (vis.markers) {

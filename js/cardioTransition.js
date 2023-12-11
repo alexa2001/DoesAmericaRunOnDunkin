@@ -17,7 +17,12 @@ class CardioTransitionVis {
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`);
 
-        vis.svg.append("text")
+        // Create 'g' elements for circles and text -- to ensure circles print behind text
+        vis.circlesGroup = vis.svg.append('g');
+        vis.textGroup = vis.svg.append('g');
+
+        // init title
+        vis.textGroup.append("text")
             .attr("x", vis.width/2)
             .attr("y", vis.height/3)
             .attr("text-anchor", "middle")  // Center the text
@@ -26,6 +31,7 @@ class CardioTransitionVis {
             .attr('font-family', 'monospace, serif')
             .text("Cardiovascular Disease is the leading cause of death in the US")
 
+        // Set 33 second timer
         setInterval(() => {
             vis.drawCircle();
         }, 33000);
@@ -36,8 +42,8 @@ class CardioTransitionVis {
     drawCircle() {
         let vis = this;
 
-
-        vis.svg.append("circle")
+        // Add circles every 33 seconds
+        vis.circlesGroup.append("circle")
             .attr("cx", Math.random() * vis.width)  // Random x position
             .attr("cy", Math.random() * vis.height) // Random y position
             .attr("r", 20)                          // Radius of the circle
@@ -64,7 +70,7 @@ class CardioTransitionVis {
         lines.forEach((line, i) => {
             let text = vis.svg.append("text")
                 .attr("x", vis.width/2)
-                //.attr("y", vis.height/2 + i * 35)  // Increment the y attribute for each line
+                // Increment the y attribute for each line so the lines after the first are further down
                 .attr("y", i < 1 ? vis.height/2 + i * 35 : vis.height/2 + i * 35 + 20)
                 .attr("text-anchor", "middle")     // Center the text
                 .attr("font-size", 20)             // Font size
