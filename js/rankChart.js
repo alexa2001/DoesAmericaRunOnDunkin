@@ -1,19 +1,27 @@
 class rankChart {
     constructor(parentElement, causeOfDeathData, causeDefinitions) {
         this.parentElement = parentElement;
-        // this.legendElement = legendElement
         this.data = causeOfDeathData;
         this.displayData = this.data;
         this.definitions = causeDefinitions
-        console.log(this.definitions)
 
-        // parse date method
+        // Parse date method
         this.parseDate = d3.timeParse("%Y");
 
-        // define colors
-        this.colors = ['#fddbc7', '#f4a582', '#d6604d', '#b2182b', '#FF0000', '#FC670F', '#FAB82D', '#FA9D2D', '#FF5329', '#FAC906', '#ffffff', "#FFA500", "#FF4433", "#8B0000", "#A52A2A", "#8A3324"]
-
-        // console.log(this.displayData)
+        // Define colors to use for color scale
+        this.colors = ["#FFFFFF", "#8A3324",
+            "#FF4D4D", "#FF0000",
+            "#FFA07A", "#FF8C00",
+            '#d3a27f', "#FFCC00",
+            "#8B4513",
+            '#8b0000','#b2182b',
+            "#000000", "#333333",
+            "#FF6347", "#FF4500",
+            "#FFA500", '#FC670F',
+            "#FFFF00", '#d6604d',
+            "#B8860B", "#D2691E",
+            '#fddbc7', "#666666"
+        ]
 
         this.initVis()
     }
@@ -21,77 +29,77 @@ class rankChart {
     initVis() {
         let vis = this;
 
-        vis.textColor = "white";
-
+        // Set sizing and margins
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height;
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
 
-        // init drawing area
+        // Initialize drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
             .attr("width", vis.width)
             .attr("height", vis.height)
             .attr('transform', `translate (${vis.margin.left}, ${vis.margin.top})`)
 
-        // init scales
+        // Initialize scales
         vis.x = d3.scaleTime().range([3*vis.margin.right, vis.width - vis.margin.right]);
         vis.y = d3.scaleLinear().range([vis.height - 3 * vis.margin.top, 2 * vis.margin.top]);
 
+        // Define transformations
         vis.xTransform = vis.height - 5 * vis.margin.top / 2
         vis.rightYTransform = vis.width - vis.margin.right
 
-        // init x & y axis
+        // Initialize x & y axis
         vis.xAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--x")
-            .attr("transform", "translate(0," + vis.xTransform + ")")
-            .style("stroke", "white");
+            .attr("transform", "translate(0," + vis.xTransform + ")");
         vis.yAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
-            .attr("transform", "translate(" + 3 * vis.margin.right + ", -0)")
-            .style("stroke", "white");
+            .attr("transform", "translate(" + 3 * vis.margin.right + ", -0)");
         vis.rightYAxis = vis.svg.append("g")
             .attr("class", "rank-axis axis axis--y")
-            .attr("transform", "translate(" + vis.rightYTransform + ", 0)")
-            .style("stroke", "white");
+            .attr("transform", "translate(" + vis.rightYTransform + ", 0)");
 
         vis.xAxis.append("text")
-            // .attr("font-weight", 5)
+            .style("fill", "black")
+            .attr("font-weight", 5)
             .style("font-size", "16px")
             .attr("x", vis.width/2)
             .attr("y", 40)
-            .attr('font-family', 'monospace')
             .text("Year")
 
         vis.yAxis.append("text")
-            // .attr("font-weight", 5)
+            .style("fill", "black")
+            .attr("font-weight", 5)
             .style("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("x", -vis.height/2)
             .attr("y", -40)
             .attr("dy", ".75em")
             .attr("transform", "rotate(-90)")
-            .attr('font-family', 'monospace')
             .text("Cause of Death Ranking")
 
+
+        // Initialize legend sizing and drawing area
         vis.legendElement = "rankLegend"
 
         vis.legendheight = document.getElementById(vis.legendElement).getBoundingClientRect().height;
         vis.legendwidth = document.getElementById(vis.legendElement).getBoundingClientRect().width - vis.margin.right;
 
-        // init drawing area
         vis.legendsvg = d3.select("#" + vis.legendElement).append("svg")
             .attr("width", vis.legendwidth)
             .attr("height", vis.legendheight)
 
-        // legend scale
+        // Initialize color and legend scales
         vis.colorScale = d3.scaleOrdinal()
             .range(vis.colors)
+
         vis.legendScaleColor = d3.scaleOrdinal()
             .range([0, (4*vis.width/5)]);
 
+        // Initialize legend and legend tooltip
         vis.legend = vis.legendsvg.append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(20, ${vis.height - 200})`)
+            .attr('transform', `translate(20, ${vis.height - 150})`)
 
         vis.legendTooltip = d3.select("#" + vis.legendElement).append('div')
             .attr('class', "rank-tooltip tooltip")
@@ -100,7 +108,7 @@ class rankChart {
             .style("position", "absolute")
             .style("padding", "10px")
 
-        // create tooltip
+        // Create legend tooltip
         vis.tooltip = d3.select("#" + vis.parentElement).append('div')
             .attr('class', "rank-tooltip tooltip")
             .attr('id', 'rankTooltip')
@@ -108,9 +116,10 @@ class rankChart {
             .style("position", "absolute")
             .style("padding", "10px")
 
-        // init pathGroup
+        // Init pathGroup for rank chart lines
         vis.pathGroup = vis.svg.append('g').attr('class', 'pathGroup')
 
+        // Define function for line
         vis.line = d3.line()
             .x(function (d) {
                 return vis.x(d.data.date);
@@ -119,15 +128,15 @@ class rankChart {
                 return vis.y(d.data.rank);
             });
 
-        let selectBox = vis.svg.append("foreignObject")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", 107)
-            .attr("height", 30)
+        // Create select box for state
+        let selectBox = vis.legendsvg.append("foreignObject")
+            .attr("x", 20)
+            .attr("y", 10)
+            .attr("width", "30vh")
+            .attr("height", 40)
             .attr("class", "select-box")
             .append("xhtml:body")
-            .html('<select id="rankSelect"></select>');
-
+            .html('<select id="rankSelect" class="form-select" aria-label= "Default select example" style="width: 30vh"></select>');
 
         vis.allStates = [["All States"],
             ['Alabama', 'AL'],
@@ -182,26 +191,16 @@ class rankChart {
             ['Wisconsin', 'WI'],
             ['Wyoming', 'WY']]
 
-        // vis.topCauses = []
-        // vis.uniqueCauses = new Set();
-        //
-        // vis.allStates.forEach(state => {
-        //     vis.selectedState = state
-        //     vis.wrangleData()
-        //     }
-        // )
         let options = d3.select("#rankSelect")
             .selectAll("rank-option")
             .data(vis.allStates)
             .enter()
             .append("option")
-            .attr('font-family', 'monospace')
-            .attr("fill", vis.textColor)
             .text((d) => d[0]);
 
+        // Change rank chart based on selected state
         d3.select("#rankSelect").on("change", function () {
             vis.selectedState = d3.select(this).property("value");
-            // console.log("Selected option:", vis.selectedState)
 
             // Call wrangleData() when the selection changes
             vis.wrangleData();
@@ -213,32 +212,21 @@ class rankChart {
     wrangleData() {
         let vis = this;
 
-        vis.allTopCauses = []
-        vis.allUniqueCauses = new Set();
-        // vis.allStates.forEach( state =>{
-        //
-        // vis.selectedState = state[0]
-
         vis.allData = this.displayData;
 
         // Sort data in order of highest number of deaths
         vis.allData.sort((a, b) => b["Deaths"] - a["Deaths"])
 
-        // vis.includedStates = [];
         vis.selectedData = [];
-        // console.log(vis.selectedState)
 
         // Convert years into date format
         vis.allData.forEach(row => {
             if (vis.parseDate(row["Year"]) !== null) {
                 row["Year"] = vis.parseDate(row["Year"])
             }
-
-            // if (!vis.includedStates.includes(row['State'])) {
-            //     vis.includedStates.push(row['State'])
-            // }
         })
 
+        // Filter based on selected state
         if (vis.selectedState) {
             if (vis.selectedState === 'All States') {
                 vis.filteredData = vis.allData
@@ -254,12 +242,9 @@ class rankChart {
         } else {
             vis.filteredData = vis.allData
         }
-        // console.log("filtered data", vis.filteredData)
-
 
         // Group data by year
         let sumDataByState = Array.from(d3.group(vis.filteredData, d => d["Year"]), ([key, value]) => ({key, value}))
-        // console.log("data by date", sumDataByState)
 
         vis.dataLines = [];
         vis.dataDates = [];
@@ -271,9 +256,6 @@ class rankChart {
         sumDataByState.forEach((year, index) => {
 
             // Add year to array
-            // if (!vis.dataDates.includes(year.key)){
-            //     vis.dataDates.push(year.key)
-            // }
             vis.dataDates.push(year.key)
 
             vis.causes = []
@@ -315,13 +297,9 @@ class rankChart {
             })
 
         })
-        // console.log("data lines", vis.dataLines)
 
         // Group data by cause of death
         vis.dataByCause = Array.from(d3.group(vis.dataLines, d => d["cause"]), ([cause, data]) => ({cause, data}))
-
-        // console.log("data by cause", vis.dataByCause)
-        // console.log("data within rank", vis.dataByCause[0]["data"][0]["date"])
 
         vis.topCauses = []
         vis.uniqueCauses = new Set();
@@ -335,28 +313,13 @@ class rankChart {
                 return a["date"] - b["date"];
             })
 
-            // Assign color to use in visualization
             cause.data.forEach((entry, i) => {
-                vis.dataByCause[index].data[i].color = this.colors[index]
                 if (entry.rank !== null && !vis.uniqueCauses.has(cause.cause)) {
                     vis.topCauses.push(cause)
                     vis.uniqueCauses.add(cause.cause)
                 }
-                if (entry.rank !== null && !vis.allUniqueCauses.has(cause.cause)) {
-                    vis.allTopCauses.push(cause)
-                    vis.allUniqueCauses.add(cause.cause);
-                }
             })
         })
-
-    // })
-        // console.log("rank", vis.dataByCause)
-        // vis.dataByCause.forEach(cause => {
-        //     cause.forEach(date => {
-        //
-        //     })
-        // })
-        console.log("top causes", vis.allTopCauses)
 
         vis.updateVis()
     }
@@ -365,30 +328,29 @@ class rankChart {
 
         let vis = this;
 
-        // update domains
+        // Update scale domains
         vis.x.domain(d3.extent(vis.dataDates, function (d) {
             return d
         }));
         vis.y.domain([5, 1]);
-        vis.colorScale.domain(vis.dataByCause, function (d) {
+        vis.colorScale.domain(vis.topCauses, function (d) {
             return d.cause
-        });
-        console.log(vis.colorScale.domain())
-        console.log(vis.colorScale.range())
+        })
 
 
-        // draw x & y axis
+        // Draw x & y axes
         vis.xAxis.transition().duration(400).call(d3.axisBottom(vis.x).tickFormat(d3.timeFormat("%Y")));
         vis.yAxis.transition().duration(400).call(d3.axisLeft(vis.y).ticks(5));
         vis.rightYAxis.transition().duration(400).call(d3.axisRight(vis.y).ticks(5));
 
+        // Create rectangles and labels for legend
         const rects = vis.legend.selectAll("rect")
             .data(vis.topCauses);
 
         rects.exit()
             .transition()
             .duration(400)
-            .style("opacity", 0)  // Transition to opacity 0 before removal
+            .style("opacity", 0)
             .remove();
 
         const labels = vis.legend.selectAll("text")
@@ -397,16 +359,15 @@ class rankChart {
         labels.exit()
             .transition()
             .duration(400)
-            .style("opacity", 0)  // Transition to opacity 0 before removal
+            .style("opacity", 0)
             .remove();
 
+        // Drank ranking line for each cause of death in top 5
         vis.dataByCause.forEach((cause, index) => {
             const lineGenerator = d3.line()
                 .defined((d) => d.rank !== null)
                 .x(d => vis.x(d.date))
                 .y(d => vis.y(d.rank));
-
-            // console.log(lineGenerator(cause.data))
 
             // Select paths inside the loop
             const paths = vis.pathGroup.selectAll(`.path-${index}`)
@@ -418,26 +379,27 @@ class rankChart {
                 .attr("class", `path-${index}`)
                 .attr("fill", "none")
                 .attr("stroke-width", 2)
-                .attr("stroke", (d, i) => d[i].color)
+                .attr("stroke", (d, i) => vis.colorScale(d[i].cause))
                 .attr("d", lineGenerator)
-                .style("opacity", 0)  // Set initial opacity to 0 for entering paths
+                .style("opacity", 0)
                 .transition()
                 .duration(400)
-                .style("opacity", 1);  // Transition to full opacity
+                .style("opacity", 1);
 
             // UPDATE
             paths.transition()
                 .duration(400)
                 .attr("d", lineGenerator)
-                .attr("stroke", (d, i) => d[i].color);  // Update color during transition
+                .attr("stroke", (d, i) => vis.colorScale(d[i].cause));
 
             // EXIT
             paths.exit()
                 .transition()
                 .duration(400)
-                .style("opacity", 0)  // Transition to opacity 0 before removal
+                .style("opacity", 0)
                 .remove();
 
+            // Remove old circles
             vis.pathGroup.selectAll(`.circle-${index}`)
                 .exit()
                 .transition()
@@ -459,30 +421,27 @@ class rankChart {
                         .attr("cx", vis.x(date.date))
                         .attr("cy", vis.y(date.rank))
                         .attr("r", 4)
-                        .attr("fill", date.color)
-                        .attr("stroke", date.color)
+                        .attr("fill", vis.colorScale(date.cause))
+                        .attr("stroke", vis.colorScale(date.cause))
                         .attr("stroke-width", 1)
                         .style("opacity", 0)
                         .on('mouseover', function(event, d){
-                            // console.log(event, d)
                             d3.select(this)
-                                .attr('stroke', date.color)
+                                .attr('stroke', vis.colorScale(date.cause))
                                 .attr('fill', 'black')
 
                             // update tooltip with data
                             vis.tooltip
                                 .style("opacity", 1)
-                                // .style("left", event.pageX + 20 + "px")
-                                // .style("top", event.pageY + "px")
                                 .html(`
-                                 <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
+                                 <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 15px">
                                      <h3>${date.cause}<h3>
-                                     <h4> Date: ${d3.timeFormat("%Y")(date.date)}</h4>
+                                     <h4> Year: ${d3.timeFormat("%Y")(date.date)}</h4>
                                      <h4> Deaths: ${d3.format(",")(date.deaths)}</h4>
                                      <h4> Rank: ${(date.rank)}</h4>
                                  </div>`);
 
-                            // Adjust tooltip position
+                            // Adjust tooltip position dynamically to prevent overflow
                             const tooltipWidth = vis.tooltip.node().offsetWidth;
                             const tooltipHeight = vis.tooltip.node().offsetHeight;
 
@@ -505,10 +464,9 @@ class rankChart {
                             }
                         })
                         .on('mouseout', function(event, d){
-                            // console.log(event, d)
                             d3.select(this)
-                                .attr('stroke', date.color)
-                                .attr('fill', date.color)
+                                .attr('stroke', vis.colorScale(date.cause))
+                                .attr('fill', vis.colorScale(date.cause))
 
                             // hide tooltip
                             vis.tooltip
@@ -532,6 +490,7 @@ class rankChart {
 
             });
 
+            // Display legend with top causes of death for selected state
             vis.topCauses.forEach((cause, index) => {
                 vis.legendBoxes = vis.legend.selectAll(`.rect-${index}`)
                     .data([cause.data]);
@@ -539,7 +498,7 @@ class rankChart {
                 vis.legendBoxes.exit()
                     .transition()
                     .duration(400)
-                    .style("opacity", 0)  // Transition to opacity 0 before removal
+                    .style("opacity", 0)
                     .remove();
 
                 vis.labels = vis.legend.selectAll(`.text-${index}`)
@@ -548,7 +507,7 @@ class rankChart {
                 vis.labels.exit()
                     .transition()
                     .duration(400)
-                    .style("opacity", 0)  // Transition to opacity 0 before removal
+                    .style("opacity", 0)
                     .remove();
 
                 vis.legendBoxes
@@ -561,7 +520,18 @@ class rankChart {
                     .attr("width", 20)
                     // .attr("r", 20)
                     .merge(vis.legendBoxes)
-                    .attr("fill", (d, i) => d[i].color)
+                    .attr("fill", (d, i) => vis.colorScale(d[i].cause))
+
+                // Display shortened name in legend
+                function shortenCause(cause){
+                    let causeName = null
+                    vis.definitions.forEach(definition => {
+                        if (definition.Cause === cause){
+                            causeName = definition.Shorthand
+                        }
+                    })
+                    return causeName
+                }
 
                 vis.labels
                     .enter()
@@ -569,40 +539,36 @@ class rankChart {
                     .attr("class", `text-${index}`)
                     .attr("y", -335 + index * 40)
                     .attr("x", 40)
-                    .attr('font-family', 'monospace')
-                    .attr("fill", vis.textColor)
+                    .attr("fill", "black")
                     .merge(vis.labels)
-                    .text(cause.cause)
+                    .text(shortenCause(cause.cause))
 
+
+                // Define each cause of death
                 function defineCause(cause){
                     let causeDefinition = null
                     vis.definitions.forEach(definition => {
-                         if (definition.Cause === cause){
-                             causeDefinition = definition.Meaning
-                         }
-                     })
+                        if (definition.Cause === cause){
+                            causeDefinition = definition.Meaning
+                        }
+                    })
                     return causeDefinition
                 }
 
-
                 vis.labels
                     .on('mouseover', function(event, d){
-                        // console.log(event, d)
                         d3.select(this)
-                            // .attr('stroke', date.color)
                             .attr("fill", "gray")
 
                         // update tooltip with data
                         vis.legendTooltip
                             .style("opacity", 1)
-                            // .style("left", event.pageX + 20 + "px")
-                            // .style("top", event.pageY + "px")
                             .html(`
                                  <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
                                      <h4> ${defineCause(cause.cause)}</h4>
                                  </div>`);
 
-                        // Adjust tooltip position
+                        // Adjust tooltip position dynamically
                         const tooltipWidth = vis.tooltip.node().offsetWidth;
                         const tooltipHeight = vis.tooltip.node().offsetHeight;
 
@@ -625,11 +591,8 @@ class rankChart {
                         }
                     })
                     .on('mouseout', function(event, d){
-                        // console.log(event, d)
                         d3.select(this)
-                            // .attr('stroke', date.color)
-                            .attr('font-family', 'monospace')
-                            .attr("fill", vis.textColor)
+                            .attr('fill', "black")
 
                         // hide tooltip
                         vis.legendTooltip
